@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Запись</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{--bg0:#0F1B33;--bg1:#1B2A4A;--card:rgba(255,255,255,.05);--line:rgba(255,255,255,.10);
+  --tx:#F3F6FC;--mut:#AEBBD6;--dim:#7F8FB0;--mint:#5ED6A4;--ink:#0F1B33;--r:18px;--pad:18px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg0);color:var(--tx);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body{background:radial-gradient(900px 500px at 50% -160px,#2E457A 0%,var(--bg1) 45%,var(--bg0) 100%) fixed;padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+.wrap{max-width:560px;margin:0 auto;padding:0 var(--pad)}
+h1,h2,h3{margin:0;line-height:1.15;letter-spacing:-.01em}
+h1{font-size:26px;font-weight:800}h2{font-size:19px;font-weight:800}
+p{margin:0}.mut{color:var(--mut)}.dim{color:var(--dim)}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--mint);text-transform:uppercase}
+
+.head{padding:20px 0 6px;display:flex;gap:14px;align-items:center}
+.head .logo{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#2E457A,#1B2A4A);border:1px solid var(--line);display:grid;place-items:center;flex:none;font-size:26px}
+.head .addr{color:var(--mut);font-size:14px;margin-top:2px}
+
+/* progress */
+.prog{display:flex;gap:6px;margin:16px 0 4px}
+.prog i{flex:1;height:4px;border-radius:99px;background:rgba(255,255,255,.12)}
+.prog i.on{background:var(--mint)}
+.sec{padding:22px 0 4px}
+.sec h2{margin-bottom:4px}
+.sec .sub{color:var(--mut);font-size:14.5px}
+
+/* services */
+.svc{display:grid;gap:10px;margin-top:14px}
+.svc button{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;color:var(--tx);text-align:left;transition:.15s}
+.svc .ic{width:46px;height:46px;border-radius:14px;background:rgba(94,214,164,.12);display:grid;place-items:center;font-size:24px;flex:none}
+.svc .nm{font-weight:700;font-size:15.5px}
+.svc .ds{font-size:13px;color:var(--dim);margin-top:2px}
+.svc .pr{margin-left:auto;font-weight:800;font-size:15px;white-space:nowrap}
+.svc button.on{border-color:var(--mint);background:rgba(94,214,164,.10);box-shadow:inset 0 0 0 1px var(--mint)}
+
+/* days */
+.days{display:flex;gap:8px;overflow-x:auto;padding:14px 0 8px;margin:0 calc(-1*var(--pad));padding-left:var(--pad);padding-right:var(--pad);scrollbar-width:none}
+.days::-webkit-scrollbar{display:none}
+.day{flex:none;width:64px;padding:10px 6px;border-radius:14px;background:var(--card);border:1px solid var(--line);color:var(--tx);text-align:center}
+.day .wd{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.day .dn{font-size:20px;font-weight:800;margin:2px 0}
+.day .mo{font-size:11px;color:var(--dim)}
+.day.on{background:var(--mint);color:var(--ink);border-color:var(--mint)}
+.day.on .wd,.day.on .mo{color:rgba(15,27,51,.7)}
+.day:disabled{opacity:.3}
+
+/* slots */
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.slot{padding:11px 4px;border-radius:12px;background:var(--card);border:1px solid var(--line);color:var(--tx);font-weight:700;font-size:15px;font-variant-numeric:tabular-nums}
+.slot.on{background:var(--mint);color:var(--ink);border-color:var(--mint)}
+.slot:disabled{opacity:.25;text-decoration:line-through}
+.empty{color:var(--dim);font-size:14px;padding:14px 0}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--dim);margin-top:10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+
+/* form */
+.form{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-top:14px}
+.f{margin-bottom:12px}.f:last-child{margin-bottom:0}
+.f label{display:block;font-size:13px;color:var(--mut);margin-bottom:6px;font-weight:600}
+.f input{width:100%;background:#0B1426;border:1px solid var(--line);color:var(--tx);border-radius:12px;padding:12px 13px;font:inherit;font-size:16px;outline:none}
+.f input:focus{border-color:var(--mint)}
+.err{color:#FF8A8A;font-size:13px;margin-top:8px;display:none}
+
+/* summary */
+.sum{position:fixed;left:0;right:0;bottom:0;padding:10px var(--pad) calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(15,27,51,0),rgba(15,27,51,.95) 30%);z-index:5;pointer-events:none}
+.sum .box{max-width:560px;margin:0 auto;background:#132040;border:1px solid var(--line);border-radius:14px;padding:10px 14px;font-size:14px;display:flex;gap:10px;align-items:center;pointer-events:auto}
+.sum .box b{color:var(--mint)}
+.sum .box .t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cta{display:none;pointer-events:auto;max-width:560px;margin:8px auto 0;width:100%;border:0;background:var(--mint);color:var(--ink);font-weight:800;font-size:16px;padding:15px;border-radius:14px}
+.ok{display:none;text-align:center;padding:40px 10px}
+.ok .big{font-size:56px}.ok h2{margin:10px 0 6px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="logo" id="logo">💫</div>
+    <div><h1 id="biz"></h1><div class="addr" id="addr"></div></div>
+  </div>
+  <div class="prog"><i class="on"></i><i></i><i></i><i></i></div>
+
+  <section class="sec" id="s1">
+    <span class="eyebrow" id="l1"></span>
+    <h2 id="h1"></h2>
+    <div class="svc" id="svcList"></div>
+  </section>
+
+  <section class="sec hidden" id="s2">
+    <span class="eyebrow" id="l2"></span>
+    <h2 id="h2"></h2>
+    <div class="days" id="days"></div>
+  </section>
+
+  <section class="sec hidden" id="s3">
+    <span class="eyebrow" id="l3"></span>
+    <h2 id="h3"></h2>
+    <p class="sub" id="h3sub"></p>
+    <div class="slots" id="slots"></div>
+    <div class="legend"><span><i style="background:var(--mint)"></i><span id="lg1"></span></span><span><i style="background:rgba(255,255,255,.15)"></i><span id="lg2"></span></span></div>
+  </section>
+
+  <section class="sec hidden" id="s4">
+    <span class="eyebrow" id="l4"></span>
+    <h2 id="h4"></h2>
+    <div class="form">
+      <div class="f"><label id="fn"></label><input id="name" autocomplete="name"></div>
+      <div class="f"><label id="fp"></label><input id="phone" inputmode="tel" autocomplete="tel" placeholder="+54 9 11 …"></div>
+      <div class="err" id="err"></div>
+    </div>
+  </section>
+
+  <div class="ok" id="ok"><div class="big">✅</div><h2 id="okh"></h2><p class="mut" id="okp"></p></div>
+</div>
+
+<div class="sum" id="sum">
+  <div class="box"><span>📅</span><div class="t" id="sumT"></div></div>
+  <button class="cta" id="cta"></button>
+</div>
+
+<script>
+const tg = window.Telegram && Telegram.WebApp ? Telegram.WebApp : null;
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+
+/* ---------- параметры от бота (base64url json в ?c=) ---------- */
+function readCfg(){
+  const q = new URLSearchParams(location.search).get("c") || (tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || "";
+  try{
+    const s = q.replace(/-/g,"+").replace(/_/g,"/"); const pad = s.length%4 ? "=".repeat(4-s.length%4) : "";
+    return JSON.parse(decodeURIComponent(escape(atob(s+pad))));
+  }catch(e){ return null; }
+}
+const DEMO = {b:"Студия красоты «Пример»",a:"Palermo, Buenos Aires",e:"💅",lang:"ru",
+  s:[{id:"manicure",t:"Маникюр с покрытием",d:90,p:"25 000 ARS",e:"💅"},{id:"pedicure",t:"Педикюр",d:90,p:"30 000 ARS",e:"🦶"},{id:"brows",t:"Брови: коррекция и окрашивание",d:60,p:"18 000 ARS",e:"👁"},{id:"lashes",t:"Наращивание ресниц",d:150,p:"45 000 ARS",e:"✨"}],
+  h:{o:"10:00",c:"20:00",st:30,wd:[0,1,2,3,4,5],da:14,lead:120}, busy:[], now:null};
+const C = readCfg() || DEMO;
+const lang = C.lang === "es" ? "es" : "ru";
+
+const T = {
+ ru:{l1:"Шаг 1",h1:"Выберите услугу",l2:"Шаг 2",h2:"Какой день?",l3:"Шаг 3",h3:"Свободное время",h3sub:"Занятые окна затемнены.",
+     lg1:"выбрано",lg2:"занято",l4:"Шаг 4",h4:"Как вас записать?",fn:"Имя",fp:"Телефон",
+     cta:"ЗАПИСАТЬСЯ",pick:"Выберите услугу, день и время",min:"мин",h:"ч",today:"Сегодня",tmr:"Завтра",
+     wd:["пн","вт","ср","чт","пт","сб","вс"],mo:["янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"],
+     noslots:"На этот день свободных окон нет — выберите другой.",errn:"Напишите имя",errp:"Оставьте телефон",
+     okh:"Вы записаны",okp:"Подтверждение придёт в чат. Напомним за сутки."},
+ es:{l1:"Paso 1",h1:"Elegí el servicio",l2:"Paso 2",h2:"¿Qué día?",l3:"Paso 3",h3:"Horarios libres",h3sub:"Los ocupados están atenuados.",
+     lg1:"elegido",lg2:"ocupado",l4:"Paso 4",h4:"¿A nombre de quién?",fn:"Nombre",fp:"Teléfono",
+     cta:"RESERVAR",pick:"Elegí servicio, día y hora",min:"min",h:"h",today:"Hoy",tmr:"Mañana",
+     wd:["lun","mar","mié","jue","vie","sáb","dom"],mo:["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"],
+     noslots:"No hay horarios libres ese día — elegí otro.",errn:"Escribí tu nombre",errp:"Dejá tu teléfono",
+     okh:"¡Turno reservado!",okp:"La confirmación llega al chat. Te recordamos un día antes."}
+}[lang];
+
+/* ---------- состояние ---------- */
+let svc = null, day = null, slot = null;
+const now = C.now ? new Date(C.now.replace(" ","T")) : new Date();
+const busy = (C.busy||[]).map(x => { const [s,d] = x.split("|"); const st = new Date(s.replace(" ","T")); return [st, new Date(st.getTime()+ (+d||60)*60000)]; });
+
+const pad2 = n => String(n).padStart(2,"0");
+const ymd = d => d.getFullYear()+"-"+pad2(d.getMonth()+1)+"-"+pad2(d.getDate());
+const hm = d => pad2(d.getHours())+":"+pad2(d.getMinutes());
+const dur = m => { const h=Math.floor(m/60), r=m%60; return (h?h+" "+T.h+" ":"")+(r?r+" "+T.min:"") ; };
+const haptic = k => { try{ if(tg) k==="success"?tg.HapticFeedback.notificationOccurred("success"):tg.HapticFeedback.impactOccurred(k);}catch(e){} };
+
+function freeSlots(d){
+  const [oh,om]=C.h.o.split(":").map(Number), [ch,cm]=C.h.c.split(":").map(Number);
+  const open = new Date(d); open.setHours(oh,om,0,0);
+  const close = new Date(d); close.setHours(ch,cm,0,0);
+  const lead = new Date(now.getTime() + (C.h.lead||0)*60000);
+  const out = [];
+  for (let t=new Date(open); t.getTime()+svc.d*60000 <= close.getTime(); t=new Date(t.getTime()+C.h.st*60000)){
+    const end = new Date(t.getTime()+svc.d*60000);
+    const clash = busy.some(([bs,be]) => t < be && bs < end);
+    out.push({t, ok: t >= lead && !clash});
+  }
+  return out;
+}
+function dayList(){
+  const out=[]; for(let i=0;i<=(C.h.da||14);i++){ const d=new Date(now); d.setDate(d.getDate()+i); d.setHours(0,0,0,0);
+    const wd=(d.getDay()+6)%7; if(!C.h.wd.includes(wd)) continue; out.push(d); }
+  return out;
+}
+
+/* ---------- рендер ---------- */
+function progress(n){ $$(".prog i").forEach((e,i)=>e.classList.toggle("on",i<n)); }
+function show(id){ $(id).classList.remove("hidden"); setTimeout(()=>$(id).scrollIntoView({behavior:"smooth",block:"start"}),50); }
+function summary(){
+  const parts=[]; if(svc) parts.push("<b>"+svc.t+"</b>"); if(day) parts.push(dayLabel(day)); if(slot) parts.push(hm(slot));
+  $("#sumT").innerHTML = parts.length ? parts.join(" · ") : '<span class="dim">'+T.pick+"</span>";
+  const ready = svc && day && slot;
+  if (tg){ ready ? tg.MainButton.show() : tg.MainButton.hide(); }
+  else { $("#cta").style.display = ready ? "block" : "none"; }
+}
+function dayLabel(d){
+  const t0=new Date(now); t0.setHours(0,0,0,0); const diff=Math.round((d-t0)/86400000);
+  if(diff===0) return T.today; if(diff===1) return T.tmr;
+  return T.wd[(d.getDay()+6)%7]+", "+d.getDate()+" "+T.mo[d.getMonth()];
+}
+
+function renderServices(){
+  const box=$("#svcList"); box.innerHTML="";
+  C.s.forEach(s=>{ const b=document.createElement("button");
+    b.innerHTML=`<div class="ic">${s.e||"✨"}</div><div><div class="nm">${s.t}</div><div class="ds">${dur(s.d)}</div></div><div class="pr">${s.p||""}</div>`;
+    b.onclick=()=>{ svc=s; day=null; slot=null; haptic("light"); $$(".svc button").forEach(x=>x.classList.toggle("on",x===b)); progress(2); renderDays(); show("#s2"); $("#s3").classList.add("hidden"); $("#s4").classList.add("hidden"); summary(); };
+    box.appendChild(b); });
+}
+function renderDays(){
+  const box=$("#days"); box.innerHTML="";
+  dayList().forEach(d=>{ const b=document.createElement("button"); b.className="day";
+    const hasFree = freeSlots(d).some(x=>x.ok); b.disabled=!hasFree;
+    b.innerHTML=`<div class="wd">${T.wd[(d.getDay()+6)%7]}</div><div class="dn">${d.getDate()}</div><div class="mo">${T.mo[d.getMonth()]}</div>`;
+    b.onclick=()=>{ day=d; slot=null; haptic("light"); $$(".day").forEach(x=>x.classList.toggle("on",x===b)); progress(3); renderSlots(); show("#s3"); $("#s4").classList.add("hidden"); summary(); };
+    box.appendChild(b); });
+}
+function renderSlots(){
+  const box=$("#slots"); box.innerHTML=""; const list=freeSlots(day);
+  if(!list.some(x=>x.ok)){ box.innerHTML=`<div class="empty" style="grid-column:1/-1">${T.noslots}</div>`; return; }
+  list.forEach(({t,ok})=>{ const b=document.createElement("button"); b.className="slot"; b.textContent=hm(t); b.disabled=!ok;
+    b.onclick=()=>{ slot=t; haptic("light"); $$(".slot").forEach(x=>x.classList.toggle("on",x===b)); progress(4); show("#s4"); summary(); };
+    box.appendChild(b); });
+}
+
+/* ---------- отправка ---------- */
+function submit(){
+  const name=$("#name").value.trim(), phone=$("#phone").value.trim(), err=$("#err");
+  if(!name){ err.textContent=T.errn; err.style.display="block"; $("#name").focus(); return; }
+  if(phone.replace(/\D/g,"").length<7){ err.textContent=T.errp; err.style.display="block"; $("#phone").focus(); return; }
+  err.style.display="none";
+  const data={type:"book", service_id:svc.id, start: ymd(slot)+" "+hm(slot), name, phone, lang};
+  haptic("success");
+  if(tg && tg.sendData){ try{ tg.sendData(JSON.stringify(data)); return; }catch(e){} }
+  $$(".sec").forEach(s=>s.classList.add("hidden")); $("#sum").classList.add("hidden"); $("#ok").style.display="block";
+}
+
+/* ---------- init ---------- */
+(function(){
+  $("#biz").textContent=C.b; $("#addr").textContent=C.a||""; $("#logo").textContent=C.e||"💫";
+  ["l1","h1","l2","h2","l3","h3","h3sub","lg1","lg2","l4","h4","fn","fp","okh","okp"].forEach(k=>{ const el=$("#"+k); if(el) el.textContent=T[k]; });
+  $("#cta").textContent=T.cta; $("#cta").onclick=submit;
+  if(tg){ tg.ready(); tg.expand(); try{tg.setHeaderColor("#0F1B33");tg.setBackgroundColor("#0F1B33");}catch(e){}
+    tg.MainButton.setParams({text:T.cta,color:"#5ED6A4",text_color:"#0F1B33",is_visible:false}); tg.MainButton.onClick(submit);
+    const u=tg.initDataUnsafe&&tg.initDataUnsafe.user; if(u&&!$("#name").value) $("#name").value=[u.first_name,u.last_name].filter(Boolean).join(" ");
+  }
+  if(C.name) $("#name").value=C.name; if(C.phone) $("#phone").value=C.phone;
+  renderServices(); summary();
+})();
+</script>
+</body>
+</html>
