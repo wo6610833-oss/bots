@@ -10,72 +10,86 @@
   --bg0:#0F1B33; --bg1:#1B2A4A; --bg2:#22355E;
   --card:rgba(255,255,255,.05); --line:rgba(255,255,255,.10);
   --tx:#F3F6FC; --mut:#AEBBD6; --dim:#7F8FB0;
-  --mint:#5ED6A4; --mintD:#3FBF8B; --ink:#0F1B33;
+  --mint:#5ED6A4; --mintD:#3FBF8B; --ink:#0F1B33; --red:#FF8A8A;
   --r:18px; --pad:18px;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg0);color:var(--tx);
-  font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
-  -webkit-font-smoothing:antialiased}
+  font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased}
 body{background:radial-gradient(1200px 600px at 50% -200px,#2E457A 0%,var(--bg1) 45%,var(--bg0) 100%) fixed;
   padding-bottom:calc(96px + env(safe-area-inset-bottom))}
 a{color:var(--mint)}
+button{font:inherit;cursor:pointer}
 .wrap{max-width:560px;margin:0 auto;padding:0 var(--pad)}
 h1,h2,h3{margin:0;line-height:1.15;letter-spacing:-.01em}
-h1{font-size:30px;font-weight:800}
-h2{font-size:22px;font-weight:800;margin-bottom:6px}
-p{margin:0}
+h1{font-size:30px;font-weight:800} h2{font-size:22px;font-weight:800;margin-bottom:6px} p{margin:0}
 .mut{color:var(--mut)} .dim{color:var(--dim)}
 .eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--mint);text-transform:uppercase}
-.sec{padding:34px 0 6px}
-.sec > .sub{color:var(--mut);margin-top:6px}
+.sec{padding:34px 0 6px} .sec > .sub{color:var(--mut);margin-top:6px}
+.hidden{display:none!important}
 
-/* top bar */
 .top{display:flex;align-items:center;justify-content:space-between;padding:14px 0 6px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800}
-.brand .mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#2E457A,#1B2A4A);
-  display:grid;place-items:center;border:1px solid var(--line)}
+.brand .mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#2E457A,#1B2A4A);display:grid;place-items:center;border:1px solid var(--line)}
 .lang{display:flex;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
 .lang button{border:0;background:transparent;color:var(--mut);font-weight:700;padding:6px 12px;border-radius:999px;font-size:13px}
 .lang button.on{background:var(--mint);color:var(--ink)}
 
-/* hero */
-.hero{padding:22px 0 8px}
-.hero h1{margin:10px 0 12px}
-.hero .sub{font-size:17px;color:var(--mut)}
-.hero-chat{margin:22px 0 4px;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:var(--r);padding:14px;position:relative;overflow:hidden}
+.hero{padding:22px 0 8px} .hero h1{margin:10px 0 12px} .hero .sub{font-size:17px;color:var(--mut)}
+.hero-chat{margin:22px 0 4px;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:var(--r);padding:14px}
 .hero-chat .t{font-size:12px;color:var(--dim);margin-bottom:8px;display:flex;justify-content:space-between}
 .bub{max-width:82%;padding:10px 13px;border-radius:16px;font-size:15px;line-height:1.35;white-space:pre-line}
 .bub.in{background:#2A3C63;border-bottom-left-radius:6px}
-.bub.out{background:var(--mint);color:var(--ink);margin-left:auto;border-bottom-right-radius:6px;font-weight:600}
+.bub.out{background:#2A3C63;margin-left:auto;border-bottom-right-radius:6px}
 .hero-chat .bub + .bub{margin-top:8px}
-.hero-chat .bub.out{background:#2A3C63;color:var(--tx);font-weight:500}
 .hero-chat .bub.in{background:rgba(94,214,164,.16);border:1px solid rgba(94,214,164,.35)}
 .hero-chat .seen{font-size:12px;color:var(--dim);text-align:right;margin-top:6px}
 .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;background:rgba(94,214,164,.14);color:var(--mint);border:1px solid rgba(94,214,164,.35)}
-.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 0 rgba(94,214,164,.6);animation:pulse 1.6s infinite}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);animation:pulse 1.6s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(94,214,164,.55)}100%{box-shadow:0 0 0 10px rgba(94,214,164,0)}}
+.btn{display:block;width:100%;border:0;background:var(--mint);color:var(--ink);font-weight:800;font-size:16px;padding:15px;border-radius:14px;box-shadow:0 10px 30px rgba(94,214,164,.25);margin-top:16px}
+.btn.ghost{background:var(--card);color:var(--tx);border:1px solid var(--line);box-shadow:none}
+.btn.sm{padding:12px;font-size:15px;margin-top:10px}
+
+/* quiz */
+.quiz{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 16px;margin-top:14px}
+.prog{height:6px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden;margin-bottom:14px}
+.prog i{display:block;height:100%;background:var(--mint);transition:.3s;width:0}
+.quiz .qn{font-size:12px;color:var(--dim);font-weight:700;margin-bottom:4px}
+.quiz h3{font-size:19px;margin-bottom:12px}
+.opts{display:grid;gap:8px}
+.opts.two{grid-template-columns:1fr 1fr}
+.opt{border:1px solid var(--line);background:rgba(0,0,0,.2);color:var(--tx);border-radius:14px;padding:13px 14px;text-align:left;font-weight:600;font-size:15px;transition:.15s}
+.opt.on{border-color:var(--mint);background:rgba(94,214,164,.14);box-shadow:inset 0 0 0 1px var(--mint)}
+.qnav{display:flex;gap:8px;margin-top:12px}
+.qnav button{flex:1}
+.qnav .back{flex:0 0 auto;padding:12px 16px}
+
+/* result */
+.result{background:linear-gradient(180deg,rgba(94,214,164,.12),rgba(94,214,164,.03));border:1px solid rgba(94,214,164,.45);border-radius:var(--r);padding:18px 16px;margin-top:14px}
+.result .meta{font-size:13.5px;color:var(--mut);margin:6px 0 12px}
+.result .txt{font-size:15px;margin-bottom:12px}
+.result ol{margin:6px 0 12px;padding-left:22px} .result li{margin:3px 0}
+.result .loss{background:rgba(0,0,0,.25);border-radius:14px;padding:12px 14px;font-size:14.5px}
+.result .loss b{color:var(--red)}
+.three{display:grid;gap:8px;margin-top:14px}
+.three .btn{margin-top:0}
 
 /* niches */
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.niche{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 12px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:.15s;text-align:left;color:var(--tx)}
-.niche .ic{font-size:26px;line-height:1}
-.niche .nm{font-weight:700;font-size:15px}
-.niche .ds{font-size:12px;color:var(--dim)}
-.niche.on{border-color:var(--mint);background:rgba(94,214,164,.10);box-shadow:inset 0 0 0 1px var(--mint)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{border:1px solid var(--line);background:transparent;color:var(--mut);padding:8px 12px;border-radius:999px;font-weight:600;font-size:13.5px}
+.chips button.on{background:var(--mint);color:var(--ink);border-color:var(--mint)}
 
 /* phone demo */
 .phone{margin-top:16px;background:#0B1426;border:1px solid var(--line);border-radius:26px;padding:10px;box-shadow:0 20px 60px rgba(0,0,0,.45)}
 .ph-top{display:flex;align-items:center;gap:10px;padding:8px 8px 10px;border-bottom:1px solid var(--line)}
 .ph-top .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#2E457A,#1B2A4A);display:grid;place-items:center;border:1px solid var(--line)}
-.ph-top .nm{font-weight:700;font-size:15px}
-.ph-top .st{font-size:12px;color:var(--mint)}
+.ph-top .nm{font-weight:700;font-size:15px} .ph-top .st{font-size:12px;color:var(--mint)}
 .ph-body{height:380px;overflow-y:auto;padding:12px 6px 6px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
-.ph-body .bub{font-size:14.5px}
-.ph-body .bub.in{background:#1E2F52}
+.ph-body .bub{font-size:14.5px} .ph-body .bub.in{background:#1E2F52}
+.ph-body .bub.out{background:var(--mint);color:var(--ink);font-weight:600}
 .kb{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 4px 0;max-width:92%}
 .kb button{border:1px solid rgba(94,214,164,.5);background:rgba(94,214,164,.10);color:var(--tx);border-radius:12px;padding:8px 11px;font-size:13.5px;font-weight:600}
-.kb button:active{transform:scale(.97)}
 .kb.done button{opacity:.45;pointer-events:none}
 .kb.done button.pick{opacity:1;background:var(--mint);color:var(--ink);border-color:var(--mint)}
 .typing{display:inline-flex;gap:4px;padding:11px 14px;background:#1E2F52;border-radius:16px;border-bottom-left-radius:6px}
@@ -84,20 +98,8 @@ p{margin:0}
 @keyframes tp{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
 .ph-foot{display:flex;gap:8px;padding:8px 4px 2px}
 .ph-foot .inp{flex:1;background:#132040;border:1px solid var(--line);border-radius:999px;padding:9px 14px;font-size:14px;color:var(--dim)}
-.restart{margin-top:12px;width:100%;border:1px solid var(--line);background:var(--card);color:var(--mut);padding:11px;border-radius:12px;font-weight:700;font-size:14px}
-.owner-note{margin-top:12px;background:rgba(94,214,164,.08);border:1px solid rgba(94,214,164,.3);border-radius:14px;padding:12px 14px;font-size:14px;display:none}
+.owner-note{margin-top:12px;background:rgba(94,214,164,.08);border:1px solid rgba(94,214,164,.3);border-radius:14px;padding:12px 14px;font-size:14px;display:none;white-space:pre-line}
 .owner-note b{color:var(--mint)}
-
-/* tiles */
-.tiles{display:grid;gap:10px;margin-top:14px}
-.tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
-.tile .ic{font-size:22px;margin-bottom:8px}
-.tile h3{font-size:16px;margin-bottom:4px}
-.tile p{color:var(--mut);font-size:14.5px}
-.tiles.two{grid-template-columns:1fr 1fr}
-.tiles.two .tile{padding:14px}
-.tiles.two h3{font-size:15px}
-.tiles.two p{font-size:13px}
 
 /* calc */
 .calc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 16px;margin-top:14px}
@@ -111,56 +113,59 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:24px;height:24px;b
 .cur button.on{background:var(--mint);color:var(--ink);border-color:var(--mint)}
 .res{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
 .res .box{background:rgba(0,0,0,.25);border-radius:14px;padding:12px}
-.res .k{font-size:12px;color:var(--dim)} .res .v{font-size:21px;font-weight:800;margin-top:2px;font-variant-numeric:tabular-nums;letter-spacing:-.01em;white-space:nowrap}
+.res .k{font-size:12px;color:var(--dim)} .res .v{font-size:21px;font-weight:800;margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
 .res .v small{font-size:12px;font-weight:700;color:var(--mut);margin-left:3px}
-.res .v.red{color:#FF8A8A}
-.calc .note{margin-top:12px;font-size:13.5px;color:var(--mut)}
-.calc .note b{color:var(--mint)}
+.res .v.red{color:var(--red)}
+.calc .note{margin-top:12px;font-size:13.5px;color:var(--mut)} .calc .note b{color:var(--mint)}
 
-/* steps */
+/* packages */
+.pkgs{display:grid;gap:12px;margin-top:14px}
+.pkg{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 16px;position:relative}
+.pkg.hot{border-color:var(--mint);background:linear-gradient(180deg,rgba(94,214,164,.12),rgba(94,214,164,.03))}
+.pkg .tag{position:absolute;top:-11px;right:14px;background:var(--mint);color:var(--ink);font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px}
+.pkg h3{font-size:17px;margin-bottom:4px}
+.pkg .for{font-size:13.5px;color:var(--mut);margin-bottom:10px}
+.pkg .big{font-size:24px;font-weight:800;letter-spacing:-.01em;line-height:1.2} .pkg .big small{font-size:13px;font-weight:600;color:var(--mut)}
+.pkg ul{margin:10px 0 0;padding:0;list-style:none}
+.pkg li{padding:4px 0 4px 24px;position:relative;font-size:14px;color:var(--mut)}
+.pkg li::before{content:"";position:absolute;left:2px;top:10px;width:12px;height:7px;border-left:2.5px solid var(--mint);border-bottom:2.5px solid var(--mint);transform:rotate(-45deg)}
+.pkg .lim{font-size:12.5px;color:var(--dim);margin-top:8px;font-style:italic}
+.free{background:rgba(94,214,164,.10);border:1px dashed rgba(94,214,164,.5);border-radius:14px;padding:12px 14px;font-size:14px;margin-top:14px}
+.free b{color:var(--mint)}
+
+/* steps / tiles */
 .steps{margin-top:14px;display:grid;gap:10px}
 .step{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px}
 .step .n{width:30px;height:30px;border-radius:50%;border:2px solid var(--mint);color:var(--mint);display:grid;place-items:center;font-weight:800;flex:none}
 .step h3{font-size:15px;margin-bottom:2px}.step p{font-size:14px;color:var(--mut)}
 
-/* prices */
-.price{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 16px;margin-top:14px;position:relative}
-.price.hot{border-color:var(--mint);background:linear-gradient(180deg,rgba(94,214,164,.12),rgba(94,214,164,.03))}
-.price .tag{position:absolute;top:-11px;right:14px;background:var(--mint);color:var(--ink);font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px}
-.price .big{font-size:26px;line-height:1.25;font-weight:800;letter-spacing:-.01em}
-.price .big small{font-size:14px;font-weight:600;color:var(--mut)}
-.price ul{margin:10px 0 0;padding:0;list-style:none}
-.price li{padding:5px 0 5px 24px;position:relative;font-size:14.5px;color:var(--mut)}
-.price li::before{content:"";position:absolute;left:2px;top:11px;width:12px;height:7px;border-left:2.5px solid var(--mint);border-bottom:2.5px solid var(--mint);transform:rotate(-45deg)}
+/* faq */
+.faq{margin-top:14px;display:grid;gap:8px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:0 14px}
+.faq summary{list-style:none;cursor:pointer;padding:13px 0;font-weight:700;font-size:15px;display:flex;justify-content:space-between;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--mint);font-size:20px;font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq .a{padding:0 0 14px;font-size:14.5px;color:var(--mut)}
 
-/* about */
 .about{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-top:14px}
 .about .av{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#2E457A,#1B2A4A);display:grid;place-items:center;flex:none;border:1px solid var(--line);font-weight:800;font-size:20px}
 .about p{font-size:14px;color:var(--mut)}
 
 /* form */
 .form{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-top:14px}
-.f{margin-bottom:12px}
-.f label{display:block;font-size:13px;color:var(--mut);margin-bottom:6px;font-weight:600}
-.f input,.f textarea,.f select{width:100%;background:#0B1426;border:1px solid var(--line);color:var(--tx);border-radius:12px;padding:12px 13px;font:inherit;font-size:16px;outline:none}
-.f input:focus,.f textarea:focus{border-color:var(--mint)}
-.f textarea{min-height:76px;resize:vertical}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips button{border:1px solid var(--line);background:transparent;color:var(--mut);padding:8px 12px;border-radius:999px;font-weight:600;font-size:13.5px}
-.chips button.on{background:var(--mint);color:var(--ink);border-color:var(--mint)}
-.err{color:#FF8A8A;font-size:13px;margin-top:4px;display:none}
-.ok{display:none;text-align:center;padding:22px 10px}
-.ok .big{font-size:48px}
-.ok h3{font-size:20px;margin:8px 0 6px}
+.f{margin-bottom:12px} .f label{display:block;font-size:13px;color:var(--mut);margin-bottom:6px;font-weight:600}
+.f input,.f textarea{width:100%;background:#0B1426;border:1px solid var(--line);color:var(--tx);border-radius:12px;padding:12px 13px;font:inherit;font-size:16px;outline:none}
+.f input:focus,.f textarea:focus{border-color:var(--mint)} .f textarea{min-height:70px;resize:vertical}
+.pill{display:inline-block;background:rgba(94,214,164,.12);border:1px solid rgba(94,214,164,.35);color:var(--tx);border-radius:999px;padding:6px 12px;font-size:13.5px;font-weight:600}
+.err{color:var(--red);font-size:13px;margin-top:4px;display:none}
+.ok{display:none;text-align:center;padding:22px 10px} .ok .big{font-size:48px} .ok h3{font-size:20px;margin:8px 0 6px}
 
-/* sticky cta (fallback when not in telegram) */
-.cta{position:fixed;left:0;right:0;bottom:0;padding:12px var(--pad) calc(12px + env(safe-area-inset-bottom));
-  background:linear-gradient(180deg,rgba(15,27,51,0),rgba(15,27,51,.92) 35%);z-index:10}
-.cta button{width:100%;max-width:560px;margin:0 auto;display:block;border:0;background:var(--mint);color:var(--ink);font-weight:800;font-size:16px;padding:15px;border-radius:14px;box-shadow:0 10px 30px rgba(94,214,164,.35)}
+.cta{position:fixed;left:0;right:0;bottom:0;padding:12px var(--pad) calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(15,27,51,0),rgba(15,27,51,.92) 35%);z-index:10}
+.cta .btn{max-width:560px;margin:0 auto}
 .cta.hide{display:none}
 .foot{text-align:center;color:var(--dim);font-size:12px;padding:26px 0 10px}
-.reveal{opacity:0;transform:translateY(14px);transition:.5s ease}
-.reveal.in{opacity:1;transform:none}
+.reveal{opacity:0;transform:translateY(14px);transition:.5s ease} .reveal.in{opacity:1;transform:none}
 </style>
 </head>
 <body>
@@ -185,14 +190,39 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:24px;height:24px;b
       <div class="bub in" data-i="hc_3"></div>
       <div class="seen" data-i="hc_seen"></div>
     </div>
+    <button class="btn" id="heroBtn" data-i="hero_btn"></button>
   </section>
 
-  <!-- NICHES -->
-  <section class="sec reveal" id="niches">
-    <span class="eyebrow" data-i="n_eb"></span>
-    <h2 data-i="n_h"></h2>
-    <p class="sub" data-i="n_sub"></p>
-    <div class="grid2" id="nicheGrid"></div>
+  <!-- QUIZ -->
+  <section class="sec" id="quiz">
+    <span class="eyebrow" data-i="q_eb"></span>
+    <h2 data-i="q_h"></h2>
+    <p class="sub" data-i="q_sub"></p>
+    <div class="quiz" id="quizBox">
+      <div class="prog"><i id="prog"></i></div>
+      <div class="qn" id="qn"></div>
+      <h3 id="qTitle"></h3>
+      <div class="opts" id="qOpts"></div>
+      <div class="qnav"><button class="btn ghost sm back" id="qBack">←</button><button class="btn sm hidden" id="qNext" data-i="q_next"></button></div>
+    </div>
+    <!-- RESULT -->
+    <div class="result hidden" id="resultBox">
+      <span class="eyebrow" data-i="r_eb"></span>
+      <h2 data-i="r_h"></h2>
+      <div class="meta" id="rMeta"></div>
+      <div class="txt" id="rText"></div>
+      <b data-i="r_can"></b>
+      <ol id="rMods"></ol>
+      <p class="mut" style="font-size:14px" data-i="r_you"></p>
+      <div class="loss" id="rLoss" style="margin-top:12px"></div>
+      <h3 style="margin-top:16px;font-size:17px" data-i="r_next"></h3>
+      <div class="three">
+        <button class="btn" data-go="#demo" data-i="b_example"></button>
+        <button class="btn ghost" data-go="#calc" data-i="b_calc"></button>
+        <button class="btn ghost" data-go="#lead" data-i="b_human"></button>
+      </div>
+      <button class="btn ghost sm" id="qRedo" data-i="q_redo"></button>
+    </div>
   </section>
 
   <!-- DEMO -->
@@ -200,6 +230,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:24px;height:24px;b
     <span class="eyebrow" data-i="d_eb"></span>
     <h2 data-i="d_h"></h2>
     <p class="sub" data-i="d_sub"></p>
+    <div class="chips" id="nicheChips" style="margin-top:12px"></div>
     <div class="phone">
       <div class="ph-top"><div class="av">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="4" stroke="#fff" stroke-width="2"/><path d="M8 10.5l2.5 2.5L16 8" stroke="#5ED6A4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -208,18 +239,8 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:24px;height:24px;b
       <div class="ph-foot"><div class="inp" data-i="ph_inp"></div></div>
     </div>
     <div class="owner-note" id="ownerNote"></div>
-    <button class="restart" id="restart" data-i="d_restart"></button>
-  </section>
-
-  <!-- PAIN -->
-  <section class="sec reveal">
-    <span class="eyebrow" data-i="p_eb"></span>
-    <h2 data-i="p_h"></h2>
-    <div class="tiles">
-      <div class="tile"><div class="ic">🌙</div><h3 data-i="p1h"></h3><p data-i="p1p"></p></div>
-      <div class="tile"><div class="ic">💬</div><h3 data-i="p2h"></h3><p data-i="p2p"></p></div>
-      <div class="tile"><div class="ic">🪑</div><h3 data-i="p3h"></h3><p data-i="p3p"></p></div>
-    </div>
+    <button class="btn ghost sm" id="restart" data-i="d_restart"></button>
+    <button class="btn sm" data-go="#calc" data-i="b_calc"></button>
   </section>
 
   <!-- CALC -->
@@ -236,20 +257,18 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:24px;height:24px;b
         <div class="box"><div class="k" data-i="c_month"></div><div class="v red" id="lossM"></div></div>
         <div class="box"><div class="k" data-i="c_year"></div><div class="v red" id="lossY"></div></div>
       </div>
-      <p class="note" data-i="c_note"></p>
+      <p class="note" id="cNote"></p>
     </div>
   </section>
 
-  <!-- GET -->
-  <section class="sec reveal">
-    <span class="eyebrow" data-i="g_eb"></span>
-    <h2 data-i="g_h"></h2>
-    <div class="tiles two">
-      <div class="tile"><div class="ic">⚡</div><h3 data-i="g1h"></h3><p data-i="g1p"></p></div>
-      <div class="tile"><div class="ic">🔔</div><h3 data-i="g2h"></h3><p data-i="g2p"></p></div>
-      <div class="tile"><div class="ic">📲</div><h3 data-i="g3h"></h3><p data-i="g3p"></p></div>
-      <div class="tile"><div class="ic">📊</div><h3 data-i="g4h"></h3><p data-i="g4p"></p></div>
-    </div>
+  <!-- PACKAGES -->
+  <section class="sec reveal" id="prices">
+    <span class="eyebrow" data-i="pr_eb"></span>
+    <h2 data-i="pr_h"></h2>
+    <p class="sub" data-i="pr_sub"></p>
+    <div class="free" id="freeBox"></div>
+    <div class="pkgs" id="pkgs"></div>
+    <p class="mut" style="font-size:13.5px;margin-top:12px" data-i="pr_add"></p>
   </section>
 
   <!-- HOW -->
@@ -263,18 +282,11 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:24px;height:24px;b
     </div>
   </section>
 
-  <!-- PRICES -->
-  <section class="sec reveal" id="prices">
-    <span class="eyebrow" data-i="pr_eb"></span>
-    <h2 data-i="pr_h"></h2>
-    <div class="price hot"><span class="tag" data-i="pr_tag"></span>
-      <div class="big" data-i="pr1_big"></div><p class="mut" data-i="pr1_sub"></p>
-      <ul><li data-i="pr1_1"></li><li data-i="pr1_2"></li><li data-i="pr1_3"></li></ul>
-    </div>
-    <div class="price">
-      <div class="big"><span data-i="pr2_big"></span></div><p class="mut" data-i="pr2_sub"></p>
-      <ul><li data-i="pr2_1"></li><li data-i="pr2_2"></li><li data-i="pr2_3"></li><li data-i="pr2_4"></li></ul>
-    </div>
+  <!-- FAQ / objections -->
+  <section class="sec reveal" id="faq">
+    <span class="eyebrow" data-i="o_eb"></span>
+    <h2 data-i="o_h"></h2>
+    <div class="faq" id="faqBox"></div>
   </section>
 
   <!-- ABOUT -->
@@ -289,7 +301,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:24px;height:24px;b
     <p class="sub" data-i="f_sub"></p>
     <div class="form" id="formBox">
       <div class="f"><label data-i="f_name"></label><input id="fName" autocomplete="name"></div>
-      <div class="f"><label data-i="f_niche"></label><select id="fNiche"></select></div>
+      <div class="f"><label data-i="f_niche"></label><span class="pill" id="fNiche"></span> <button class="btn ghost sm" style="display:inline-block;width:auto;margin:0 0 0 6px;padding:6px 10px;font-size:13px" data-go="#quiz" data-i="f_change"></button></div>
       <div class="f"><label data-i="f_contact"></label><input id="fContact" placeholder="@username / +54 9 11…"></div>
       <div class="f"><label data-i="f_when"></label><div class="chips" id="whenChips"></div></div>
       <div class="f"><label data-i="f_comment"></label><textarea id="fComment"></textarea></div>
@@ -301,152 +313,197 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:24px;height:24px;b
   <div class="foot" data-i="foot"></div>
 </div>
 
-<div class="cta" id="cta"><button id="ctaBtn" data-i="cta"></button></div>
+<div class="cta" id="cta"><button class="btn" id="ctaBtn" data-i="cta"></button></div>
 
 <script>
-/* ========== CONFIG (правится под себя) ========== */
-const CONTACT = "@leopatttt";        // куда писать живому человеку (fallback)
-const PRICE_SETUP = 250, PRICE_MONTH = 40;
+/* ========== CONFIG ========== */
+const CONTACT = "@leopatttt";
+const PRICES = {"basic":{"setup_usd":200,"month_usd":30},"business":{"setup_usd":400,"month_usd":60},"pro":{"setup_usd":700,"month_usd":100,"from":true}};          // из config.yaml (build_webapp.py)
+const FREE = 2;
+/* ========== ДАННЫЕ ВОРОНКИ — сгенерированы из funnel.py, не править руками ========== */
+const FN = {"quiz":[{"key":"niche","multi":false,"q":{"ru":"<b>1/6 · Чем занимаетесь?<\/b>","es":"<b>1/6 · ¿A qué te dedicás?<\/b>"},"opts":[["rest","🍽 Ресторан / кафе / бар","🍽 Restaurante / café / bar"],["salon","💅 Салон / барбершоп","💅 Salón / barbería"],["clinic","🦷 Клиника / стоматология","🦷 Clínica / dentista"],["realty","🏠 Недвижимость","🏠 Inmobiliaria"],["fit","🏋️ Фитнес / студия","🏋️ Fitness / estudio"],["hotel","🏨 Отель / апартаменты","🏨 Hotel / departamentos"],["auto","🚗 Автосервис","🚗 Taller mecánico"],["shop","🛍 Магазин","🛍 Tienda"],["edu","🎓 Курсы / консультации","🎓 Cursos / consultoría"],["other","✨ Другое","✨ Otro"]]},{"key":"channel","multi":false,"q":{"ru":"<b>2/6 · Где вам сейчас пишут клиенты?<\/b>","es":"<b>2/6 · ¿Por dónde te escriben hoy los clientes?<\/b>"},"opts":[["wa","WhatsApp","WhatsApp"],["ig","Instagram Direct","Instagram Direct"],["tg","Telegram","Telegram"],["phone","Звонят","Llaman"],["mix","Везде понемногу","Un poco de todo"]]},{"key":"volume","multi":false,"q":{"ru":"<b>3/6 · Сколько обращений в день?<\/b>","es":"<b>3/6 · ¿Cuántas consultas por día?<\/b>"},"opts":[["v5","До 5","Hasta 5"],["v20","5–20","5–20"],["v50","20–50","20–50"],["v50p","Больше 50","Más de 50"],["na","Не считал","No lo conté"]]},{"key":"asks","multi":true,"q":{"ru":"<b>4/6 · Что спрашивают чаще всего?<\/b>\nМожно выбрать несколько, потом «Дальше».","es":"<b>4/6 · ¿Qué te preguntan más seguido?<\/b>\nPodés elegir varias y después «Seguir»."},"opts":[["price","Цена","Precio"],["slots","Свободно ли время / места","Si hay turno / lugar"],["addr","Адрес и часы","Dirección y horarios"],["how","Как записаться / заказать","Cómo reservar / pedir"],["terms","Условия, доставка, оплата","Condiciones, envío, pago"],["own","Что-то своё","Otra cosa"]]},{"key":"reply","multi":false,"q":{"ru":"<b>5/6 · Бывает, что отвечаете не сразу?<\/b>","es":"<b>5/6 · ¿Pasa que no respondés enseguida?<\/b>"},"opts":[["self_late","Отвечаю сам, часто с задержкой","Respondo yo, muchas veces tarde"],["staff_hours","Сотрудник в рабочее время","Un empleado, en horario laboral"],["nobody_eve","Вечером и в выходные никто","De noche y fines de semana, nadie"],["fast","Всегда отвечаем быстро","Siempre respondemos rápido"]]},{"key":"booking","multi":false,"q":{"ru":"<b>6/6 · Нужна ли запись или бронирование?<\/b>","es":"<b>6/6 · ¿Necesitás turnos o reservas?<\/b>"},"opts":[["manual","Да, записываю руками","Sí, los anoto a mano"],["system","Есть система, но клиенты всё равно пишут","Tengo sistema, pero igual me escriben"],["orders","Нет, у меня заказы / заявки","No, tengo pedidos / solicitudes"],["faq","Нет, только вопросы","No, solo preguntas"]]}],"niche":{"rest":{"pkg":"pro","demo":"order","ru":{"name":"ресторан / кафе","auto":["меню с ценами","часы и адрес","бронь столика","предзаказ или доставка","акции недели","готовый заказ — вам"],"text":"Для вашего заведения бот возьмёт на себя то, о чём спрашивают чаще всего ({asks}). Клиент сможет посмотреть меню, забронировать стол на нужное время, сделать предзаказ, узнать про акции — в любое время, без ожидания ответа. Вам придёт только готовый заказ или бронь с именем и телефоном. Ничего не надо переписывать руками."},"es":{"name":"restaurante / café","auto":["menú con precios","horarios y dirección","reserva de mesa","pedido anticipado o delivery","promos de la semana","el pedido listo, para vos"],"text":"Para tu local el bot se encarga de lo que más preguntan ({asks}). El cliente puede ver el menú, reservar mesa, hacer un pedido anticipado y ver las promos, a cualquier hora, sin esperar respuesta. A vos te llega solo el pedido o la reserva lista, con nombre y teléfono. Nada que copiar a mano."}},"salon":{"pkg":"business","demo":"book","ru":{"name":"салон / барбершоп","auto":["услуги и цены","свободные окна","запись","напоминание за сутки","перенос и отмена одной кнопкой","повторная запись «как в прошлый раз»"],"text":"У вас клиенты пишут «а когда свободно?» — это самый дорогой вопрос: пока вы в работе, они ждут, а потом записываются к тому, кто ответил. Бот покажет свободные окна сам, запишет, за сутки напомнит и при отмене сразу освободит время. Вы увидите уведомление о каждой записи и список на день. Неявок станет меньше — напоминание работает лучше любого «я вам напишу»."},"es":{"name":"salón / barbería","auto":["servicios y precios","horarios libres","turno","recordatorio un día antes","cambiar o cancelar con un botón","repetir «como la última vez»"],"text":"Tus clientes escriben «¿cuándo tenés lugar?»: es la pregunta más cara. Mientras trabajás, esperan, y después reservan con quien les respondió. El bot muestra los horarios libres, anota el turno, recuerda un día antes y, si cancelan, libera el horario al instante. Vos ves cada turno y la lista del día. Menos ausencias: el recordatorio funciona mejor que cualquier «te escribo»."}},"clinic":{"pkg":"business","demo":"book","ru":{"name":"клиника / стоматология","auto":["услуги и ориентировочные цены","запись к врачу","памятка «как подготовиться»","напоминание за сутки и за 2 часа","напоминание о плановом визите","FAQ по страховке и оплате"],"text":"У клиники два дорогих провала: пациент не записался, потому что не дождался ответа, и пациент не пришёл, потому что забыл. Бот закрывает оба: записывает сам, напоминает дважды, а через полгода напоминает о плановом осмотре. Администратор видит расписание и получает только подтверждённые записи."},"es":{"name":"clínica / dentista","auto":["servicios y precios orientativos","turno con el profesional","instructivo «cómo prepararse»","recordatorio un día y 2 horas antes","aviso de control semestral","FAQ de obra social y pago"],"text":"Una clínica pierde plata en dos lugares: el paciente que no sacó turno porque nadie le respondió, y el que no vino porque se olvidó. El bot cierra los dos: anota solo, recuerda dos veces y a los seis meses avisa el control. La recepción ve la agenda y recibe solo turnos confirmados."}},"realty":{"pkg":"pro","demo":"qualify","ru":{"name":"недвижимость","auto":["сбор требований: аренда/покупка, район, бюджет, комнаты, срок","квалификация","карточка горячего лида агенту","подписка на новые объекты"],"text":"Агенту не нужно вести десять одинаковых диалогов. Бот спросит район, бюджет, количество комнат и срок — и передаст вам карточку клиента, где всё уже заполнено. Вы отвечаете только тем, у кого совпал бюджет с районом. Остальным бот вежливо предложит подписаться на новые объекты."},"es":{"name":"inmobiliaria","auto":["requisitos: alquiler/compra, zona, presupuesto, ambientes, plazo","calificación","ficha del lead caliente al agente","suscripción a propiedades nuevas"],"text":"El agente no tiene que llevar diez charlas iguales. El bot pregunta zona, presupuesto, ambientes y plazo, y te pasa la ficha del cliente ya completa. Respondés solo a los que tienen presupuesto para esa zona. Al resto el bot les ofrece suscribirse a propiedades nuevas."}},"fit":{"pkg":"business","demo":"book","ru":{"name":"фитнес / студия","auto":["расписание групп","пробное занятие","абонементы и оплата","напоминание о занятии","напоминание об окончании абонемента","лист ожидания в полные группы"],"text":"Три вещи, на которых студия теряет деньги: не пришёл на пробное, забыл продлить абонемент, не узнал, что в группе освободилось место. Бот записывает на пробное и напоминает, за три дня до конца абонемента предлагает продлить, а при отмене пишет первому в листе ожидания."},"es":{"name":"fitness / estudio","auto":["horarios de las clases","clase de prueba","abonos y pago","recordatorio de la clase","aviso de vencimiento del abono","lista de espera en grupos llenos"],"text":"Tres cosas por las que un estudio pierde plata: no vino a la prueba, se olvidó de renovar, no se enteró de que se liberó un lugar. El bot anota la prueba y recuerda, tres días antes del vencimiento propone renovar y, si alguien cancela, le escribe al primero de la lista de espera."}},"hotel":{"pkg":"pro","demo":"dates","ru":{"name":"отель / апартаменты","auto":["наличие дат и цена","бронь с предоплатой","инструкция по заселению","ответы про парковку, завтрак, поздний выезд","сбор отзыва после выезда"],"text":"Гость пишет в 23:00 «есть ли свободное на выходные?» — и ждёт до утра. За это время он бронирует на Booking с их комиссией. Бот ответит сразу: даты, цена, бронь и предоплата. После заселения ответит на типовые вопросы, после выезда попросит отзыв."},"es":{"name":"hotel / departamentos","auto":["disponibilidad y precio","reserva con seña","instrucciones de check-in","respuestas sobre cochera, desayuno, late check-out","pedido de reseña al irse"],"text":"El huésped escribe a las 23:00 «¿hay lugar el fin de semana?» y espera hasta la mañana. Mientras tanto reserva por Booking, con su comisión. El bot responde al instante: fechas, precio, reserva y seña. Después del check-in contesta las dudas típicas; al irse, pide la reseña."}},"auto":{"pkg":"business","demo":"book","ru":{"name":"автосервис","auto":["запись на диагностику или ТО","ориентировочные цены по типовым работам","статус ремонта «машина готова»","напоминание о следующем ТО"],"text":"Клиент сервиса задаёт три вопроса: сколько стоит, когда можно приехать, готова ли машина. Бот отвечает на все три без участия мастера. Когда машина готова — клиент получает сообщение сам. Через полгода бот напомнит про ТО, и клиент вернётся к вам, а не к первому попавшемуся."},"es":{"name":"taller mecánico","auto":["turno para diagnóstico o service","precios orientativos de trabajos típicos","estado del arreglo: «el auto está listo»","aviso del próximo service"],"text":"El cliente del taller pregunta tres cosas: cuánto sale, cuándo puede ir, si el auto está listo. El bot responde las tres sin molestar al mecánico. Cuando el auto está listo, el cliente recibe el aviso solo. A los seis meses el bot recuerda el service, y el cliente vuelve a vos, no al primero que encuentra."}},"shop":{"pkg":"basic","demo":"order","ru":{"name":"магазин","auto":["каталог и цены","наличие","заказ с доставкой или самовывозом","условия оплаты","передача заказа вам"],"text":"Половина сообщений в магазин — «есть в наличии?» и «сколько стоит?». Бот отвечает на них сам, принимает заказ с адресом и способом оплаты и передаёт вам готовую заявку. Вы собираете заказ, а не переписку."},"es":{"name":"tienda","auto":["catálogo y precios","stock","pedido con envío o retiro","formas de pago","el pedido, a vos"],"text":"La mitad de los mensajes a una tienda son «¿hay stock?» y «¿cuánto sale?». El bot los responde solo, toma el pedido con dirección y forma de pago y te lo pasa listo. Vos armás el pedido, no la charla."}},"edu":{"pkg":"basic","demo":"book","ru":{"name":"курсы / консультации","auto":["программа и цены","запись на пробное или консультацию","напоминание о занятии","ответы на типовые вопросы","заявка с контактом — вам"],"text":"Тот, кто спросил «сколько стоит и когда старт», решает в тот же вечер. Если ответ пришёл утром — он уже выбрал других. Бот отвечает сразу, записывает на пробное и напоминает о нём. Вам приходит заявка с именем и контактом, а не «здравствуйте» в директе."},"es":{"name":"cursos / consultoría","auto":["programa y precios","inscripción a la clase de prueba o consulta","recordatorio","respuestas a las dudas típicas","la solicitud con contacto, a vos"],"text":"El que pregunta «cuánto sale y cuándo empieza» decide esa misma noche. Si la respuesta llega a la mañana, ya eligió a otro. El bot responde al instante, anota la prueba y la recuerda. A vos te llega la solicitud con nombre y contacto, no un «hola» en el direct."}},"other":{"pkg":"basic","demo":"qualify","ru":{"name":"ваш бизнес","auto":["ответы на типовые вопросы","цены и условия","сбор заявки с квалификацией","передача вам"],"text":"Даже если ниша особенная, схема одна: бот отвечает на повторяющиеся вопросы, задаёт клиенту два-три уточнения и передаёт вам готовую заявку. Вы отвечаете только тем, кто уже решил."},"es":{"name":"tu negocio","auto":["respuestas a las dudas de siempre","precios y condiciones","solicitud calificada","derivación a vos"],"text":"Aunque el rubro sea particular, el esquema es el mismo: el bot responde lo repetitivo, le hace al cliente dos o tres preguntas y te pasa la solicitud lista. Respondés solo a los que ya decidieron."}}},"ask_module":{"ru":{"price":"узнать цены","slots":"увидеть свободное время или места","addr":"посмотреть адрес и часы","how":"записаться или заказать без переписки","terms":"узнать условия, доставку и оплату","own":"получить ответ на ваш частый вопрос"},"es":{"price":"ver los precios","slots":"ver horarios o lugares libres","addr":"ver dirección y horarios","how":"reservar o pedir sin chatear","terms":"ver condiciones, envío y pago","own":"resolver tu pregunta frecuente"}},"main_module":{"ru":{"manual":"записаться на свободное время","system":"записаться, не отвлекая вас","orders":"оформить заказ","faq":"оставить заявку"},"es":{"manual":"sacar turno en un horario libre","system":"sacar turno sin molestarte","orders":"hacer el pedido","faq":"dejar una solicitud"}},"volume_mid":{"v5":3,"v20":12,"v50":35,"v50p":60,"na":null},"unanswered_share":{"self_late":0.3,"staff_hours":0.35,"nobody_eve":0.35,"fast":0.1},"packages":{"basic":{"ru":{"name":"Basic — «ответы и заявки»","for":"мастера-одиночки, консультанты, небольшие магазины — все, у кого в основном вопросы","in":["FAQ до 15 ответов, цены, адрес и часы","форма заявки с передачей вам в Telegram","один язык"],"limits":"без записи на время, без напоминаний, без интеграций"},"es":{"name":"Basic — «respuestas y solicitudes»","for":"profesionales independientes, consultores, tiendas chicas: donde son sobre todo preguntas","in":["FAQ hasta 15 respuestas, precios, dirección y horarios","formulario de solicitud que te llega a Telegram","un idioma"],"limits":"sin turnos por horario, sin recordatorios, sin integraciones"}},"business":{"ru":{"name":"Business — «запись и напоминания»","for":"салоны, барбершопы, клиники, фитнес, автосервисы — все, кто живёт по расписанию","in":["всё из Basic","запись через мини-приложение с живыми свободными окнами","напоминания, перенос и отмена","сводка на день и выгрузка в Google-таблицу","два языка"],"limits":"один филиал, до 5 специалистов, без оплаты внутри бота"},"es":{"name":"Business — «turnos y recordatorios»","for":"salones, barberías, clínicas, fitness, talleres: todos los que viven con agenda","in":["todo lo de Basic","turnos en mini app con horarios libres en vivo","recordatorios, cambios y cancelaciones","resumen del día y planilla de Google","dos idiomas"],"limits":"una sucursal, hasta 5 profesionales, sin pago dentro del bot"}},"pro":{"ru":{"name":"Pro — «заказы, оплата, интеграции»","for":"рестораны и доставки, отели, агентства недвижимости, сети из нескольких точек","in":["всё из Business","приём заказов с корзиной и предоплата","квалификация лидов с передачей менеджеру","несколько филиалов, CRM или таблица заказов","рассылки по базе, три языка"],"limits":"дальше — индивидуально"},"es":{"name":"Pro — «pedidos, pago, integraciones»","for":"restaurantes y deliverys, hoteles, inmobiliarias, cadenas con varias sucursales","in":["todo lo de Business","pedidos con carrito y seña","calificación de leads y derivación","varias sucursales, CRM o planilla de pedidos","envíos masivos, tres idiomas"],"limits":"más allá, a medida"}}},"pkg_order":["basic","business","pro"],"objections":{"dear":{"ru":"Понимаю. Давайте посчитаем от вашего чека — кнопка ниже. Если бот вернёт две записи в месяц, он уже окупился. Если не вернёт — это будет видно по цифрам через месяц, и вы ничего не теряете: первое внедрение бесплатное.","es":"Te entiendo. Calculemos con tu ticket: botón abajo. Si el bot recupera dos turnos por mes, ya se pagó. Si no, lo vas a ver en los números en un mes y no perdés nada: la primera implementación es gratis."},"noneed":{"ru":"Возможно. Тогда один вопрос: сколько человек написали вам за последнюю неделю и не записались? Если знаете цифру — вам правда не нужно. Если не знаете — бот её покажет за неделю, а дальше решите сами.","es":"Puede ser. Una sola pregunta: ¿cuántas personas te escribieron la semana pasada y no reservaron? Si sabés el número, de verdad no lo necesitás. Si no lo sabés, el bot te lo muestra en una semana y después decidís."},"whatsapp":{"ru":"WhatsApp — это где вам пишут. Бот — это кто отвечает, когда вы не можете. Он не заменяет WhatsApp, а закрывает время, пока вы в работе. Бота можно поставить и в WhatsApp — Telegram просто быстрее и дешевле для старта.","es":"WhatsApp es por dónde te escriben. El bot es quién responde cuando vos no podés. No reemplaza WhatsApp: cubre el tiempo en que estás trabajando. El bot también va en WhatsApp; Telegram es más rápido y barato para arrancar."},"site":{"ru":"Сайт показывает. Бот делает: записывает, напоминает, передаёт вам готовую заявку. Посмотрите, сколько людей с сайта всё равно пишут вам в директ «а как записаться» — это и есть работа, которую забирает бот.","es":"El sitio muestra. El bot hace: anota, recuerda, te pasa la solicitud lista. Fijate cuántos, después de ver el sitio, igual te escriben «¿cómo reservo?»: ese es el trabajo que se lleva el bot."},"staff":{"ru":"И правильно. Вопрос — что они делают в 22:00 и в воскресенье. Бот не заменяет сотрудника: он отвечает, пока сотрудника нет, и передаёт ему утром готовые записи, а не переписку с двадцатью «здравствуйте».","es":"Y está bien. La pregunta es qué hacen a las 22:00 y el domingo. El bot no reemplaza al empleado: responde cuando no está y a la mañana le pasa turnos listos, no veinte charlas que empiezan con «hola»."},"notg":{"ru":"В Буэнос-Айресе — да, там WhatsApp. Поэтому для местных клиентов ставим бота в WhatsApp, для русскоязычных — в Telegram; логика одна, делаю обе. А ссылка на запись работает откуда угодно: из Instagram, с сайта, из QR-кода на стойке.","es":"En Buenos Aires, sí: acá es WhatsApp. Por eso para clientes locales el bot va en WhatsApp y para rusoparlantes en Telegram; la lógica es la misma, hago las dos. Y el link de reserva funciona desde donde sea: Instagram, sitio, QR en el mostrador."},"think":{"ru":"Конечно. Оставлю ссылку на демо — потыкайте, когда будет минута. Напишу через неделю узнать, что решили. Удобно?","es":"Claro. Te dejo el link de la demo para que la pruebes cuando tengas un minuto. Te escribo en una semana para saber qué decidiste, ¿te parece?"}},"demo":{"book":{"ru":{"hi":"Здравствуйте! Это бот записи {biz} ✨\nВыберите услугу:","day":"{svc}. Какой день?","time":"{day} — свободно:","done":"<b>Вы записаны<\/b> ✅\n\n{svc}\n{day}, {time}\n\nНапомню за сутки. Перенести или отменить — одной кнопкой.","days":["Сегодня","Завтра","Пт"],"times":["11:00","14:30","18:00"],"owner":"<b>А вот что увидите вы:<\/b>\n🆕 Запись #12 · {svc} · {day} {time} · Анна · +54 9 11…\nНичего не надо открывать — пришло в Telegram и легло в таблицу."},"es":{"hi":"¡Hola! Soy el bot de turnos de {biz} ✨\nElegí un servicio:","day":"{svc}. ¿Qué día?","time":"{day} — disponible:","done":"<b>Turno confirmado<\/b> ✅\n\n{svc}\n{day}, {time}\n\nTe recuerdo un día antes. Cambiar o cancelar, con un botón.","days":["Hoy","Mañana","Vie"],"times":["11:00","14:30","18:00"],"owner":"<b>Y esto es lo que ves vos:<\/b>\n🆕 Turno #12 · {svc} · {day} {time} · Ana · +54 9 11…\nSin abrir nada: llega a tu Telegram y queda en la planilla."}},"order":{"ru":{"hi":"Здравствуйте! Это {biz} 🍽\nЧто будем заказывать?","day":"{svc} — сколько?","time":"Куда доставить?","done":"<b>Заказ принят<\/b> ✅\n\n{svc} × {day}\n{time}\nДоставка сегодня к 19:30\n\nОплата при получении или переводом.","days":["1","2","3"],"times":["Palermo, Gorriti 4800","Самовывоз"],"owner":"<b>А вот что увидите вы:<\/b>\n🆕 Заказ #12 · {svc} × {day} · {time} · Анна · +54 9 11…\nГотовый заказ, а не переписка."},"es":{"hi":"¡Hola! Soy {biz} 🍽\n¿Qué pedimos?","day":"{svc}: ¿cuántos?","time":"¿A dónde lo llevamos?","done":"<b>Pedido tomado<\/b> ✅\n\n{svc} × {day}\n{time}\nEntrega hoy a las 19:30\n\nPago al recibir o por transferencia.","days":["1","2","3"],"times":["Palermo, Gorriti 4800","Retiro en local"],"owner":"<b>Y esto es lo que ves vos:<\/b>\n🆕 Pedido #12 · {svc} × {day} · {time} · Ana · +54 9 11…\nUn pedido listo, no una charla."}},"qualify":{"ru":{"hi":"Здравствуйте! Это бот {biz} 🏠\nЧто ищете?","day":"{svc}. Какой район?","time":"Бюджет в месяц?","done":"<b>Принято<\/b> ✅\n\n{svc} · {day} · {time}\n\nАгент свяжется с вами сегодня. А пока — подписать вас на новые объекты по этим параметрам?","days":["Palermo","Recoleta","Belgrano"],"times":["до 600 USD","600–900 USD","900+ USD"],"owner":"<b>А вот что увидите вы:<\/b>\n🔥 Лид · {svc} · {day} · {time} · Анна · +54 9 11…\nКарточка уже заполнена — вы звоните только тем, у кого бюджет совпал с районом."},"es":{"hi":"¡Hola! Soy el bot de {biz} 🏠\n¿Qué buscás?","day":"{svc}. ¿Qué zona?","time":"¿Presupuesto mensual?","done":"<b>Listo<\/b> ✅\n\n{svc} · {day} · {time}\n\nUn agente te contacta hoy. Mientras tanto, ¿te suscribo a propiedades nuevas con estos parámetros?","days":["Palermo","Recoleta","Belgrano"],"times":["hasta 600 USD","600–900 USD","900+ USD"],"owner":"<b>Y esto es lo que ves vos:<\/b>\n🔥 Lead · {svc} · {day} · {time} · Ana · +54 9 11…\nLa ficha ya está completa: llamás solo a los que tienen presupuesto para esa zona."}},"dates":{"ru":{"hi":"Здравствуйте! Это {biz} 🏨\nНа какие даты?","day":"{svc}. Сколько гостей?","time":"Есть свободно. Выберите вариант:","done":"<b>Бронь принята<\/b> ✅\n\n{svc} · {day}\n{time}\n\nПришлю ссылку на предоплату и инструкцию по заселению.","days":["1","2","3–4"],"times":["Студия · 45 USD/ночь","1 спальня · 60 USD/ночь"],"owner":"<b>А вот что увидите вы:<\/b>\n🆕 Бронь #12 · {svc} · {day} гостей · {time} · Анна · +54 9 11…\nГость не ушёл на Booking, пока вы спали."},"es":{"hi":"¡Hola! Soy {biz} 🏨\n¿Para qué fechas?","day":"{svc}. ¿Cuántos huéspedes?","time":"Hay lugar. Elegí una opción:","done":"<b>Reserva tomada<\/b> ✅\n\n{svc} · {day}\n{time}\n\nTe mando el link de la seña y las instrucciones de check-in.","days":["1","2","3–4"],"times":["Estudio · 45 USD/noche","1 dormitorio · 60 USD/noche"],"owner":"<b>Y esto es lo que ves vos:<\/b>\n🆕 Reserva #12 · {svc} · {day} huéspedes · {time} · Ana · +54 9 11…\nEl huésped no se fue a Booking mientras dormías."}}},"demo_biz":{"rest":{"ru":["кафе «Пельмени и Ко»",["Пельмени сибирские, 1 кг","Борщ, 1 л","Сырники, 6 шт"]],"es":["Café La Esquina",["Empanadas, docena","Milanesa con papas","Torta, 1 kg"]]},"salon":{"ru":["студии «Мила»",["Маникюр с покрытием","Педикюр","Брови"]],"es":["Mila Estética",["Manicura semipermanente","Pedicura","Cejas"]]},"clinic":{"ru":["клиники Dental Care",["Консультация","Чистка","Лечение кариеса"]],"es":["Dental Care",["Consulta","Limpieza","Caries"]]},"realty":{"ru":["агентства Casa BA",["Аренда","Покупка","Временное жильё"]],"es":["Casa BA",["Alquiler","Compra","Temporario"]]},"fit":{"ru":["студии Flow Yoga",["Пробное занятие","Абонемент 8 занятий","Индивидуально"]],"es":["Flow Yoga",["Clase de prueba","Abono 8 clases","Personal"]]},"hotel":{"ru":["апартаментов Sol",["20–22 сен","27–29 сен","Другие даты"]],"es":["Departamentos Sol",["20–22 sep","27–29 sep","Otras fechas"]]},"auto":{"ru":["сервиса AutoPro",["Диагностика","ТО","Замена масла"]],"es":["AutoPro",["Diagnóstico","Service","Cambio de aceite"]]},"shop":{"ru":["магазина «Русские продукты»",["Гречка, 1 кг","Сгущёнка","Пряники"]],"es":["Tienda Rusa",["Trigo sarraceno, 1 kg","Dulce de leche ruso","Galletas"]]},"edu":{"ru":["школы QueTal",["Тест уровня","Группа А1, вечер","Индивидуально"]],"es":["QueTal Español",["Test de nivel","Grupo A1, noche","Individual"]]},"other":{"ru":["вашего бизнеса",["Консультация","Услуга","Заявка"]],"es":["tu negocio",["Consulta","Servicio","Solicitud"]]}}};
 
-/* ========== I18N ========== */
+/* ========== I18N (тексты страницы) ========== */
 const T = {
 ru:{
  brand:"Роберт · боты", badge:"Отвечаю за 30 секунд",
  h1:"Клиент написал в 23:40. Кто ответит?",
- h1sub:"Бот принимает записи и заказы, пока вы заняты или спите. Выберите нишу — покажу, как это увидит ваш клиент.",
+ h1sub:"Бот сам отвечает на типовые вопросы, записывает, принимает заказы и передаёт вам только тех, кто готов платить.",
  hc_who:"Новое сообщение", hc_1:"Здравствуйте! А на завтра есть окошко на маникюр?", hc_2:"Да, есть 11:00, 14:30 и 18:00. Выберите время 👇", hc_3:"Записала вас на 14:30. Напомню за сутки ✨", hc_seen:"ответ за 4 секунды · без вашего участия",
- n_eb:"Шаг 1", n_h:"Чем вы занимаетесь?", n_sub:"Демо подстроится под вашу нишу.",
- niches:[["💅","Салон / бьюти-мастер","маникюр, брови, ресницы"],["✂️","Барбершоп","стрижки, борода"],["🥟","Доставка еды","домашняя кухня, торты"],["🧒","Детская студия","кружки, сад, лагерь"],["🎓","Курсы / репетитор","язык, музыка, спорт"],["✨","Другое","любая запись или заказ"]],
- d_eb:"Шаг 2", d_h:"Так это увидит ваш клиент", d_sub:"Нажимайте на кнопки — это живая копия бота.", ph_online:"онлайн · отвечает мгновенно", ph_inp:"Сообщение…", d_restart:"↻ Пройти заново",
- owner:"<b>А вот что увидите вы:</b> «🆕 Запись #12 · {svc} · {day} {time} · Анна · +54 9 11…». Ничего не надо открывать — пришло в Telegram и легло в таблицу.",
- p_eb:"Где теряются деньги", p_h:"Три дыры, которых не видно",
- p1h:"Вечер и выходные", p1p:"Пик спроса — 18:00–19:00 и суббота. Именно тогда вы не за телефоном, а клиент не ждёт до утра.",
- p2h:"«А когда свободно?»", p2p:"Двадцать сообщений ради одной записи. Каждый такой диалог — ваши 5–10 минут.",
- p3h:"Неявки", p3p:"Человек записался две недели назад и забыл. Окно простояло пустым, деньги ушли.",
- c_eb:"Шаг 3", c_h:"Сколько это стоит вам", c_sub:"Подвиньте ползунки под свои цифры. Считаем честно, без магии.",
- c_check:"Средний чек", c_missed:"Упущенных заявок в неделю", c_noshow:"Неявок в месяц",
- c_month:"Теряете в месяц", c_year:"Теряете в год",
- c_note:"Бот стоит <b>40 USD в месяц</b>. Если он возвращает хотя бы пару записей — он уже окупился.",
- g_eb:"Что вы получаете", g_h:"Не «бот», а свободные руки",
- g1h:"Запись 24/7", g1p:"Услуга → день → время. Сам знает занятые окна.",
- g2h:"Напоминание", g2p:"За сутки, с кнопкой отмены. Неявок меньше.",
- g3h:"Уведомление вам", g3p:"Каждая запись — сразу в ваш Telegram.",
- g4h:"Таблица", g4p:"Всё в Google-таблице: учёт, статистика, налоги.",
+ hero_btn:"Пройти диагностику — 2 минуты",
+ q_eb:"Шаг 1 · диагностика", q_h:"6 вопросов — и покажу, что автоматизировать у вас", q_sub:"Всё кнопками, писать ничего не нужно.", q_next:"Дальше →", q_redo:"↻ Изменить ответы", q_pick:"Выберите хотя бы один пункт",
+ r_eb:"Ваш результат", r_h:"Что можно автоматизировать у вас", r_can:"Клиент сможет сам:", r_you:"Вам придёт только результат: запись, заказ или заявка с контактом. Остальное бот закроет сам.", r_next:"Хотите, покажу, как это будет выглядеть именно у вас?",
+ r_meta:"Вы: {niche} · клиенты пишут: {channel} · обращений: {volume} · чаще всего спрашивают: {asks}",
+ r_loss:"По вашим ответам: примерно <b>{unans}</b> обращений в неделю остаются без быстрого ответа. Даже если уходит треть — это <b>~{lost}</b> потерянных клиентов в неделю. Ниже посчитаем точнее с вашим средним чеком.",
+ r_loss_na:"Вы не считали обращения — это нормально. Бот покажет точную цифру за первую неделю. Ниже можно прикинуть потери с вашим средним чеком.",
+ remind:"получить напоминание",
+ b_example:"👀 Показать пример", b_calc:"🧮 Рассчитать стоимость", b_human:"💬 Обсудить с человеком",
+ d_eb:"Шаг 2 · пример", d_h:"Так это увидит ваш клиент", d_sub:"Нажимайте на кнопки — это живая копия бота.", ph_online:"онлайн · отвечает мгновенно", ph_inp:"Сообщение…", d_restart:"↻ Пройти заново",
+ c_eb:"Шаг 3 · цифры", c_h:"Сколько это стоит вам", c_sub:"Подвиньте ползунки под свои цифры. Считаем честно, без магии.",
+ c_check:"Средний чек", c_missed:"Упущенных заявок в неделю", c_noshow:"Неявок в месяц", c_month:"Теряете в месяц", c_year:"Теряете в год",
+ c_note:"Бот в вашем пакете стоит <b>{m} USD в месяц</b>. Если он возвращает хотя бы две записи — он уже окупился.",
+ pr_eb:"Шаг 4 · цена", pr_h:"Открыто, без звёздочек", pr_sub:"Сначала пакет, который подходит вашей нише.",
+ pr_free:"🎁 <b>Первые внедрения — бесплатно за честный отзыв.</b> Это не скидка: я покупаю кейсы. Осталось мест: {n}.",
+ pr_tag:"Подходит вам", pr_setup:"внедрение", pr_month:"/ месяц", pr_from:"от ", pr_for:"Для кого: ",
+ pr_add:"К любому пакету: второй язык, второй филиал, рассылка раз в месяц, WhatsApp, ежемесячный отчёт с цифрами. Оплата в USDT или переводом.",
  s_eb:"Как это происходит", s_h:"Три шага, один вечер",
  s1h:"20 минут разговора", s1p:"Услуги, часы, как вы работаете сейчас. Без техники.",
  s2h:"Через 1–2 дня бот готов", s2p:"Вы проверяете, я правлю. Ваш стиль, ваши тексты.",
  s3h:"Ссылка в профиль", s3p:"Ставите в Instagram и WhatsApp. Дальше он работает сам.",
- pr_eb:"Цены", pr_h:"Открыто, без звёздочек",
- pr_tag:"Осталось 2 места", pr1_big:"0 USD", pr1_sub:"Первые два внедрения — бесплатно",
- pr1_1:"Полноценный бот под ваш бизнес", pr1_2:"Месяц поддержки включён", pr1_3:"От вас — честный отзыв через месяц",
- pr2_big:`${PRICE_SETUP} USD <small>внедрение</small><br>+ ${PRICE_MONTH} USD <small>/ месяц</small>`, pr2_sub:"Дальше — для всех остальных",
- pr2_1:"Настройка под услуги, часы и тексты", pr2_2:"Хостинг и мониторинг 24/7", pr2_3:"Правки и поддержка в течение месяца", pr2_4:"Оплата в USDT или переводом",
+ o_eb:"Частые вопросы", o_h:"«А если…»",
+ obj_titles:{dear:"Это дорого", noneed:"Мне это не нужно, я справляюсь", whatsapp:"У меня уже есть WhatsApp", site:"У меня есть сайт", staff:"Мои сотрудники сами отвечают", notg:"Клиенты не пользуются Telegram", think:"Дайте подумать"},
  a_h:"Роберт", a_p:"Продакт-менеджер, живу в Буэнос-Айресе. Делаю сам, отвечаю сам, без менеджеров и посредников.",
- f_eb:"Шаг 4", f_h:"Оставьте заявку", f_sub:"Отвечу лично в течение дня. Никаких рассылок.",
- f_name:"Как вас зовут", f_niche:"Ниша", f_contact:"Telegram или телефон", f_when:"Когда удобно созвониться", f_comment:"Что автоматизировать? (необязательно)",
+ f_eb:"Шаг 5 · заявка", f_h:"Обсудить с человеком", f_sub:"Отвечу лично в течение дня. Никаких рассылок.",
+ f_name:"Как вас зовут", f_niche:"Ниша", f_change:"изменить", f_contact:"Telegram или телефон", f_when:"Когда удобно созвониться", f_comment:"Что автоматизировать? (необязательно)",
  when:["Утром","Днём","Вечером","Напишите текстом"],
- err_name:"Напишите имя", err_contact:"Оставьте Telegram или телефон",
- cta:"Оставить заявку", cta_main:"ОСТАВИТЬ ЗАЯВКУ",
- ok_h:"Заявка у меня", ok_p:"Напишу вам в Telegram в течение дня. Пока — можете потыкать демо ещё раз.",
+ err_name:"Напишите имя", err_contact:"Оставьте Telegram или телефон", err_quiz:"Пройдите 6 вопросов выше — так я приду на созвон с готовым предложением.",
+ cta:"Обсудить с человеком", cta_main:"ОБСУДИТЬ С ЧЕЛОВЕКОМ",
+ ok_h:"Заявка у меня", ok_p:"Напишу вам в Telegram в течение дня.",
  fallback:"Откройте это в Telegram, чтобы отправить заявку в один тап. Или напишите мне: ",
  foot:"Буэнос-Айрес · 2026",
- demo:{
-  book:{ hi:"Здравствуйте! Это бот записи {biz} 💫\nВыберите услугу:", day:"Отлично, {svc}. Какой день?", time:"{day} — свободно:", name:"Как вас записать?", done:"Вы записаны ✅\n\n{svc}\n{day}, {time}\n\nНапомню за сутки. Отменить или перенести — команда /my", days:["Сегодня","Завтра","Пт, 20 сен"], times:["11:00","14:30","18:00"], names:["Анна"] },
-  order:{ hi:"Здравствуйте! Это {biz} 🥟\nЧто будем заказывать?", qty:"{svc} — сколько порций?", addr:"Куда доставить?", done:"Заказ принят ✅\n\n{svc} × {qty}\n{addr}\nДоставка сегодня к 19:30\n\nОплата при получении или переводом.", qtys:["1","2","3"], addrs:["Palermo, Gorriti 4800","Самовывоз"] },
-  biz:{0:"студии красоты «Мила»",1:"барбершопа Prime",2:"кухня «Домашние пельмени»",3:"детской студии Alma",4:"школы испанского QueTal",5:"вашего бизнеса"},
-  svc:{0:["Маникюр с покрытием","Педикюр","Брови"],1:["Стрижка","Стрижка + борода","Детская стрижка"],2:["Пельмени сибирские, 1 кг","Борщ, 1 л","Сырники, 6 шт"],3:["Пробное занятие","Абонемент 8 занятий","Летний лагерь"],4:["Тест уровня","Группа А1, вечер","Индивидуально"],5:["Услуга 1","Услуга 2","Консультация"]}
- }
+ demo_names:["Анна"],
 },
 es:{
  brand:"Roberto · bots", badge:"Respondo en 30 segundos",
  h1:"Un cliente escribió a las 23:40. ¿Quién responde?",
- h1sub:"El bot toma turnos y pedidos mientras trabajás o dormís. Elegí tu rubro y te muestro cómo lo ve tu cliente.",
+ h1sub:"El bot responde las preguntas de siempre, toma turnos y pedidos, y te pasa solo a los que están listos para pagar.",
  hc_who:"Mensaje nuevo", hc_1:"¡Hola! ¿Tenés turno para manicura mañana?", hc_2:"Sí: 11:00, 14:30 y 18:00. Elegí el horario 👇", hc_3:"Listo, te anoté a las 14:30. Te recuerdo un día antes ✨", hc_seen:"respondido en 4 segundos · sin vos",
- n_eb:"Paso 1", n_h:"¿A qué te dedicás?", n_sub:"La demo se adapta a tu rubro.",
- niches:[["💅","Salón / belleza","uñas, cejas, pestañas"],["✂️","Barbería","cortes, barba"],["🥟","Comida a domicilio","cocina casera, tortas"],["🧒","Taller infantil","talleres, jardín, colonia"],["🎓","Cursos / profe","idiomas, música, deporte"],["✨","Otro","cualquier turno o pedido"]],
- d_eb:"Paso 2", d_h:"Así lo ve tu cliente", d_sub:"Tocá los botones: es una copia viva del bot.", ph_online:"en línea · responde al instante", ph_inp:"Mensaje…", d_restart:"↻ Empezar de nuevo",
- owner:"<b>Y esto es lo que ves vos:</b> «🆕 Turno #12 · {svc} · {day} {time} · Ana · +54 9 11…». Sin abrir nada: llega a tu Telegram y queda en la planilla.",
- p_eb:"Dónde se pierde plata", p_h:"Tres agujeros que no se ven",
- p1h:"Noche y fin de semana", p1p:"El pico de demanda es 18–19 h y el sábado. Justo cuando no estás con el teléfono, y el cliente no espera hasta mañana.",
- p2h:"«¿Cuándo tenés lugar?»", p2p:"Veinte mensajes por un solo turno. Cada charla así son 5–10 minutos tuyos.",
- p3h:"Ausencias", p3p:"Reservó hace dos semanas y se olvidó. El horario quedó vacío, la plata se fue.",
- c_eb:"Paso 3", c_h:"Cuánto te cuesta", c_sub:"Mové los controles con tus números. Cálculo honesto, sin magia.",
- c_check:"Ticket promedio", c_missed:"Consultas perdidas por semana", c_noshow:"Ausencias por mes",
- c_month:"Perdés por mes", c_year:"Perdés por año",
- c_note:"El bot cuesta <b>40 USD por mes</b>. Si recupera un par de turnos, ya se pagó solo.",
- g_eb:"Qué recibís", g_h:"No un «bot»: manos libres",
- g1h:"Turnos 24/7", g1p:"Servicio → día → hora. Conoce los horarios ocupados.",
- g2h:"Recordatorio", g2p:"Un día antes, con botón para cancelar. Menos ausencias.",
- g3h:"Aviso para vos", g3p:"Cada turno llega al instante a tu Telegram.",
- g4h:"Planilla", g4p:"Todo en Google Sheets: control, estadísticas, contador.",
+ hero_btn:"Diagnóstico — 2 minutos",
+ q_eb:"Paso 1 · diagnóstico", q_h:"6 preguntas y te muestro qué automatizar", q_sub:"Todo con botones, no hace falta escribir.", q_next:"Seguir →", q_redo:"↻ Cambiar respuestas", q_pick:"Elegí al menos una opción",
+ r_eb:"Tu resultado", r_h:"Qué se puede automatizar en tu negocio", r_can:"El cliente va a poder solo:", r_you:"A vos te llega solo el resultado: turno, pedido o solicitud con contacto. El resto lo cierra el bot.", r_next:"¿Querés ver cómo quedaría en tu negocio?",
+ r_meta:"Vos: {niche} · te escriben por: {channel} · consultas: {volume} · lo que más preguntan: {asks}",
+ r_loss:"Según tus respuestas: unas <b>{unans}</b> consultas por semana quedan sin respuesta rápida. Aunque se vaya un tercio, son <b>~{lost}</b> clientes perdidos por semana. Abajo lo calculamos con tu ticket promedio.",
+ r_loss_na:"No contaste las consultas, es normal. El bot te muestra el número exacto en la primera semana. Abajo podés estimar la pérdida con tu ticket promedio.",
+ remind:"recibir un recordatorio",
+ b_example:"👀 Ver un ejemplo", b_calc:"🧮 Calcular el costo", b_human:"💬 Hablar con una persona",
+ d_eb:"Paso 2 · ejemplo", d_h:"Así lo ve tu cliente", d_sub:"Tocá los botones: es una copia viva del bot.", ph_online:"en línea · responde al instante", ph_inp:"Mensaje…", d_restart:"↻ Empezar de nuevo",
+ c_eb:"Paso 3 · números", c_h:"Cuánto te cuesta", c_sub:"Mové los controles con tus números. Cálculo honesto, sin magia.",
+ c_check:"Ticket promedio", c_missed:"Consultas perdidas por semana", c_noshow:"Ausencias por mes", c_month:"Perdés por mes", c_year:"Perdés por año",
+ c_note:"El bot en tu paquete cuesta <b>{m} USD por mes</b>. Si recupera un par de turnos, ya se pagó solo.",
+ pr_eb:"Paso 4 · precio", pr_h:"Claros, sin letra chica", pr_sub:"Primero el paquete que va con tu rubro.",
+ pr_free:"🎁 <b>Las primeras implementaciones, gratis a cambio de una reseña honesta.</b> No es descuento: compro casos. Quedan {n} lugares.",
+ pr_tag:"Para tu negocio", pr_setup:"implementación", pr_month:"/ mes", pr_from:"desde ", pr_for:"Para: ",
+ pr_add:"A cualquier paquete: segundo idioma, segunda sucursal, envío mensual, WhatsApp, informe mensual con números. Pago en USDT o transferencia.",
  s_eb:"Cómo funciona", s_h:"Tres pasos, una tarde",
  s1h:"20 minutos de charla", s1p:"Servicios, horarios, cómo trabajás hoy. Sin tecnicismos.",
  s2h:"En 1–2 días está listo", s2p:"Vos probás, yo corrijo. Tu estilo, tus textos.",
  s3h:"Link en el perfil", s3p:"Lo ponés en Instagram y WhatsApp. Después trabaja solo.",
- pr_eb:"Precios", pr_h:"Claros, sin letra chica",
- pr_tag:"Quedan 2 lugares", pr1_big:"0 USD", pr1_sub:"Las primeras dos implementaciones, gratis",
- pr1_1:"Bot completo para tu negocio", pr1_2:"Un mes de soporte incluido", pr1_3:"A cambio: una reseña honesta al mes",
- pr2_big:`${PRICE_SETUP} USD <small>implementación</small><br>+ ${PRICE_MONTH} USD <small>/ mes</small>`, pr2_sub:"Después, para todos los demás",
- pr2_1:"Configurado con tus servicios, horarios y textos", pr2_2:"Hosting y monitoreo 24/7", pr2_3:"Ajustes y soporte durante un mes", pr2_4:"Pago en USDT o transferencia",
+ o_eb:"Preguntas frecuentes", o_h:"«¿Y si…?»",
+ obj_titles:{dear:"Es caro", noneed:"No lo necesito, me arreglo", whatsapp:"Ya tengo WhatsApp", site:"Tengo un sitio web", staff:"Mis empleados responden", notg:"Mis clientes no usan Telegram", think:"Lo voy a pensar"},
  a_h:"Roberto", a_p:"Product manager, vivo en Buenos Aires. Lo hago yo y respondo yo, sin intermediarios.",
- f_eb:"Paso 4", f_h:"Dejá tu solicitud", f_sub:"Te respondo personalmente en el día. Nada de spam.",
- f_name:"Tu nombre", f_niche:"Rubro", f_contact:"Telegram o teléfono", f_when:"Cuándo te viene bien hablar", f_comment:"¿Qué querés automatizar? (opcional)",
- when:["Mañana","Mediodía","Noche","Por mensaje"],
- err_name:"Escribí tu nombre", err_contact:"Dejá tu Telegram o teléfono",
- cta:"Dejar solicitud", cta_main:"DEJAR SOLICITUD",
- ok_h:"¡Recibido!", ok_p:"Te escribo por Telegram en el día. Mientras tanto, probá la demo otra vez.",
+ f_eb:"Paso 5 · solicitud", f_h:"Hablar con una persona", f_sub:"Te respondo personalmente en el día. Nada de spam.",
+ f_name:"Tu nombre", f_niche:"Rubro", f_change:"cambiar", f_contact:"Telegram o teléfono", f_when:"Cuándo te viene bien hablar", f_comment:"¿Qué querés automatizar? (opcional)",
+ when:["A la mañana","Al mediodía","A la noche","Por mensaje"],
+ err_name:"Escribí tu nombre", err_contact:"Dejá tu Telegram o teléfono", err_quiz:"Respondé las 6 preguntas de arriba: así llego a la charla con una propuesta lista.",
+ cta:"Hablar con una persona", cta_main:"HABLAR CON UNA PERSONA",
+ ok_h:"¡Recibido!", ok_p:"Te escribo por Telegram en el día.",
  fallback:"Abrí esto en Telegram para enviar la solicitud con un toque. O escribime: ",
  foot:"Buenos Aires · 2026",
- demo:{
-  book:{ hi:"¡Hola! Soy el bot de turnos de {biz} 💫\nElegí un servicio:", day:"Perfecto, {svc}. ¿Qué día?", time:"{day} — disponible:", name:"¿A nombre de quién?", done:"¡Turno confirmado! ✅\n\n{svc}\n{day}, {time}\n\nTe recuerdo un día antes. Cancelar o cambiar: /mis", days:["Hoy","Mañana","Vie 20 sep"], times:["11:00","14:30","18:00"], names:["Ana"] },
-  order:{ hi:"¡Hola! Soy {biz} 🥟\n¿Qué pedimos?", qty:"{svc} — ¿cuántas porciones?", addr:"¿A dónde lo llevamos?", done:"¡Pedido tomado! ✅\n\n{svc} × {qty}\n{addr}\nEntrega hoy a las 19:30\n\nPago al recibir o por transferencia.", qtys:["1","2","3"], addrs:["Palermo, Gorriti 4800","Retiro en local"] },
-  biz:{0:"Mila Estética",1:"Prime Barbería",2:"Cocina Casera",3:"Taller Alma",4:"QueTal Español",5:"tu negocio"},
-  svc:{0:["Manicura semipermanente","Pedicura","Cejas"],1:["Corte","Corte + barba","Corte infantil"],2:["Empanadas, docena","Sopa casera, 1 L","Torta, 1 kg"],3:["Clase de prueba","Abono 8 clases","Colonia de verano"],4:["Test de nivel","Grupo A1, noche","Individual"],5:["Servicio 1","Servicio 2","Consulta"]}
- }
+ demo_names:["Ana"],
 }};
 
 /* ========== STATE ========== */
 const tg = window.Telegram && Telegram.WebApp ? Telegram.WebApp : null;
-let lang = "ru", niche = 0, cur = "ARS", when = null;
-const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
-const fmtN = n => new Intl.NumberFormat(lang==="ru"?"ru-RU":"es-AR").format(Math.round(n));
+let lang="ru", cur="ARS", when=null, niche=null;
+let quiz={}, qIdx=0, quizDone=false;
+let prefill={name:"",username:""};
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const fmtN=n=>new Intl.NumberFormat(lang==="ru"?"ru-RU":"es-AR").format(Math.round(n));
+const fill=(s,o)=>s.replace(/\{(\w+)\}/g,(_,k)=>o[k]??"");
+function haptic(k){ try{ if(!tg) return; if(k==="success") tg.HapticFeedback.notificationOccurred("success"); else tg.HapticFeedback.impactOccurred(k);}catch(e){} }
+function go(sel){ const el=$(sel); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); }
 
-function detectLang(){
-  const lc = tg && tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.language_code;
-  if (lc) return lc.startsWith("ru") ? "ru" : "es";
-  return (navigator.language||"").startsWith("ru") ? "ru" : "es";
+function readParams(){
+  try{
+    const q=new URLSearchParams(location.search).get("q"); if(!q) return;
+    const s=q.replace(/-/g,"+").replace(/_/g,"/"); const raw=atob(s+"===".slice((s.length+3)%4));
+    const o=JSON.parse(decodeURIComponent(escape(raw)));
+    if(o.lang) lang=o.lang; if(o.quiz&&o.quiz.niche){ quiz=o.quiz; quizDone=true; niche=quiz.niche; }
+    prefill={name:o.name||"", username:o.username||""};
+  }catch(e){}
 }
+function detectLang(){
+  const lc=tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user&&tg.initDataUnsafe.user.language_code;
+  if(lc) return lc.startsWith("ru")?"ru":"es";
+  return (navigator.language||"").startsWith("ru")?"ru":"es";
+}
+const lbl=(key,code)=>{ const q=FN.quiz.find(x=>x.key===key); const o=q&&q.opts.find(x=>x[0]===code); if(!o) return ""; const s=lang==="ru"?o[1]:o[2]; return key==="niche"?s.replace(/^\S+\s/,""):s; };
 
+/* ========== RENDER ========== */
 function render(){
-  const t = T[lang];
-  document.documentElement.lang = lang;
-  $$("[data-i]").forEach(el=>{ const k=el.dataset.i; if (t[k]!==undefined) el.innerHTML = t[k]; });
-  $$(".lang button").forEach(b=>b.classList.toggle("on", b.dataset.l===lang));
-  // niches
-  const g = $("#nicheGrid"); g.innerHTML = "";
-  t.niches.forEach((n,i)=>{
-    const b = document.createElement("button"); b.className="niche"+(i===niche?" on":"");
-    b.innerHTML = `<div class="ic">${n[0]}</div><div class="nm">${n[1]}</div><div class="ds">${n[2]}</div>`;
-    b.onclick = ()=>{ niche=i; haptic("light"); render(); startDemo(); $("#demo").scrollIntoView({behavior:"smooth",block:"start"}); };
-    g.appendChild(b);
-  });
-  const sel = $("#fNiche"); sel.innerHTML = t.niches.map((n,i)=>`<option value="${i}" ${i===niche?"selected":""}>${n[0]} ${n[1]}</option>`).join("");
-  const wc = $("#whenChips"); wc.innerHTML = "";
-  t.when.forEach((w,i)=>{ const b=document.createElement("button"); b.textContent=w; b.className = when===i?"on":""; b.onclick=()=>{when=i;haptic("light");render();}; wc.appendChild(b); });
-  $("#phName").textContent = t.demo.biz[niche].replace(/^(студии красоты|барбершопа|детской студии|школы испанского|кухня)\s*/,"").replace(/^«|»$/g,"");
-  if (tg) { tg.MainButton.setText(t.cta_main); }
+  const t=T[lang]; document.documentElement.lang=lang;
+  $$("[data-i]").forEach(el=>{ const k=el.dataset.i; if(typeof t[k]==="string") el.innerHTML=t[k]; });
+  $$(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.l===lang));
+  renderQuiz(); renderNiches(); renderPkgs(); renderFaq();
+  const wc=$("#whenChips"); wc.innerHTML="";
+  t.when.forEach((w,i)=>{ const b=document.createElement("button"); b.textContent=w; b.className=when===i?"on":""; b.onclick=()=>{when=i;haptic("light");render();}; wc.appendChild(b); });
+  $("#fNiche").textContent = niche ? lbl("niche",niche) : "—";
+  if(tg) tg.MainButton.setText(t.cta_main);
   calc();
 }
 
-/* ========== DEMO CHAT ========== */
-let demoTimer = [];
+/* ========== QUIZ ========== */
+function renderQuiz(){
+  const t=T[lang];
+  if(quizDone){ $("#quizBox").classList.add("hidden"); $("#resultBox").classList.remove("hidden"); renderResult(); return; }
+  $("#quizBox").classList.remove("hidden"); $("#resultBox").classList.add("hidden");
+  const q=FN.quiz[qIdx]; $("#prog").style.width=(qIdx/FN.quiz.length*100)+"%";
+  $("#qn").textContent=`${qIdx+1} / ${FN.quiz.length}`;
+  $("#qTitle").innerHTML=q.q[lang].replace(/<\/?b>/g,"").split("\n")[0].replace(/^\d\/\d · /,"");
+  const box=$("#qOpts"); box.innerHTML=""; box.className="opts"+(q.key==="niche"?" two":"");
+  q.opts.forEach(([code,ru,es])=>{
+    const b=document.createElement("button"); b.className="opt"; b.textContent=lang==="ru"?ru:es;
+    const sel=q.multi ? (quiz[q.key]||[]).includes(code) : quiz[q.key]===code;
+    if(sel) b.classList.add("on");
+    b.onclick=()=>{ haptic("light");
+      if(q.multi){ const a=new Set(quiz[q.key]||[]); a.has(code)?a.delete(code):a.add(code); quiz[q.key]=[...a]; renderQuiz(); }
+      else { quiz[q.key]=code; if(q.key==="niche") niche=code; setTimeout(nextQ,180); }
+    };
+    box.appendChild(b);
+  });
+  $("#qNext").classList.toggle("hidden",!q.multi);
+  $("#qBack").style.visibility=qIdx?"visible":"hidden";
+}
+function nextQ(){
+  const q=FN.quiz[qIdx];
+  if(q.multi && !(quiz[q.key]||[]).length){ alert(T[lang].q_pick); return; }
+  if(qIdx+1<FN.quiz.length){ qIdx++; renderQuiz(); }
+  else { quizDone=true; haptic("success"); render(); startDemo(); setTimeout(()=>go("#resultBox"),50); }
+}
+function lossEstimate(a){
+  const daily=FN.volume_mid[a.volume]; if(!daily) return [null,null];
+  const share=FN.unanswered_share[a.reply]??0.3; const un=Math.round(daily*share*6); return [un,Math.max(1,Math.round(un*0.3))];
+}
+function renderResult(){
+  const t=T[lang], a=quiz, n=FN.niche[a.niche||"other"], L=n[lang];
+  const asks=(a.asks||[]).filter(c=>FN.ask_module[lang][c]).slice(0,3);
+  const asksLbl=asks.map(c=>lbl("asks",c)).join(", ").toLowerCase() || (lang==="ru"?"цена и условия":"precio y condiciones");
+  $("#rMeta").textContent=fill(t.r_meta,{niche:L.name,channel:lbl("channel",a.channel),volume:lbl("volume",a.volume).toLowerCase(),asks:asksLbl});
+  $("#rText").textContent=fill(L.text,{asks:asksLbl});
+  const mods=asks.map(c=>FN.ask_module[lang][c]); const main=FN.main_module[lang][a.booking||"faq"]; if(!mods.includes(main)) mods.push(main); mods.push(t.remind);
+  $("#rMods").innerHTML=mods.map(m=>`<li>${m}</li>`).join("");
+  const [un,lost]=lossEstimate(a);
+  $("#rLoss").innerHTML= un ? fill(t.r_loss,{unans:un,lost}) : t.r_loss_na;
+}
+
+/* ========== NICHES + DEMO ========== */
+function renderNiches(){
+  const box=$("#nicheChips"); box.innerHTML="";
+  const q=FN.quiz[0];
+  q.opts.forEach(([code,ru,es])=>{ const b=document.createElement("button"); b.textContent=lang==="ru"?ru:es; b.className=code===(niche||"salon")?"on":"";
+    b.onclick=()=>{ niche=code; haptic("light"); renderNiches(); startDemo(); }; box.appendChild(b); });
+  const biz=FN.demo_biz[niche||"salon"][lang][0];
+  $("#phName").textContent=biz.replace(/^(студии красоты|студии|барбершопа|детской студии|школы|клиники|агентства|сервиса|магазина|апартаментов|кафе|кухня|вашего)\s*/,"").replace(/^«|»$/g,"");
+}
+let demoTimer=[];
 function clearDemo(){ demoTimer.forEach(clearTimeout); demoTimer=[]; $("#phBody").innerHTML=""; $("#ownerNote").style.display="none"; }
 function wait(ms){ return new Promise(r=>demoTimer.push(setTimeout(r,ms))); }
-function scrollPh(){ const b=$("#phBody"); b.scrollTop = b.scrollHeight; }
+function scrollPh(){ const b=$("#phBody"); b.scrollTop=b.scrollHeight; }
+const strip=s=>s.replace(/<\/?b>/g,"");
 async function botSay(text){
   const b=$("#phBody"); const ty=document.createElement("div"); ty.className="typing"; ty.innerHTML="<i></i><i></i><i></i>"; b.appendChild(ty); scrollPh();
   await wait(650); ty.remove();
-  const d=document.createElement("div"); d.className="bub in"; d.textContent=text; b.appendChild(d); scrollPh(); await wait(120);
+  const d=document.createElement("div"); d.className="bub in"; d.textContent=strip(text); b.appendChild(d); scrollPh(); await wait(120);
 }
 function userSay(text){ const d=document.createElement("div"); d.className="bub out"; d.textContent=text; $("#phBody").appendChild(d); scrollPh(); }
 function ask(options){
@@ -456,87 +513,96 @@ function ask(options){
     $("#phBody").appendChild(kb); scrollPh();
   });
 }
-const fill=(s,o)=>s.replace(/\{(\w+)\}/g,(_,k)=>o[k]??"");
 async function startDemo(){
   clearDemo();
-  const t=T[lang].demo, biz=t.biz[niche], svcs=t.svc[niche];
-  if (niche===2){
-    const d=t.order;
-    await botSay(fill(d.hi,{biz})); const svc=await ask(svcs);
-    await botSay(fill(d.qty,{svc})); const qty=await ask(d.qtys);
-    await botSay(d.addr); const addr=await ask(d.addrs);
-    await botSay(fill(d.done,{svc,qty,addr}));
-    showOwner({svc, day:(lang==="ru"?"сегодня":"hoy"), time:"19:30"});
-  } else {
-    const d=t.book;
-    await botSay(fill(d.hi,{biz})); const svc=await ask(svcs);
-    await botSay(fill(d.day,{svc})); const day=await ask(d.days);
-    await botSay(fill(d.time,{day})); const time=await ask(d.times);
-    await botSay(d.name); const name=await ask(d.names);
-    await botSay(fill(d.done,{svc,day,time}));
-    showOwner({svc,day,time});
-  }
+  const nk=niche||"salon", kind=FN.niche[nk].demo, d=FN.demo[kind][lang], [biz,items]=FN.demo_biz[nk][lang];
+  await botSay(fill(d.hi,{biz})); const svc=await ask(items);
+  await botSay(fill(d.day,{svc})); const day=await ask(d.days);
+  await botSay(fill(d.time,{svc,day})); const time=await ask(d.times);
+  await botSay(fill(d.done,{svc,day,time}));
+  const n=$("#ownerNote"); n.innerHTML=fill(d.owner,{svc,day,time}); n.style.display="block";
   haptic("success");
 }
-function showOwner(o){ const n=$("#ownerNote"); n.innerHTML=fill(T[lang].owner,o); n.style.display="block"; }
 
 /* ========== CALC ========== */
-const CHECK = { ARS:{min:5000,max:120000,step:1000,def:25000}, USD:{min:5,max:150,step:5,def:25} };
-function setRange(id,v){ const r=$(id); const p=(r.value-r.min)/(r.max-r.min)*100; r.style.setProperty("--p",p+"%"); }
+const CHECK={ ARS:{min:5000,max:120000,step:1000,def:25000}, USD:{min:5,max:150,step:5,def:25} };
+function setRange(id){ const r=$(id); const p=(r.value-r.min)/(r.max-r.min)*100; r.style.setProperty("--p",p+"%"); }
+function myPkg(){ return quizDone ? FN.niche[quiz.niche||"other"].pkg : "business"; }
 function calc(){
   const c=CHECK[cur], r=$("#rCheck");
-  r.min=c.min; r.max=c.max; r.step=c.step; if (r.dataset.cur!==cur){ r.value=c.def; r.dataset.cur=cur; }
+  r.min=c.min; r.max=c.max; r.step=c.step; if(r.dataset.cur!==cur){ r.value=c.def; r.dataset.cur=cur; }
   const check=+r.value, missed=+$("#rMissed").value, noshow=+$("#rNoshow").value;
-  $("#vCheck").textContent = fmtN(check)+" "+cur; $("#vMissed").textContent=missed; $("#vNoshow").textContent=noshow;
-  const m = (missed*4.3 + noshow) * check;
-  $("#lossM").innerHTML = "−"+fmtN(m)+"<small>"+cur+"</small>"; $("#lossY").innerHTML="−"+fmtN(m*12)+"<small>"+cur+"</small>";
+  $("#vCheck").textContent=fmtN(check)+" "+cur; $("#vMissed").textContent=missed; $("#vNoshow").textContent=noshow;
+  const m=(missed*4.3+noshow)*check;
+  $("#lossM").innerHTML="−"+fmtN(m)+"<small>"+cur+"</small>"; $("#lossY").innerHTML="−"+fmtN(m*12)+"<small>"+cur+"</small>";
   ["#rCheck","#rMissed","#rNoshow"].forEach(setRange);
   $$(".cur button").forEach(b=>b.classList.toggle("on",b.dataset.c===cur));
+  $("#cNote").innerHTML=fill(T[lang].c_note,{m:(PRICES[myPkg()]||{}).month_usd||40});
 }
 $$("#rCheck,#rMissed,#rNoshow").forEach(r=>r.addEventListener("input",calc));
 $$(".cur button").forEach(b=>b.onclick=()=>{cur=b.dataset.c;haptic("light");calc();});
 
+/* ========== PACKAGES ========== */
+function renderPkgs(){
+  const t=T[lang], mine=quizDone?myPkg():null;
+  const order=mine?[mine,...FN.pkg_order.filter(p=>p!==mine)]:FN.pkg_order;
+  $("#freeBox").innerHTML= FREE>0 ? fill(t.pr_free,{n:FREE}) : ""; $("#freeBox").style.display=FREE>0?"block":"none";
+  $("#pkgs").innerHTML=order.map((p,i)=>{ const P=FN.packages[p][lang], pr=PRICES[p]||{};
+    const price = pr.setup_usd ? `${pr.from?t.pr_from:""}${pr.setup_usd} USD <small>${t.pr_setup}</small><br>+ ${pr.month_usd} USD <small>${t.pr_month}</small>` : "";
+    return `<div class="pkg${mine&&i===0?" hot":""}">${mine&&i===0?`<span class="tag">${t.pr_tag}</span>`:""}<h3>${P.name}</h3><div class="for">${t.pr_for}${P.for}</div><div class="big">${price}</div><ul>${P.in.map(x=>`<li>${x}</li>`).join("")}</ul><div class="lim">${P.limits}</div></div>`; }).join("");
+}
+
+/* ========== FAQ ========== */
+function renderFaq(){
+  const t=T[lang];
+  $("#faqBox").innerHTML=Object.keys(FN.objections).map(k=>`<details><summary>${t.obj_titles[k]}</summary><div class="a">${FN.objections[k][lang]}</div></details>`).join("");
+}
+
 /* ========== FORM / SUBMIT ========== */
-function haptic(k){ try{ if(!tg) return; if(k==="success") tg.HapticFeedback.notificationOccurred("success"); else tg.HapticFeedback.impactOccurred(k);}catch(e){} }
 function validate(){
   const t=T[lang], name=$("#fName").value.trim(), contact=$("#fContact").value.trim(), err=$("#fErr");
-  if(!name){ err.textContent=t.err_name; err.style.display="block"; $("#fName").focus(); return null; }
-  if(!contact){ err.textContent=t.err_contact; err.style.display="block"; $("#fContact").focus(); return null; }
+  const show=(msg,el)=>{ err.textContent=msg; err.style.display="block"; if(el) el.focus(); return null; };
+  if(!quizDone){ go("#quiz"); return show(t.err_quiz); }
+  if(!name) return show(t.err_name,$("#fName"));
+  if(!contact) return show(t.err_contact,$("#fContact"));
   err.style.display="none";
   const r=$("#rCheck");
-  return { type:"lead", lang, name, contact, niche:+$("#fNiche").value, niche_label:t.niches[+$("#fNiche").value][1],
-    when: when===null?"":t.when[when], comment:$("#fComment").value.trim(),
-    calc:{cur, check:+r.value, missed:+$("#rMissed").value, noshow:+$("#rNoshow").value,
-          loss_month: Math.round((+$("#rMissed").value*4.3 + +$("#rNoshow").value)*+r.value)} };
+  return { type:"lead", lang, name, contact, when: when===null?"":t.when[when], comment:$("#fComment").value.trim(),
+    niche_label: lbl("niche",niche), quiz, human:true,
+    calc:{cur, check:+r.value, missed:+$("#rMissed").value, noshow:+$("#rNoshow").value, loss_month:Math.round((+$("#rMissed").value*4.3 + +$("#rNoshow").value)*+r.value)} };
 }
 function submit(){
-  const data=validate(); if(!data) { $("#lead").scrollIntoView({behavior:"smooth"}); return; }
+  const data=validate(); if(!data){ if(quizDone) go("#lead"); return; }
   haptic("success");
-  if (tg && tg.sendData){
-    try{ tg.sendData(JSON.stringify(data)); return; }catch(e){}
-  }
-  // fallback (открыто не из Telegram-кнопки): показываем успех + контакт
+  if(tg&&tg.sendData){ try{ tg.sendData(JSON.stringify(data)); return; }catch(e){} }
   $("#formBox").style.display="none"; const ok=$("#okBox"); ok.style.display="block";
-  ok.querySelector("p").innerHTML = T[lang].fallback + `<a href="https://t.me/${CONTACT.replace("@","")}">${CONTACT}</a>`;
+  ok.querySelector("p").innerHTML=T[lang].fallback+`<a href="https://t.me/${CONTACT.replace("@","")}">${CONTACT}</a>`;
   $("#cta").classList.add("hide");
 }
 
 /* ========== INIT ========== */
 (function init(){
-  lang = detectLang();
-  if (tg){
+  lang=detectLang(); readParams();
+  if(tg){
     tg.ready(); tg.expand();
     try{ tg.setHeaderColor("#0F1B33"); tg.setBackgroundColor("#0F1B33"); }catch(e){}
-    tg.MainButton.setParams({color:"#5ED6A4", text_color:"#0F1B33", is_visible:true, is_active:true});
+    tg.MainButton.setParams({color:"#5ED6A4",text_color:"#0F1B33",is_visible:true,is_active:true});
     tg.MainButton.onClick(submit);
     $("#cta").classList.add("hide");
-    const u=tg.initDataUnsafe && tg.initDataUnsafe.user;
-    if (u){ $("#fName").value=[u.first_name,u.last_name].filter(Boolean).join(" "); if(u.username) $("#fContact").value="@"+u.username; }
+    const u=tg.initDataUnsafe&&tg.initDataUnsafe.user;
+    if(u){ prefill.name=prefill.name||[u.first_name,u.last_name].filter(Boolean).join(" "); prefill.username=prefill.username||u.username||""; }
   } else {
-    $("#ctaBtn").onclick=()=>{ if(!validate()) {$("#lead").scrollIntoView({behavior:"smooth"});return;} submit(); };
+    $("#ctaBtn").onclick=submit;
   }
+  if(prefill.name) $("#fName").value=prefill.name;
+  if(prefill.username) $("#fContact").value="@"+prefill.username;
   $$(".lang button").forEach(b=>b.onclick=()=>{lang=b.dataset.l;haptic("light");render();startDemo();});
   $("#restart").onclick=()=>{haptic("light");startDemo();};
+  $("#heroBtn").onclick=()=>go("#quiz");
+  $("#qNext").onclick=nextQ;
+  $("#qBack").onclick=()=>{ if(qIdx){ qIdx--; renderQuiz(); } };
+  $("#qRedo").onclick=()=>{ quizDone=false; qIdx=0; render(); go("#quiz"); };
+  $$("[data-go]").forEach(b=>b.addEventListener("click",()=>{haptic("light");go(b.dataset.go);}));
   render(); startDemo();
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}}),{threshold:.08});
   $$(".reveal").forEach(el=>io.observe(el));
