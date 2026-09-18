@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Боты для бизнеса · Буэнос-Айрес</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{
+  --bg0:#0F1B33; --bg1:#1B2A4A; --bg2:#22355E;
+  --card:rgba(255,255,255,.05); --line:rgba(255,255,255,.10);
+  --tx:#F3F6FC; --mut:#AEBBD6; --dim:#7F8FB0;
+  --mint:#5ED6A4; --mintD:#3FBF8B; --ink:#0F1B33;
+  --r:18px; --pad:18px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg0);color:var(--tx);
+  font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+body{background:radial-gradient(1200px 600px at 50% -200px,#2E457A 0%,var(--bg1) 45%,var(--bg0) 100%) fixed;
+  padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+a{color:var(--mint)}
+.wrap{max-width:560px;margin:0 auto;padding:0 var(--pad)}
+h1,h2,h3{margin:0;line-height:1.15;letter-spacing:-.01em}
+h1{font-size:30px;font-weight:800}
+h2{font-size:22px;font-weight:800;margin-bottom:6px}
+p{margin:0}
+.mut{color:var(--mut)} .dim{color:var(--dim)}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--mint);text-transform:uppercase}
+.sec{padding:34px 0 6px}
+.sec > .sub{color:var(--mut);margin-top:6px}
+
+/* top bar */
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 0 6px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800}
+.brand .mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#2E457A,#1B2A4A);
+  display:grid;place-items:center;border:1px solid var(--line)}
+.lang{display:flex;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+.lang button{border:0;background:transparent;color:var(--mut);font-weight:700;padding:6px 12px;border-radius:999px;font-size:13px}
+.lang button.on{background:var(--mint);color:var(--ink)}
+
+/* hero */
+.hero{padding:22px 0 8px}
+.hero h1{margin:10px 0 12px}
+.hero .sub{font-size:17px;color:var(--mut)}
+.hero-chat{margin:22px 0 4px;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:var(--r);padding:14px;position:relative;overflow:hidden}
+.hero-chat .t{font-size:12px;color:var(--dim);margin-bottom:8px;display:flex;justify-content:space-between}
+.bub{max-width:82%;padding:10px 13px;border-radius:16px;font-size:15px;line-height:1.35;white-space:pre-line}
+.bub.in{background:#2A3C63;border-bottom-left-radius:6px}
+.bub.out{background:var(--mint);color:var(--ink);margin-left:auto;border-bottom-right-radius:6px;font-weight:600}
+.hero-chat .bub + .bub{margin-top:8px}
+.hero-chat .bub.out{background:#2A3C63;color:var(--tx);font-weight:500}
+.hero-chat .bub.in{background:rgba(94,214,164,.16);border:1px solid rgba(94,214,164,.35)}
+.hero-chat .seen{font-size:12px;color:var(--dim);text-align:right;margin-top:6px}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;background:rgba(94,214,164,.14);color:var(--mint);border:1px solid rgba(94,214,164,.35)}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 0 rgba(94,214,164,.6);animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(94,214,164,.55)}100%{box-shadow:0 0 0 10px rgba(94,214,164,0)}}
+
+/* niches */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.niche{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 12px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:.15s;text-align:left;color:var(--tx)}
+.niche .ic{font-size:26px;line-height:1}
+.niche .nm{font-weight:700;font-size:15px}
+.niche .ds{font-size:12px;color:var(--dim)}
+.niche.on{border-color:var(--mint);background:rgba(94,214,164,.10);box-shadow:inset 0 0 0 1px var(--mint)}
+
+/* phone demo */
+.phone{margin-top:16px;background:#0B1426;border:1px solid var(--line);border-radius:26px;padding:10px;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.ph-top{display:flex;align-items:center;gap:10px;padding:8px 8px 10px;border-bottom:1px solid var(--line)}
+.ph-top .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#2E457A,#1B2A4A);display:grid;place-items:center;border:1px solid var(--line)}
+.ph-top .nm{font-weight:700;font-size:15px}
+.ph-top .st{font-size:12px;color:var(--mint)}
+.ph-body{height:380px;overflow-y:auto;padding:12px 6px 6px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.ph-body .bub{font-size:14.5px}
+.ph-body .bub.in{background:#1E2F52}
+.kb{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 4px 0;max-width:92%}
+.kb button{border:1px solid rgba(94,214,164,.5);background:rgba(94,214,164,.10);color:var(--tx);border-radius:12px;padding:8px 11px;font-size:13.5px;font-weight:600}
+.kb button:active{transform:scale(.97)}
+.kb.done button{opacity:.45;pointer-events:none}
+.kb.done button.pick{opacity:1;background:var(--mint);color:var(--ink);border-color:var(--mint)}
+.typing{display:inline-flex;gap:4px;padding:11px 14px;background:#1E2F52;border-radius:16px;border-bottom-left-radius:6px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--mut);animation:tp 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tp{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+.ph-foot{display:flex;gap:8px;padding:8px 4px 2px}
+.ph-foot .inp{flex:1;background:#132040;border:1px solid var(--line);border-radius:999px;padding:9px 14px;font-size:14px;color:var(--dim)}
+.restart{margin-top:12px;width:100%;border:1px solid var(--line);background:var(--card);color:var(--mut);padding:11px;border-radius:12px;font-weight:700;font-size:14px}
+.owner-note{margin-top:12px;background:rgba(94,214,164,.08);border:1px solid rgba(94,214,164,.3);border-radius:14px;padding:12px 14px;font-size:14px;display:none}
+.owner-note b{color:var(--mint)}
+
+/* tiles */
+.tiles{display:grid;gap:10px;margin-top:14px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.tile .ic{font-size:22px;margin-bottom:8px}
+.tile h3{font-size:16px;margin-bottom:4px}
+.tile p{color:var(--mut);font-size:14.5px}
+.tiles.two{grid-template-columns:1fr 1fr}
+.tiles.two .tile{padding:14px}
+.tiles.two h3{font-size:15px}
+.tiles.two p{font-size:13px}
+
+/* calc */
+.calc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 16px;margin-top:14px}
+.row{margin-bottom:16px}
+.row .lab{display:flex;justify-content:space-between;font-size:14px;color:var(--mut);margin-bottom:6px}
+.row .lab b{color:var(--tx);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;appearance:none;height:6px;border-radius:999px;background:linear-gradient(90deg,var(--mint) var(--p,50%),rgba(255,255,255,.14) var(--p,50%));outline:none}
+input[type=range]::-webkit-slider-thumb{appearance:none;width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid var(--mint);box-shadow:0 2px 10px rgba(0,0,0,.4)}
+.cur{display:flex;gap:6px;margin-bottom:14px}
+.cur button{border:1px solid var(--line);background:transparent;color:var(--mut);padding:6px 12px;border-radius:999px;font-weight:700;font-size:13px}
+.cur button.on{background:var(--mint);color:var(--ink);border-color:var(--mint)}
+.res{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.res .box{background:rgba(0,0,0,.25);border-radius:14px;padding:12px}
+.res .k{font-size:12px;color:var(--dim)} .res .v{font-size:21px;font-weight:800;margin-top:2px;font-variant-numeric:tabular-nums;letter-spacing:-.01em;white-space:nowrap}
+.res .v small{font-size:12px;font-weight:700;color:var(--mut);margin-left:3px}
+.res .v.red{color:#FF8A8A}
+.calc .note{margin-top:12px;font-size:13.5px;color:var(--mut)}
+.calc .note b{color:var(--mint)}
+
+/* steps */
+.steps{margin-top:14px;display:grid;gap:10px}
+.step{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.step .n{width:30px;height:30px;border-radius:50%;border:2px solid var(--mint);color:var(--mint);display:grid;place-items:center;font-weight:800;flex:none}
+.step h3{font-size:15px;margin-bottom:2px}.step p{font-size:14px;color:var(--mut)}
+
+/* prices */
+.price{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 16px;margin-top:14px;position:relative}
+.price.hot{border-color:var(--mint);background:linear-gradient(180deg,rgba(94,214,164,.12),rgba(94,214,164,.03))}
+.price .tag{position:absolute;top:-11px;right:14px;background:var(--mint);color:var(--ink);font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px}
+.price .big{font-size:26px;line-height:1.25;font-weight:800;letter-spacing:-.01em}
+.price .big small{font-size:14px;font-weight:600;color:var(--mut)}
+.price ul{margin:10px 0 0;padding:0;list-style:none}
+.price li{padding:5px 0 5px 24px;position:relative;font-size:14.5px;color:var(--mut)}
+.price li::before{content:"";position:absolute;left:2px;top:11px;width:12px;height:7px;border-left:2.5px solid var(--mint);border-bottom:2.5px solid var(--mint);transform:rotate(-45deg)}
+
+/* about */
+.about{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-top:14px}
+.about .av{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#2E457A,#1B2A4A);display:grid;place-items:center;flex:none;border:1px solid var(--line);font-weight:800;font-size:20px}
+.about p{font-size:14px;color:var(--mut)}
+
+/* form */
+.form{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-top:14px}
+.f{margin-bottom:12px}
+.f label{display:block;font-size:13px;color:var(--mut);margin-bottom:6px;font-weight:600}
+.f input,.f textarea,.f select{width:100%;background:#0B1426;border:1px solid var(--line);color:var(--tx);border-radius:12px;padding:12px 13px;font:inherit;font-size:16px;outline:none}
+.f input:focus,.f textarea:focus{border-color:var(--mint)}
+.f textarea{min-height:76px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{border:1px solid var(--line);background:transparent;color:var(--mut);padding:8px 12px;border-radius:999px;font-weight:600;font-size:13.5px}
+.chips button.on{background:var(--mint);color:var(--ink);border-color:var(--mint)}
+.err{color:#FF8A8A;font-size:13px;margin-top:4px;display:none}
+.ok{display:none;text-align:center;padding:22px 10px}
+.ok .big{font-size:48px}
+.ok h3{font-size:20px;margin:8px 0 6px}
+
+/* sticky cta (fallback when not in telegram) */
+.cta{position:fixed;left:0;right:0;bottom:0;padding:12px var(--pad) calc(12px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(15,27,51,0),rgba(15,27,51,.92) 35%);z-index:10}
+.cta button{width:100%;max-width:560px;margin:0 auto;display:block;border:0;background:var(--mint);color:var(--ink);font-weight:800;font-size:16px;padding:15px;border-radius:14px;box-shadow:0 10px 30px rgba(94,214,164,.35)}
+.cta.hide{display:none}
+.foot{text-align:center;color:var(--dim);font-size:12px;padding:26px 0 10px}
+.reveal{opacity:0;transform:translateY(14px);transition:.5s ease}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="brand"><div class="mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="4" stroke="#fff" stroke-width="2"/><path d="M8 17v4l4-4" fill="#fff"/><path d="M8 10.5l2.5 2.5L16 8" stroke="#5ED6A4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div><span data-i="brand"></span></div>
+    <div class="lang"><button data-l="ru">RU</button><button data-l="es">ES</button></div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="badge"><i class="dot"></i><span data-i="badge"></span></span>
+    <h1 data-i="h1"></h1>
+    <p class="sub" data-i="h1sub"></p>
+    <div class="hero-chat">
+      <div class="t"><span data-i="hc_who"></span><span>23:40</span></div>
+      <div class="bub out" data-i="hc_1"></div>
+      <div class="bub in" data-i="hc_2"></div>
+      <div class="bub in" data-i="hc_3"></div>
+      <div class="seen" data-i="hc_seen"></div>
+    </div>
+  </section>
+
+  <!-- NICHES -->
+  <section class="sec reveal" id="niches">
+    <span class="eyebrow" data-i="n_eb"></span>
+    <h2 data-i="n_h"></h2>
+    <p class="sub" data-i="n_sub"></p>
+    <div class="grid2" id="nicheGrid"></div>
+  </section>
+
+  <!-- DEMO -->
+  <section class="sec reveal" id="demo">
+    <span class="eyebrow" data-i="d_eb"></span>
+    <h2 data-i="d_h"></h2>
+    <p class="sub" data-i="d_sub"></p>
+    <div class="phone">
+      <div class="ph-top"><div class="av">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="4" stroke="#fff" stroke-width="2"/><path d="M8 10.5l2.5 2.5L16 8" stroke="#5ED6A4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div><div><div class="nm" id="phName"></div><div class="st" data-i="ph_online"></div></div></div>
+      <div class="ph-body" id="phBody"></div>
+      <div class="ph-foot"><div class="inp" data-i="ph_inp"></div></div>
+    </div>
+    <div class="owner-note" id="ownerNote"></div>
+    <button class="restart" id="restart" data-i="d_restart"></button>
+  </section>
+
+  <!-- PAIN -->
+  <section class="sec reveal">
+    <span class="eyebrow" data-i="p_eb"></span>
+    <h2 data-i="p_h"></h2>
+    <div class="tiles">
+      <div class="tile"><div class="ic">🌙</div><h3 data-i="p1h"></h3><p data-i="p1p"></p></div>
+      <div class="tile"><div class="ic">💬</div><h3 data-i="p2h"></h3><p data-i="p2p"></p></div>
+      <div class="tile"><div class="ic">🪑</div><h3 data-i="p3h"></h3><p data-i="p3p"></p></div>
+    </div>
+  </section>
+
+  <!-- CALC -->
+  <section class="sec reveal" id="calc">
+    <span class="eyebrow" data-i="c_eb"></span>
+    <h2 data-i="c_h"></h2>
+    <p class="sub" data-i="c_sub"></p>
+    <div class="calc">
+      <div class="cur"><button data-c="ARS" class="on">ARS</button><button data-c="USD">USD</button></div>
+      <div class="row"><div class="lab"><span data-i="c_check"></span><b id="vCheck"></b></div><input type="range" id="rCheck" min="0" max="100" value="25"></div>
+      <div class="row"><div class="lab"><span data-i="c_missed"></span><b id="vMissed"></b></div><input type="range" id="rMissed" min="0" max="20" value="3"></div>
+      <div class="row"><div class="lab"><span data-i="c_noshow"></span><b id="vNoshow"></b></div><input type="range" id="rNoshow" min="0" max="20" value="4"></div>
+      <div class="res">
+        <div class="box"><div class="k" data-i="c_month"></div><div class="v red" id="lossM"></div></div>
+        <div class="box"><div class="k" data-i="c_year"></div><div class="v red" id="lossY"></div></div>
+      </div>
+      <p class="note" data-i="c_note"></p>
+    </div>
+  </section>
+
+  <!-- GET -->
+  <section class="sec reveal">
+    <span class="eyebrow" data-i="g_eb"></span>
+    <h2 data-i="g_h"></h2>
+    <div class="tiles two">
+      <div class="tile"><div class="ic">⚡</div><h3 data-i="g1h"></h3><p data-i="g1p"></p></div>
+      <div class="tile"><div class="ic">🔔</div><h3 data-i="g2h"></h3><p data-i="g2p"></p></div>
+      <div class="tile"><div class="ic">📲</div><h3 data-i="g3h"></h3><p data-i="g3p"></p></div>
+      <div class="tile"><div class="ic">📊</div><h3 data-i="g4h"></h3><p data-i="g4p"></p></div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="sec reveal">
+    <span class="eyebrow" data-i="s_eb"></span>
+    <h2 data-i="s_h"></h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><div><h3 data-i="s1h"></h3><p data-i="s1p"></p></div></div>
+      <div class="step"><div class="n">2</div><div><h3 data-i="s2h"></h3><p data-i="s2p"></p></div></div>
+      <div class="step"><div class="n">3</div><div><h3 data-i="s3h"></h3><p data-i="s3p"></p></div></div>
+    </div>
+  </section>
+
+  <!-- PRICES -->
+  <section class="sec reveal" id="prices">
+    <span class="eyebrow" data-i="pr_eb"></span>
+    <h2 data-i="pr_h"></h2>
+    <div class="price hot"><span class="tag" data-i="pr_tag"></span>
+      <div class="big" data-i="pr1_big"></div><p class="mut" data-i="pr1_sub"></p>
+      <ul><li data-i="pr1_1"></li><li data-i="pr1_2"></li><li data-i="pr1_3"></li></ul>
+    </div>
+    <div class="price">
+      <div class="big"><span data-i="pr2_big"></span></div><p class="mut" data-i="pr2_sub"></p>
+      <ul><li data-i="pr2_1"></li><li data-i="pr2_2"></li><li data-i="pr2_3"></li><li data-i="pr2_4"></li></ul>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="sec reveal">
+    <div class="about"><div class="av">R</div><div><h3 data-i="a_h"></h3><p data-i="a_p"></p></div></div>
+  </section>
+
+  <!-- FORM -->
+  <section class="sec reveal" id="lead">
+    <span class="eyebrow" data-i="f_eb"></span>
+    <h2 data-i="f_h"></h2>
+    <p class="sub" data-i="f_sub"></p>
+    <div class="form" id="formBox">
+      <div class="f"><label data-i="f_name"></label><input id="fName" autocomplete="name"></div>
+      <div class="f"><label data-i="f_niche"></label><select id="fNiche"></select></div>
+      <div class="f"><label data-i="f_contact"></label><input id="fContact" placeholder="@username / +54 9 11…"></div>
+      <div class="f"><label data-i="f_when"></label><div class="chips" id="whenChips"></div></div>
+      <div class="f"><label data-i="f_comment"></label><textarea id="fComment"></textarea></div>
+      <div class="err" id="fErr"></div>
+    </div>
+    <div class="ok" id="okBox"><div class="big">✅</div><h3 data-i="ok_h"></h3><p class="mut" data-i="ok_p"></p></div>
+  </section>
+
+  <div class="foot" data-i="foot"></div>
+</div>
+
+<div class="cta" id="cta"><button id="ctaBtn" data-i="cta"></button></div>
+
+<script>
+/* ========== CONFIG (правится под себя) ========== */
+const CONTACT = "@robert_bots";        // куда писать живому человеку (fallback)
+const PRICE_SETUP = 250, PRICE_MONTH = 40;
+
+/* ========== I18N ========== */
+const T = {
+ru:{
+ brand:"Роберт · боты", badge:"Отвечаю за 30 секунд",
+ h1:"Клиент написал в 23:40. Кто ответит?",
+ h1sub:"Бот принимает записи и заказы, пока вы заняты или спите. Выберите нишу — покажу, как это увидит ваш клиент.",
+ hc_who:"Новое сообщение", hc_1:"Здравствуйте! А на завтра есть окошко на маникюр?", hc_2:"Да, есть 11:00, 14:30 и 18:00. Выберите время 👇", hc_3:"Записала вас на 14:30. Напомню за сутки ✨", hc_seen:"ответ за 4 секунды · без вашего участия",
+ n_eb:"Шаг 1", n_h:"Чем вы занимаетесь?", n_sub:"Демо подстроится под вашу нишу.",
+ niches:[["💅","Салон / бьюти-мастер","маникюр, брови, ресницы"],["✂️","Барбершоп","стрижки, борода"],["🥟","Доставка еды","домашняя кухня, торты"],["🧒","Детская студия","кружки, сад, лагерь"],["🎓","Курсы / репетитор","язык, музыка, спорт"],["✨","Другое","любая запись или заказ"]],
+ d_eb:"Шаг 2", d_h:"Так это увидит ваш клиент", d_sub:"Нажимайте на кнопки — это живая копия бота.", ph_online:"онлайн · отвечает мгновенно", ph_inp:"Сообщение…", d_restart:"↻ Пройти заново",
+ owner:"<b>А вот что увидите вы:</b> «🆕 Запись #12 · {svc} · {day} {time} · Анна · +54 9 11…». Ничего не надо открывать — пришло в Telegram и легло в таблицу.",
+ p_eb:"Где теряются деньги", p_h:"Три дыры, которых не видно",
+ p1h:"Вечер и выходные", p1p:"Пик спроса — 18:00–19:00 и суббота. Именно тогда вы не за телефоном, а клиент не ждёт до утра.",
+ p2h:"«А когда свободно?»", p2p:"Двадцать сообщений ради одной записи. Каждый такой диалог — ваши 5–10 минут.",
+ p3h:"Неявки", p3p:"Человек записался две недели назад и забыл. Окно простояло пустым, деньги ушли.",
+ c_eb:"Шаг 3", c_h:"Сколько это стоит вам", c_sub:"Подвиньте ползунки под свои цифры. Считаем честно, без магии.",
+ c_check:"Средний чек", c_missed:"Упущенных заявок в неделю", c_noshow:"Неявок в месяц",
+ c_month:"Теряете в месяц", c_year:"Теряете в год",
+ c_note:"Бот стоит <b>40 USD в месяц</b>. Если он возвращает хотя бы пару записей — он уже окупился.",
+ g_eb:"Что вы получаете", g_h:"Не «бот», а свободные руки",
+ g1h:"Запись 24/7", g1p:"Услуга → день → время. Сам знает занятые окна.",
+ g2h:"Напоминание", g2p:"За сутки, с кнопкой отмены. Неявок меньше.",
+ g3h:"Уведомление вам", g3p:"Каждая запись — сразу в ваш Telegram.",
+ g4h:"Таблица", g4p:"Всё в Google-таблице: учёт, статистика, налоги.",
+ s_eb:"Как это происходит", s_h:"Три шага, один вечер",
+ s1h:"20 минут разговора", s1p:"Услуги, часы, как вы работаете сейчас. Без техники.",
+ s2h:"Через 1–2 дня бот готов", s2p:"Вы проверяете, я правлю. Ваш стиль, ваши тексты.",
+ s3h:"Ссылка в профиль", s3p:"Ставите в Instagram и WhatsApp. Дальше он работает сам.",
+ pr_eb:"Цены", pr_h:"Открыто, без звёздочек",
+ pr_tag:"Осталось 2 места", pr1_big:"0 USD", pr1_sub:"Первые два внедрения — бесплатно",
+ pr1_1:"Полноценный бот под ваш бизнес", pr1_2:"Месяц поддержки включён", pr1_3:"От вас — честный отзыв через месяц",
+ pr2_big:`${PRICE_SETUP} USD <small>внедрение</small><br>+ ${PRICE_MONTH} USD <small>/ месяц</small>`, pr2_sub:"Дальше — для всех остальных",
+ pr2_1:"Настройка под услуги, часы и тексты", pr2_2:"Хостинг и мониторинг 24/7", pr2_3:"Правки и поддержка в течение месяца", pr2_4:"Оплата в USDT или переводом",
+ a_h:"Роберт", a_p:"Продакт-менеджер, живу в Буэнос-Айресе. Делаю сам, отвечаю сам, без менеджеров и посредников.",
+ f_eb:"Шаг 4", f_h:"Оставьте заявку", f_sub:"Отвечу лично в течение дня. Никаких рассылок.",
+ f_name:"Как вас зовут", f_niche:"Ниша", f_contact:"Telegram или телефон", f_when:"Когда удобно созвониться", f_comment:"Что автоматизировать? (необязательно)",
+ when:["Утром","Днём","Вечером","Напишите текстом"],
+ err_name:"Напишите имя", err_contact:"Оставьте Telegram или телефон",
+ cta:"Оставить заявку", cta_main:"ОСТАВИТЬ ЗАЯВКУ",
+ ok_h:"Заявка у меня", ok_p:"Напишу вам в Telegram в течение дня. Пока — можете потыкать демо ещё раз.",
+ fallback:"Откройте это в Telegram, чтобы отправить заявку в один тап. Или напишите мне: ",
+ foot:"Буэнос-Айрес · 2026",
+ demo:{
+  book:{ hi:"Здравствуйте! Это бот записи {biz} 💫\nВыберите услугу:", day:"Отлично, {svc}. Какой день?", time:"{day} — свободно:", name:"Как вас записать?", done:"Вы записаны ✅\n\n{svc}\n{day}, {time}\n\nНапомню за сутки. Отменить или перенести — команда /my", days:["Сегодня","Завтра","Пт, 20 сен"], times:["11:00","14:30","18:00"], names:["Анна"] },
+  order:{ hi:"Здравствуйте! Это {biz} 🥟\nЧто будем заказывать?", qty:"{svc} — сколько порций?", addr:"Куда доставить?", done:"Заказ принят ✅\n\n{svc} × {qty}\n{addr}\nДоставка сегодня к 19:30\n\nОплата при получении или переводом.", qtys:["1","2","3"], addrs:["Palermo, Gorriti 4800","Самовывоз"] },
+  biz:{0:"студии красоты «Мила»",1:"барбершопа Prime",2:"кухня «Домашние пельмени»",3:"детской студии Alma",4:"школы испанского QueTal",5:"вашего бизнеса"},
+  svc:{0:["Маникюр с покрытием","Педикюр","Брови"],1:["Стрижка","Стрижка + борода","Детская стрижка"],2:["Пельмени сибирские, 1 кг","Борщ, 1 л","Сырники, 6 шт"],3:["Пробное занятие","Абонемент 8 занятий","Летний лагерь"],4:["Тест уровня","Группа А1, вечер","Индивидуально"],5:["Услуга 1","Услуга 2","Консультация"]}
+ }
+},
+es:{
+ brand:"Roberto · bots", badge:"Respondo en 30 segundos",
+ h1:"Un cliente escribió a las 23:40. ¿Quién responde?",
+ h1sub:"El bot toma turnos y pedidos mientras trabajás o dormís. Elegí tu rubro y te muestro cómo lo ve tu cliente.",
+ hc_who:"Mensaje nuevo", hc_1:"¡Hola! ¿Tenés turno para manicura mañana?", hc_2:"Sí: 11:00, 14:30 y 18:00. Elegí el horario 👇", hc_3:"Listo, te anoté a las 14:30. Te recuerdo un día antes ✨", hc_seen:"respondido en 4 segundos · sin vos",
+ n_eb:"Paso 1", n_h:"¿A qué te dedicás?", n_sub:"La demo se adapta a tu rubro.",
+ niches:[["💅","Salón / belleza","uñas, cejas, pestañas"],["✂️","Barbería","cortes, barba"],["🥟","Comida a domicilio","cocina casera, tortas"],["🧒","Taller infantil","talleres, jardín, colonia"],["🎓","Cursos / profe","idiomas, música, deporte"],["✨","Otro","cualquier turno o pedido"]],
+ d_eb:"Paso 2", d_h:"Así lo ve tu cliente", d_sub:"Tocá los botones: es una copia viva del bot.", ph_online:"en línea · responde al instante", ph_inp:"Mensaje…", d_restart:"↻ Empezar de nuevo",
+ owner:"<b>Y esto es lo que ves vos:</b> «🆕 Turno #12 · {svc} · {day} {time} · Ana · +54 9 11…». Sin abrir nada: llega a tu Telegram y queda en la planilla.",
+ p_eb:"Dónde se pierde plata", p_h:"Tres agujeros que no se ven",
+ p1h:"Noche y fin de semana", p1p:"El pico de demanda es 18–19 h y el sábado. Justo cuando no estás con el teléfono, y el cliente no espera hasta mañana.",
+ p2h:"«¿Cuándo tenés lugar?»", p2p:"Veinte mensajes por un solo turno. Cada charla así son 5–10 minutos tuyos.",
+ p3h:"Ausencias", p3p:"Reservó hace dos semanas y se olvidó. El horario quedó vacío, la plata se fue.",
+ c_eb:"Paso 3", c_h:"Cuánto te cuesta", c_sub:"Mové los controles con tus números. Cálculo honesto, sin magia.",
+ c_check:"Ticket promedio", c_missed:"Consultas perdidas por semana", c_noshow:"Ausencias por mes",
+ c_month:"Perdés por mes", c_year:"Perdés por año",
+ c_note:"El bot cuesta <b>40 USD por mes</b>. Si recupera un par de turnos, ya se pagó solo.",
+ g_eb:"Qué recibís", g_h:"No un «bot»: manos libres",
+ g1h:"Turnos 24/7", g1p:"Servicio → día → hora. Conoce los horarios ocupados.",
+ g2h:"Recordatorio", g2p:"Un día antes, con botón para cancelar. Menos ausencias.",
+ g3h:"Aviso para vos", g3p:"Cada turno llega al instante a tu Telegram.",
+ g4h:"Planilla", g4p:"Todo en Google Sheets: control, estadísticas, contador.",
+ s_eb:"Cómo funciona", s_h:"Tres pasos, una tarde",
+ s1h:"20 minutos de charla", s1p:"Servicios, horarios, cómo trabajás hoy. Sin tecnicismos.",
+ s2h:"En 1–2 días está listo", s2p:"Vos probás, yo corrijo. Tu estilo, tus textos.",
+ s3h:"Link en el perfil", s3p:"Lo ponés en Instagram y WhatsApp. Después trabaja solo.",
+ pr_eb:"Precios", pr_h:"Claros, sin letra chica",
+ pr_tag:"Quedan 2 lugares", pr1_big:"0 USD", pr1_sub:"Las primeras dos implementaciones, gratis",
+ pr1_1:"Bot completo para tu negocio", pr1_2:"Un mes de soporte incluido", pr1_3:"A cambio: una reseña honesta al mes",
+ pr2_big:`${PRICE_SETUP} USD <small>implementación</small><br>+ ${PRICE_MONTH} USD <small>/ mes</small>`, pr2_sub:"Después, para todos los demás",
+ pr2_1:"Configurado con tus servicios, horarios y textos", pr2_2:"Hosting y monitoreo 24/7", pr2_3:"Ajustes y soporte durante un mes", pr2_4:"Pago en USDT o transferencia",
+ a_h:"Roberto", a_p:"Product manager, vivo en Buenos Aires. Lo hago yo y respondo yo, sin intermediarios.",
+ f_eb:"Paso 4", f_h:"Dejá tu solicitud", f_sub:"Te respondo personalmente en el día. Nada de spam.",
+ f_name:"Tu nombre", f_niche:"Rubro", f_contact:"Telegram o teléfono", f_when:"Cuándo te viene bien hablar", f_comment:"¿Qué querés automatizar? (opcional)",
+ when:["Mañana","Mediodía","Noche","Por mensaje"],
+ err_name:"Escribí tu nombre", err_contact:"Dejá tu Telegram o teléfono",
+ cta:"Dejar solicitud", cta_main:"DEJAR SOLICITUD",
+ ok_h:"¡Recibido!", ok_p:"Te escribo por Telegram en el día. Mientras tanto, probá la demo otra vez.",
+ fallback:"Abrí esto en Telegram para enviar la solicitud con un toque. O escribime: ",
+ foot:"Buenos Aires · 2026",
+ demo:{
+  book:{ hi:"¡Hola! Soy el bot de turnos de {biz} 💫\nElegí un servicio:", day:"Perfecto, {svc}. ¿Qué día?", time:"{day} — disponible:", name:"¿A nombre de quién?", done:"¡Turno confirmado! ✅\n\n{svc}\n{day}, {time}\n\nTe recuerdo un día antes. Cancelar o cambiar: /mis", days:["Hoy","Mañana","Vie 20 sep"], times:["11:00","14:30","18:00"], names:["Ana"] },
+  order:{ hi:"¡Hola! Soy {biz} 🥟\n¿Qué pedimos?", qty:"{svc} — ¿cuántas porciones?", addr:"¿A dónde lo llevamos?", done:"¡Pedido tomado! ✅\n\n{svc} × {qty}\n{addr}\nEntrega hoy a las 19:30\n\nPago al recibir o por transferencia.", qtys:["1","2","3"], addrs:["Palermo, Gorriti 4800","Retiro en local"] },
+  biz:{0:"Mila Estética",1:"Prime Barbería",2:"Cocina Casera",3:"Taller Alma",4:"QueTal Español",5:"tu negocio"},
+  svc:{0:["Manicura semipermanente","Pedicura","Cejas"],1:["Corte","Corte + barba","Corte infantil"],2:["Empanadas, docena","Sopa casera, 1 L","Torta, 1 kg"],3:["Clase de prueba","Abono 8 clases","Colonia de verano"],4:["Test de nivel","Grupo A1, noche","Individual"],5:["Servicio 1","Servicio 2","Consulta"]}
+ }
+}};
+
+/* ========== STATE ========== */
+const tg = window.Telegram && Telegram.WebApp ? Telegram.WebApp : null;
+let lang = "ru", niche = 0, cur = "ARS", when = null;
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const fmtN = n => new Intl.NumberFormat(lang==="ru"?"ru-RU":"es-AR").format(Math.round(n));
+
+function detectLang(){
+  const lc = tg && tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.language_code;
+  if (lc) return lc.startsWith("ru") ? "ru" : "es";
+  return (navigator.language||"").startsWith("ru") ? "ru" : "es";
+}
+
+function render(){
+  const t = T[lang];
+  document.documentElement.lang = lang;
+  $$("[data-i]").forEach(el=>{ const k=el.dataset.i; if (t[k]!==undefined) el.innerHTML = t[k]; });
+  $$(".lang button").forEach(b=>b.classList.toggle("on", b.dataset.l===lang));
+  // niches
+  const g = $("#nicheGrid"); g.innerHTML = "";
+  t.niches.forEach((n,i)=>{
+    const b = document.createElement("button"); b.className="niche"+(i===niche?" on":"");
+    b.innerHTML = `<div class="ic">${n[0]}</div><div class="nm">${n[1]}</div><div class="ds">${n[2]}</div>`;
+    b.onclick = ()=>{ niche=i; haptic("light"); render(); startDemo(); $("#demo").scrollIntoView({behavior:"smooth",block:"start"}); };
+    g.appendChild(b);
+  });
+  const sel = $("#fNiche"); sel.innerHTML = t.niches.map((n,i)=>`<option value="${i}" ${i===niche?"selected":""}>${n[0]} ${n[1]}</option>`).join("");
+  const wc = $("#whenChips"); wc.innerHTML = "";
+  t.when.forEach((w,i)=>{ const b=document.createElement("button"); b.textContent=w; b.className = when===i?"on":""; b.onclick=()=>{when=i;haptic("light");render();}; wc.appendChild(b); });
+  $("#phName").textContent = t.demo.biz[niche].replace(/^(студии красоты|барбершопа|детской студии|школы испанского|кухня)\s*/,"").replace(/^«|»$/g,"");
+  if (tg) { tg.MainButton.setText(t.cta_main); }
+  calc();
+}
+
+/* ========== DEMO CHAT ========== */
+let demoTimer = [];
+function clearDemo(){ demoTimer.forEach(clearTimeout); demoTimer=[]; $("#phBody").innerHTML=""; $("#ownerNote").style.display="none"; }
+function wait(ms){ return new Promise(r=>demoTimer.push(setTimeout(r,ms))); }
+function scrollPh(){ const b=$("#phBody"); b.scrollTop = b.scrollHeight; }
+async function botSay(text){
+  const b=$("#phBody"); const ty=document.createElement("div"); ty.className="typing"; ty.innerHTML="<i></i><i></i><i></i>"; b.appendChild(ty); scrollPh();
+  await wait(650); ty.remove();
+  const d=document.createElement("div"); d.className="bub in"; d.textContent=text; b.appendChild(d); scrollPh(); await wait(120);
+}
+function userSay(text){ const d=document.createElement("div"); d.className="bub out"; d.textContent=text; $("#phBody").appendChild(d); scrollPh(); }
+function ask(options){
+  return new Promise(res=>{
+    const kb=document.createElement("div"); kb.className="kb";
+    options.forEach(o=>{ const b=document.createElement("button"); b.textContent=o; b.onclick=()=>{ haptic("light"); kb.classList.add("done"); b.classList.add("pick"); userSay(o); res(o); }; kb.appendChild(b); });
+    $("#phBody").appendChild(kb); scrollPh();
+  });
+}
+const fill=(s,o)=>s.replace(/\{(\w+)\}/g,(_,k)=>o[k]??"");
+async function startDemo(){
+  clearDemo();
+  const t=T[lang].demo, biz=t.biz[niche], svcs=t.svc[niche];
+  if (niche===2){
+    const d=t.order;
+    await botSay(fill(d.hi,{biz})); const svc=await ask(svcs);
+    await botSay(fill(d.qty,{svc})); const qty=await ask(d.qtys);
+    await botSay(d.addr); const addr=await ask(d.addrs);
+    await botSay(fill(d.done,{svc,qty,addr}));
+    showOwner({svc, day:(lang==="ru"?"сегодня":"hoy"), time:"19:30"});
+  } else {
+    const d=t.book;
+    await botSay(fill(d.hi,{biz})); const svc=await ask(svcs);
+    await botSay(fill(d.day,{svc})); const day=await ask(d.days);
+    await botSay(fill(d.time,{day})); const time=await ask(d.times);
+    await botSay(d.name); const name=await ask(d.names);
+    await botSay(fill(d.done,{svc,day,time}));
+    showOwner({svc,day,time});
+  }
+  haptic("success");
+}
+function showOwner(o){ const n=$("#ownerNote"); n.innerHTML=fill(T[lang].owner,o); n.style.display="block"; }
+
+/* ========== CALC ========== */
+const CHECK = { ARS:{min:5000,max:120000,step:1000,def:25000}, USD:{min:5,max:150,step:5,def:25} };
+function setRange(id,v){ const r=$(id); const p=(r.value-r.min)/(r.max-r.min)*100; r.style.setProperty("--p",p+"%"); }
+function calc(){
+  const c=CHECK[cur], r=$("#rCheck");
+  r.min=c.min; r.max=c.max; r.step=c.step; if (r.dataset.cur!==cur){ r.value=c.def; r.dataset.cur=cur; }
+  const check=+r.value, missed=+$("#rMissed").value, noshow=+$("#rNoshow").value;
+  $("#vCheck").textContent = fmtN(check)+" "+cur; $("#vMissed").textContent=missed; $("#vNoshow").textContent=noshow;
+  const m = (missed*4.3 + noshow) * check;
+  $("#lossM").innerHTML = "−"+fmtN(m)+"<small>"+cur+"</small>"; $("#lossY").innerHTML="−"+fmtN(m*12)+"<small>"+cur+"</small>";
+  ["#rCheck","#rMissed","#rNoshow"].forEach(setRange);
+  $$(".cur button").forEach(b=>b.classList.toggle("on",b.dataset.c===cur));
+}
+$$("#rCheck,#rMissed,#rNoshow").forEach(r=>r.addEventListener("input",calc));
+$$(".cur button").forEach(b=>b.onclick=()=>{cur=b.dataset.c;haptic("light");calc();});
+
+/* ========== FORM / SUBMIT ========== */
+function haptic(k){ try{ if(!tg) return; if(k==="success") tg.HapticFeedback.notificationOccurred("success"); else tg.HapticFeedback.impactOccurred(k);}catch(e){} }
+function validate(){
+  const t=T[lang], name=$("#fName").value.trim(), contact=$("#fContact").value.trim(), err=$("#fErr");
+  if(!name){ err.textContent=t.err_name; err.style.display="block"; $("#fName").focus(); return null; }
+  if(!contact){ err.textContent=t.err_contact; err.style.display="block"; $("#fContact").focus(); return null; }
+  err.style.display="none";
+  const r=$("#rCheck");
+  return { type:"lead", lang, name, contact, niche:+$("#fNiche").value, niche_label:t.niches[+$("#fNiche").value][1],
+    when: when===null?"":t.when[when], comment:$("#fComment").value.trim(),
+    calc:{cur, check:+r.value, missed:+$("#rMissed").value, noshow:+$("#rNoshow").value,
+          loss_month: Math.round((+$("#rMissed").value*4.3 + +$("#rNoshow").value)*+r.value)} };
+}
+function submit(){
+  const data=validate(); if(!data) { $("#lead").scrollIntoView({behavior:"smooth"}); return; }
+  haptic("success");
+  if (tg && tg.sendData){
+    try{ tg.sendData(JSON.stringify(data)); return; }catch(e){}
+  }
+  // fallback (открыто не из Telegram-кнопки): показываем успех + контакт
+  $("#formBox").style.display="none"; const ok=$("#okBox"); ok.style.display="block";
+  ok.querySelector("p").innerHTML = T[lang].fallback + `<a href="https://t.me/${CONTACT.replace("@","")}">${CONTACT}</a>`;
+  $("#cta").classList.add("hide");
+}
+
+/* ========== INIT ========== */
+(function init(){
+  lang = detectLang();
+  if (tg){
+    tg.ready(); tg.expand();
+    try{ tg.setHeaderColor("#0F1B33"); tg.setBackgroundColor("#0F1B33"); }catch(e){}
+    tg.MainButton.setParams({color:"#5ED6A4", text_color:"#0F1B33", is_visible:true, is_active:true});
+    tg.MainButton.onClick(submit);
+    $("#cta").classList.add("hide");
+    const u=tg.initDataUnsafe && tg.initDataUnsafe.user;
+    if (u){ $("#fName").value=[u.first_name,u.last_name].filter(Boolean).join(" "); if(u.username) $("#fContact").value="@"+u.username; }
+  } else {
+    $("#ctaBtn").onclick=()=>{ if(!validate()) {$("#lead").scrollIntoView({behavior:"smooth"});return;} submit(); };
+  }
+  $$(".lang button").forEach(b=>b.onclick=()=>{lang=b.dataset.l;haptic("light");render();startDemo();});
+  $("#restart").onclick=()=>{haptic("light");startDemo();};
+  render(); startDemo();
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}}),{threshold:.08});
+  $$(".reveal").forEach(el=>io.observe(el));
+})();
+</script>
+</body>
+</html>
