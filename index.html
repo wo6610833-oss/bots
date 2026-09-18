@@ -10,7 +10,7 @@
   --bg0:#0F1B33; --bg1:#1B2A4A; --bg2:#22355E;
   --card:rgba(255,255,255,.05); --line:rgba(255,255,255,.10);
   --tx:#F3F6FC; --mut:#AEBBD6; --dim:#7F8FB0;
-  --mint:#5ED6A4; --mintD:#3FBF8B; --ink:#0F1B33; --red:#FF8A8A;
+  --mint:#5ED6A4; --mintD:#3FBF8B; --ink:#0F1B33; --red:#FF8A8A; --hot:#FF5C4A;
   --r:18px; --pad:18px;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -130,8 +130,21 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:24px;height:24px;b
 .pkg li{padding:4px 0 4px 24px;position:relative;font-size:14px;color:var(--mut)}
 .pkg li::before{content:"";position:absolute;left:2px;top:10px;width:12px;height:7px;border-left:2.5px solid var(--mint);border-bottom:2.5px solid var(--mint);transform:rotate(-45deg)}
 .pkg .lim{font-size:12.5px;color:var(--dim);margin-top:8px;font-style:italic}
-.free{background:rgba(94,214,164,.10);border:1px dashed rgba(94,214,164,.5);border-radius:14px;padding:12px 14px;font-size:14px;margin-top:14px}
-.free b{color:var(--mint)}
+/* бесплатные места — главный акцент страницы */
+.free{position:relative;margin:18px 0 6px;border-radius:22px;padding:22px 18px 20px;text-align:center;
+  background:linear-gradient(160deg,rgba(255,92,74,.22),rgba(255,150,90,.06));
+  border:2px solid var(--hot);box-shadow:0 0 0 5px rgba(255,92,74,.09),0 18px 46px rgba(255,92,74,.22)}
+.free .fb{display:inline-flex;align-items:center;gap:7px;background:var(--hot);color:#2B0A06;
+  font-weight:900;font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;padding:7px 14px;border-radius:999px;
+  animation:hotpulse 1.8s infinite}
+@keyframes hotpulse{0%{box-shadow:0 0 0 0 rgba(255,92,74,.6)}100%{box-shadow:0 0 0 14px rgba(255,92,74,0)}}
+.free h3{font-size:26px;font-weight:900;margin:14px 0 10px;line-height:1.2;text-wrap:balance}
+.free h3 em{font-style:normal;color:var(--hot)}
+.free p{font-size:15px;color:var(--mut)}
+.freehint{display:none;margin-top:14px;padding:11px 14px;border-radius:14px;text-align:center;font-size:14px;font-weight:700;
+  background:rgba(255,92,74,.14);border:1px solid var(--hot);color:#FFD2CB}
+.freehint b{color:var(--hot)}
+.free .left{display:block;margin-top:14px;font-size:14px;font-weight:800;color:var(--hot);letter-spacing:.02em}
 
 /* steps / tiles */
 .steps{margin-top:14px;display:grid;gap:10px}
@@ -221,6 +234,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:24px;height:24px;b
         <button class="btn ghost" data-go="#calc" data-i="b_calc"></button>
         <button class="btn ghost" data-go="#lead" data-i="b_human"></button>
       </div>
+      <div class="freehint" id="freeHint"></div>
       <button class="btn ghost sm" id="qRedo" data-i="q_redo"></button>
     </div>
   </section>
@@ -266,7 +280,12 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:24px;height:24px;b
     <span class="eyebrow" data-i="pr_eb"></span>
     <h2 data-i="pr_h"></h2>
     <p class="sub" data-i="pr_sub"></p>
-    <div class="free" id="freeBox"></div>
+    <div class="free" id="freeBox">
+      <span class="fb" data-i="pr_free_badge"></span>
+      <h3 data-i="pr_free_h"></h3>
+      <p data-i="pr_free_p"></p>
+      <span class="left" id="freeLeft"></span>
+    </div>
     <div class="pkgs" id="pkgs"></div>
     <p class="mut" style="font-size:13.5px;margin-top:12px" data-i="pr_add"></p>
   </section>
@@ -343,7 +362,9 @@ ru:{
  c_check:"Средний чек", c_missed:"Упущенных заявок в неделю", c_noshow:"Неявок в месяц", c_month:"Теряете в месяц", c_year:"Теряете в год",
  c_note:"Бот в вашем пакете стоит <b>{m} USD в месяц</b>. Если он возвращает хотя бы две записи — он уже окупился.",
  pr_eb:"Шаг 4 · цена", pr_h:"Открыто, без звёздочек", pr_sub:"Сначала пакет, который подходит вашей нише.",
- pr_free:"🎁 <b>Первые внедрения — бесплатно за честный отзыв.</b> Это не скидка: я покупаю кейсы. Осталось мест: {n}.",
+ pr_free_badge:"🎁 Бесплатно", pr_free_h:"Первые внедрения —<br><em>0&nbsp;USD</em>",
+ pr_free_p:"Полноценный бот под ваш бизнес, месяц поддержки включён. От вас — честный отзыв через месяц. Это не скидка: я покупаю кейсы.",
+ pr_free_left:"Осталось мест: {n}", pr_free_hint:"🎁 Сейчас первые внедрения <b>бесплатно</b> — осталось мест: {n}",
  pr_tag:"Подходит вам", pr_setup:"внедрение", pr_month:"/ месяц", pr_from:"от ", pr_for:"Для кого: ",
  pr_add:"К любому пакету: второй язык, второй филиал, рассылка раз в месяц, WhatsApp, ежемесячный отчёт с цифрами. Оплата в USDT или переводом.",
  s_eb:"Как это происходит", s_h:"Три шага, один вечер",
@@ -381,7 +402,9 @@ es:{
  c_check:"Ticket promedio", c_missed:"Consultas perdidas por semana", c_noshow:"Ausencias por mes", c_month:"Perdés por mes", c_year:"Perdés por año",
  c_note:"El bot en tu paquete cuesta <b>{m} USD por mes</b>. Si recupera un par de turnos, ya se pagó solo.",
  pr_eb:"Paso 4 · precio", pr_h:"Claros, sin letra chica", pr_sub:"Primero el paquete que va con tu rubro.",
- pr_free:"🎁 <b>Las primeras implementaciones, gratis a cambio de una reseña honesta.</b> No es descuento: compro casos. Quedan {n} lugares.",
+ pr_free_badge:"🎁 Gratis", pr_free_h:"Primeras implementaciones:<br><em>0&nbsp;USD</em>",
+ pr_free_p:"Bot completo para tu negocio, con un mes de soporte incluido. A cambio, una reseña honesta al mes. No es descuento: compro casos.",
+ pr_free_left:"Quedan {n} lugares", pr_free_hint:"🎁 Ahora las primeras implementaciones son <b>gratis</b> — quedan {n} lugares",
  pr_tag:"Para tu negocio", pr_setup:"implementación", pr_month:"/ mes", pr_from:"desde ", pr_for:"Para: ",
  pr_add:"A cualquier paquete: segundo idioma, segunda sucursal, envío mensual, WhatsApp, informe mensual con números. Pago en USDT o transferencia.",
  s_eb:"Cómo funciona", s_h:"Tres pasos, una tarde",
@@ -546,7 +569,8 @@ $$(".cur button").forEach(b=>b.onclick=()=>{cur=b.dataset.c;haptic("light");calc
 function renderPkgs(){
   const t=T[lang], mine=quizDone?myPkg():null;
   const order=mine?[mine,...FN.pkg_order.filter(p=>p!==mine)]:FN.pkg_order;
-  $("#freeBox").innerHTML= FREE>0 ? fill(t.pr_free,{n:FREE}) : ""; $("#freeBox").style.display=FREE>0?"block":"none";
+  $("#freeLeft").textContent=fill(t.pr_free_left,{n:FREE});
+  const fh=$("#freeHint"); fh.innerHTML=fill(t.pr_free_hint,{n:FREE}); fh.style.display=FREE>0?"block":"none"; $("#freeBox").style.display=FREE>0?"block":"none";
   $("#pkgs").innerHTML=order.map((p,i)=>{ const P=FN.packages[p][lang], pr=PRICES[p]||{};
     const price = pr.setup_usd ? `${pr.from?t.pr_from:""}${pr.setup_usd} USD <small>${t.pr_setup}</small><br>+ ${pr.month_usd} USD <small>${t.pr_month}</small>` : "";
     return `<div class="pkg${mine&&i===0?" hot":""}">${mine&&i===0?`<span class="tag">${t.pr_tag}</span>`:""}<h3>${P.name}</h3><div class="for">${t.pr_for}${P.for}</div><div class="big">${price}</div><ul>${P.in.map(x=>`<li>${x}</li>`).join("")}</ul><div class="lim">${P.limits}</div></div>`; }).join("");
