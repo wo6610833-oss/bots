@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barrancas Quality Apartments · Belgrano, Buenos Aires</title>
+<meta name="description" content="Apart-hotel en Belgrano, Buenos Aires. Departamentos equipados, coworking, gimnasio y terraza. Reservá directo por WhatsApp.">
+<meta property="og:title" content="Barrancas Quality Apartments">
+<meta property="og:description" content="Tu hogar lejos de casa en Belgrano, Buenos Aires.">
+<meta property="og:image" content="img_terrace.jpg">
+<link rel="icon" href="img_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2b2b2b;--mute:#6b6f76;--bg:#f7f6f3;--card:#ffffff;--line:#e6e4df;--accent:#4a4a4a;--wa:#25d366;--tg:#2aabee;--max:1080px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;letter-spacing:.01em;margin:0}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+/* nav */
+.nav{position:sticky;top:0;z-index:10;background:rgba(247,246,243,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{width:36px;height:36px;border-radius:50%}
+.brand b{font-family:"Cormorant Garamond",serif;font-size:20px;letter-spacing:.06em;font-weight:600}
+.brand small{display:block;font-size:10px;letter-spacing:.22em;color:var(--mute);font-weight:500}
+.lang{display:flex;gap:4px;border:1px solid var(--line);border-radius:999px;padding:3px}
+.lang button{border:0;background:transparent;padding:6px 12px;border-radius:999px;font:500 13px Inter;cursor:pointer;color:var(--mute)}
+.lang button.on{background:var(--ink);color:#fff}
+/* hero */
+.hero{position:relative;min-height:78vh;display:flex;align-items:flex-end;color:#fff;background:#222 url(img_terrace.jpg) center/cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 30%,rgba(0,0,0,.72))}
+.hero .wrap{position:relative;z-index:1;padding-bottom:56px;padding-top:120px}
+.hero h1{font-size:clamp(40px,7vw,72px);line-height:1.02}
+.hero p{font-size:clamp(17px,2.2vw,21px);max-width:640px;margin:14px 0 26px;color:#e9e7e2}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:12px;font-weight:600;text-decoration:none;font-size:15px;transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.wa{background:var(--wa);color:#fff}.btn.tg{background:var(--tg);color:#fff}.btn.ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.4)}
+.btn svg{width:20px;height:20px;fill:currentColor}
+/* sections */
+section{padding:72px 0}
+.kicker{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);font-weight:600;margin-bottom:10px}
+h2{font-size:clamp(30px,4.5vw,44px);margin-bottom:26px}
+.grid{display:grid;gap:18px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card h3{font-size:24px;margin-bottom:8px}
+.card p{margin:0;color:var(--mute);font-size:15px}
+.feat{display:flex;gap:14px;align-items:flex-start}
+.feat .ic{font-size:22px;line-height:1;flex:0 0 auto;width:44px;height:44px;border-radius:12px;background:var(--bg);display:grid;place-items:center}
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+.gal figure{margin:0;position:relative;border-radius:16px;overflow:hidden;background:#ddd;aspect-ratio:4/3}
+.gal img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.gal figure:hover img{transform:scale(1.03)}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:14px 16px;color:#fff;font-size:14px;font-weight:500;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent)}
+.gal .a{grid-column:span 7}.gal .b{grid-column:span 5}.gal .c{grid-column:span 4}
+@media(max-width:720px){.gal .a,.gal .b,.gal .c{grid-column:span 12}}
+/* dark band */
+.band{background:var(--ink);color:#fff}
+.band .card{background:#363636;border-color:#444}.band .card p{color:#cfcfcf}.band .kicker{color:#aaa}
+.band .feat .ic{background:#444}
+/* assistant */
+.phone{background:#fff;color:var(--ink);border-radius:26px;padding:18px;max-width:340px;margin:0 auto;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+.bub{border-radius:14px;padding:10px 12px;font-size:14px;margin:8px 0;max-width:88%}
+.bub.bot{background:#f0f0f0}.bub.me{background:#dcf3ff;margin-left:auto}
+.keys{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
+.keys span{background:#f6f6f6;border:1px solid #e5e5e5;border-radius:10px;padding:8px;font-size:12px;text-align:center}
+/* location */
+.map{border:0;width:100%;height:340px;border-radius:16px;filter:grayscale(.2)}
+.near{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:16px}
+.near div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px}
+.near b{display:block;font-size:13px;color:var(--mute);font-weight:500}
+/* footer */
+footer{padding:40px 0;border-top:1px solid var(--line);color:var(--mute);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+.fab{position:fixed;right:18px;bottom:18px;z-index:20;display:flex;flex-direction:column;gap:10px}
+.fab a{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+.fab a svg{width:26px;height:26px;fill:#fff}
+[data-en]{display:none}html.en [data-en]{display:revert}html.en [data-es]{display:none}html.en .near b[data-en]{display:block}html.en h1[data-en],html.en h2[data-en],html.en h3[data-en],html.en p[data-en],html.en .kicker[data-en],html.en figcaption[data-en]{display:block}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="wrap">
+  <a class="brand" href="#"><img src="img_logo.png" alt=""><span><b>BARRANCAS</b><small>QUALITY APARTMENTS</small></span></a>
+  <div class="lang"><button class="on" onclick="setLang('es')">ES</button><button onclick="setLang('en')">EN</button></div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <h1 data-es>Tu hogar en Belgrano,<br>Buenos Aires</h1>
+  <h1 data-en>Your home in Belgrano,<br>Buenos Aires</h1>
+  <p data-es>Departamentos equipados a estrenar, coworking, gimnasio y terraza con vista — a 5 minutos del subte, las Barrancas y el Barrio Chino.</p>
+  <p data-en>Brand-new fully equipped apartments, coworking, gym and a rooftop terrace — 5 minutes from the subway, Barrancas park and Chinatown.</p>
+  <div class="cta">
+    <a class="btn wa" href="https://wa.me/5491126479910?text=Hola%2C%20quiero%20consultar%20disponibilidad%20en%20Barrancas%20Quality%20Apartments" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.3.8 3.1.7a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.2-.2-.2-.5-.4z"/></svg><span data-es>Reservar por WhatsApp</span><span data-en>Book via WhatsApp</span></a>
+    <a class="btn tg" href="https://t.me/BarrancasGuide_bot?start=web" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9.4 15.9 9 20c.5 0 .8-.2 1-.5l2.5-2.4 5.2 3.8c1 .5 1.6.2 1.9-.9L23 4.6c.3-1.3-.5-1.9-1.4-1.5L1.7 10.7c-1.3.5-1.3 1.2-.2 1.6l5.1 1.6L18.4 6.4c.6-.4 1-.2.6.2z"/></svg><span data-es>Asistente para huéspedes</span><span data-en>Guest assistant</span></a>
+    <a class="btn ghost" href="https://www.booking.com/hotel/ar/hermosos-apartamentos-a-estrenar-en-barrancas-de-belgrano.html" target="_blank" rel="noopener"><span data-es>Ver en Booking</span><span data-en>See on Booking</span></a>
+  </div>
+</div></header>
+
+<section id="apts"><div class="wrap">
+  <div class="kicker" data-es>Los departamentos</div><div class="kicker" data-en>The apartments</div>
+  <h2 data-es>Todo lo que necesitás, desde el primer día</h2>
+  <h2 data-en>Everything you need, from day one</h2>
+  <div class="grid g3">
+    <div class="card feat"><div class="ic">🍳</div><div><h3 data-es>Cocina completa</h3><h3 data-en>Full kitchen</h3><p data-es>Heladera, horno, microondas, pava eléctrica, tostadora y vajilla.</p><p data-en>Fridge, oven, microwave, kettle, toaster and dishes.</p></div></div>
+    <div class="card feat"><div class="ic">📶</div><div><h3>Wi-Fi</h3><p data-es>Red propia en cada departamento. Ideal para trabajar.</p><p data-en>Private network in every apartment. Work-ready.</p></div></div>
+    <div class="card feat"><div class="ic">❄️</div><div><h3 data-es>Aire acondicionado</h3><h3 data-en>Air conditioning</h3><p data-es>Frío / calor en todos los ambientes.</p><p data-en>Cooling and heating in every room.</p></div></div>
+    <div class="card feat"><div class="ic">🔇</div><div><h3 data-es>Ambientes silenciosos</h3><h3 data-en>Soundproofed rooms</h3><p data-es>Edificio a estrenar en una calle tranquila de Belgrano.</p><p data-en>Brand-new building on a quiet Belgrano street.</p></div></div>
+    <div class="card feat"><div class="ic">🧺</div><div><h3 data-es>Lavadero</h3><h3 data-en>Laundry</h3><p data-es>Lavarropas y secadora en el edificio, con fichas.</p><p data-en>Washer and dryer in the building, token-operated.</p></div></div>
+    <div class="card feat"><div class="ic">🛎️</div><div><h3 data-es>Recepción</h3><h3 data-en>Reception</h3><p data-es>Check-in desde las 16:00, check-out hasta las 12:00. Consultas 24/7 por el asistente.</p><p data-en>Check-in from 16:00, check-out by 12:00. 24/7 answers via the assistant.</p></div></div>
+  </div>
+</div></section>
+
+<section id="amen" style="padding-top:0"><div class="wrap">
+  <div class="kicker" data-es>Piso 10</div><div class="kicker" data-en>Floor 10</div>
+  <h2 data-es>Coworking, gimnasio y terraza</h2>
+  <h2 data-en>Coworking, gym and rooftop terrace</h2>
+  <div class="gal">
+    <figure class="a"><img src="img_terrace.jpg" alt="Terraza" loading="lazy"><figcaption data-es>Terraza con reposeras y vista a la ciudad</figcaption><figcaption data-en>Terrace with sun loungers and city views</figcaption></figure>
+    <figure class="b"><img src="img_coworking.jpg" alt="Coworking" loading="lazy"><figcaption data-es>Coworking con aire acondicionado</figcaption><figcaption data-en>Air-conditioned coworking</figcaption></figure>
+    <figure class="c"><img src="img_gym.jpg" alt="Gimnasio" loading="lazy"><figcaption data-es>Gimnasio: cinta, elíptico, bici, mancuernas</figcaption><figcaption data-en>Gym: treadmill, elliptical, bike, dumbbells</figcaption></figure>
+    <figure class="c"><img src="img_lobby.jpg" alt="Lobby" loading="lazy"><figcaption data-es>Lobby y jardín interno</figcaption><figcaption data-en>Lobby and inner garden</figcaption></figure>
+    <figure class="c"><img src="img_entrance.jpg" alt="Entrada" loading="lazy"><figcaption data-es>Recepción · Arcos 2057</figcaption><figcaption data-en>Reception · Arcos 2057</figcaption></figure>
+  </div>
+</div></section>
+
+<section class="band" id="bot"><div class="wrap grid g2" style="align-items:center">
+  <div>
+    <div class="kicker" data-es>Asistente digital 24/7</div><div class="kicker" data-en>24/7 digital assistant</div>
+    <h2 data-es>Todas las respuestas, en tu idioma, antes de preguntar</h2>
+    <h2 data-en>Every answer, in your language, before you ask</h2>
+    <p data-es style="color:#cfcfcf;font-size:17px">Wi-Fi de tu departamento, lavadero, basura, cómo moverse, aeropuertos, qué hacer en Buenos Aires — y un botón para hablar con recepción. En español, inglés, ruso y portugués, en Telegram.</p>
+    <p data-en style="color:#cfcfcf;font-size:17px">Your apartment's Wi-Fi, laundry, trash, getting around, airports, what to do in Buenos Aires — plus one button to reach reception. In Spanish, English, Russian and Portuguese, on Telegram.</p>
+    <div class="cta"><a class="btn tg" href="https://t.me/BarrancasGuide_bot?start=web" target="_blank" rel="noopener"><span data-es>Abrir en Telegram</span><span data-en>Open in Telegram</span></a></div>
+  </div>
+  <div class="phone">
+    <div class="bub bot">Welcome to Buenos Aires 👋<br>How can I help you?</div>
+    <div class="bub me" data-es>¿Dónde puedo desayunar cerca?</div>
+    <div class="bub me" data-en>Where can I have breakfast nearby?</div>
+    <div class="bub bot" data-es>☕ A 3 minutos por Av. Cabildo hay varias cafeterías; para algo más tranquilo, la zona de Juramento y Barrancas…</div>
+    <div class="bub bot" data-en>☕ 3 minutes away on Av. Cabildo you'll find several cafés; for something quieter, try Juramento and Barrancas…</div>
+    <div class="keys"><span>🏠 Mi estadía</span><span>🛎 Servicios</span><span>🆘 Necesito ayuda</span><span>📍 Explorar</span><span>🚇 Cómo moverse</span><span>🚨 Emergencias</span></div>
+  </div>
+</div></section>
+
+<section id="loc"><div class="wrap">
+  <div class="kicker" data-es>Ubicación</div><div class="kicker" data-en>Location</div>
+  <h2>Arcos 2057, Belgrano</h2>
+  <iframe class="map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Arcos+2057,+Belgrano,+Buenos+Aires&output=embed" title="Mapa"></iframe>
+  <div class="near">
+    <div><b data-es>Subte línea D · Juramento</b><b data-en>Subway line D · Juramento</b>5 min <span data-es>a pie</span><span data-en>walk</span></div>
+    <div><b data-es>Tren Mitre · Belgrano C</b><b data-en>Train Mitre · Belgrano C</b>5 min <span data-es>a pie</span><span data-en>walk</span></div>
+    <div><b>Barrancas de Belgrano</b>8 min <span data-es>a pie</span><span data-en>walk</span></div>
+    <div><b>Barrio Chino</b>5 min <span data-es>a pie</span><span data-en>walk</span></div>
+    <div><b>Aeroparque (AEP)</b>15–25 min <span data-es>en auto</span><span data-en>by car</span></div>
+    <div><b>Ezeiza (EZE)</b>50–70 min <span data-es>en auto</span><span data-en>by car</span></div>
+  </div>
+</div></section>
+
+<section id="contact" style="padding-top:0"><div class="wrap">
+  <div class="card" style="display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between">
+    <div><h3 data-es>¿Consultás disponibilidad?</h3><h3 data-en>Checking availability?</h3><p data-es>Escribinos por WhatsApp y te respondemos con fechas y tarifa.</p><p data-en>Message us on WhatsApp and we'll reply with dates and rates.</p></div>
+    <div class="cta"><a class="btn wa" href="https://wa.me/5491126479910" target="_blank" rel="noopener">+54 9 11 2647-9910</a><a class="btn ghost" style="color:var(--ink);border-color:var(--line);background:#fff" href="https://www.instagram.com/barranqas/" target="_blank" rel="noopener">Instagram</a></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <span>© <span id="y"></span> Barrancas Quality Apartments · Arcos 2057, C1428 Buenos Aires</span>
+  <span><a href="https://www.booking.com/hotel/ar/hermosos-apartamentos-a-estrenar-en-barrancas-de-belgrano.html" target="_blank" rel="noopener">Booking</a> · <a href="https://www.instagram.com/barranqas/" target="_blank" rel="noopener">Instagram</a> · <a href="https://t.me/BarrancasGuide_bot" target="_blank" rel="noopener">Telegram</a></span>
+</div></footer>
+
+<div class="fab"><a href="https://wa.me/5491126479910" target="_blank" rel="noopener" style="background:var(--wa)" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.3.8 3.1.7a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.2-.2-.2-.5-.4z"/></svg></a></div>
+
+<script>
+function setLang(l){document.documentElement.className=l==='en'?'en':'';document.documentElement.lang=l;
+document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.textContent.toLowerCase()===l));try{localStorage.setItem('lang',l)}catch(e){}}
+try{var s=localStorage.getItem('lang');if(s)setLang(s);else if(!/^es/.test(navigator.language))setLang('en')}catch(e){}
+document.getElementById('y').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
