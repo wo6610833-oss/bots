@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casa Belice — concepto de web</title>
+<meta name="description" content="Concepto de mejora: cotizador de oro en vivo, tasación por fotos, turnos y asistente Beli en 4 idiomas.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0b09; --bg2:#14120e; --card:#1a1813; --line:#2c2820; --text:#f3eee4; --muted:#a79f8f;
+  --gold:#d4ae5c; --gold2:#f0d48f; --gold-d:#9c7a35; --ok:#6fcf97; --wa:#25d366;
+  --r:18px; --shadow:0 20px 60px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;letter-spacing:.2px;line-height:1.1}
+h2{font-size:clamp(30px,4.2vw,46px);margin-bottom:12px}
+.eyebrow{color:var(--gold);font-size:12px;letter-spacing:3px;text-transform:uppercase;font-weight:600;margin-bottom:10px}
+.lead{color:var(--muted);max-width:620px}
+.gold{background:linear-gradient(90deg,var(--gold2),var(--gold) 55%,var(--gold-d));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* demo ribbon */
+.demo{background:linear-gradient(90deg,#3a2d12,#1d170b);color:var(--gold2);font-size:13px;text-align:center;padding:7px 12px;border-bottom:1px solid var(--line)}
+
+/* header */
+header{position:sticky;top:0;z-index:40;background:rgba(12,11,9,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:18px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:700;letter-spacing:3px}
+.logo i{width:30px;height:30px;border-radius:50%;background:conic-gradient(from 200deg,var(--gold-d),var(--gold2),var(--gold),var(--gold-d));box-shadow:0 0 18px rgba(212,174,92,.35);display:inline-block}
+.links{display:flex;gap:22px;margin-left:auto;font-size:14px;color:var(--muted)}
+.links a:hover{color:var(--text)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{background:none;border:0;padding:6px 10px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer}
+.lang button.on{background:var(--gold);color:#1a1405}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:13px 22px;font-weight:600;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s;white-space:nowrap}
+.btn:hover{transform:translateY(-1px)}
+.btn-gold{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#1a1405;box-shadow:0 8px 30px rgba(212,174,92,.25)}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:var(--gold-d)}
+.btn-wa{background:var(--wa);color:#062b14}
+.btn-sm{padding:9px 16px;font-size:14px}
+@media(max-width:900px){.links{display:none}.nav .btn-wa span{display:none}}
+.logo{white-space:nowrap}
+@media(max-width:560px){.nav{gap:10px}.logo{font-size:17px;letter-spacing:2px;gap:8px}.logo i{width:22px;height:22px}.lang{margin-left:auto}.lang button{padding:5px 7px;font-size:11px}.nav .btn-wa{padding:8px 11px}}
+
+/* hero */
+.hero{position:relative;padding:80px 0 60px;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:-30% -10% auto auto;width:720px;height:720px;background:radial-gradient(circle,rgba(212,174,92,.22),transparent 60%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(40px,6.2vw,76px);margin-bottom:18px}
+.hero p{font-size:18px;color:var(--muted);max-width:540px;margin-bottom:28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.trust{display:flex;gap:22px;flex-wrap:wrap;margin-top:30px;color:var(--muted);font-size:14px}
+.trust b{color:var(--text)}
+.stars{color:var(--gold2);letter-spacing:2px}
+.ticker{background:linear-gradient(160deg,#1f1b12,#12100c);border:1px solid #3a321f;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+.ticker .row{display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line)}
+.ticker .row:last-of-type{border:0}
+.ticker .k{color:var(--muted);font-size:14px}
+.ticker .v{font-weight:600;font-variant-numeric:tabular-nums}
+.ticker .big{font-family:"Cormorant Garamond",serif;font-size:44px;font-weight:700}
+.live{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--ok);font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.live:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(111,207,151,.6);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(111,207,151,0)}100%{box-shadow:0 0 0 0 rgba(111,207,151,0)}}
+.small{font-size:12px;color:var(--muted)}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero{padding-top:48px}}
+
+section{padding:84px 0}
+.alt{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:36px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+label{display:block;font-size:13px;color:var(--muted);margin:0 0 8px;font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chip{border:1px solid var(--line);background:#12100c;border-radius:999px;padding:9px 14px;font-size:14px;cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--gold-d)}
+.chip.on{background:var(--gold);color:#1a1405;border-color:var(--gold);font-weight:600}
+.field{width:100%;background:#12100c;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:18px;outline:none}
+.field:focus{border-color:var(--gold)}
+.weight{display:flex;align-items:center;gap:10px}
+.weight span{color:var(--muted)}
+input[type=range]{width:100%;accent-color:var(--gold);margin-top:14px}
+.result{display:flex;flex-direction:column;justify-content:center;text-align:center;background:radial-gradient(circle at 50% 0,rgba(212,174,92,.18),transparent 70%),var(--card)}
+.result .amt{font-family:"Cormorant Garamond",serif;font-size:clamp(40px,5vw,62px);font-weight:700;margin:8px 0}
+.result .note{color:var(--muted);font-size:13px;max-width:380px;margin:0 auto 22px}
+@media(max-width:900px){.calc{grid-template-columns:1fr}}
+
+/* cards */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px;transition:border-color .2s,transform .2s}
+.card:hover{border-color:#4a3f25;transform:translateY(-2px)}
+.card h3{font-size:24px;margin:12px 0 6px}
+.card p{color:var(--muted);font-size:15px}
+.ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(160deg,#2b2415,#171309);border:1px solid #3a321f;font-size:22px}
+.num{font-family:"Cormorant Garamond",serif;font-size:40px;color:var(--gold);line-height:1}
+@media(max-width:900px){.grid3,.grid4{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.grid3,.grid4{grid-template-columns:1fr}}
+
+/* photo + booking */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:36px}
+@media(max-width:900px){.two{grid-template-columns:1fr}}
+.drop{border:1.5px dashed #4a3f25;border-radius:14px;padding:26px;text-align:center;color:var(--muted);cursor:pointer;margin:14px 0}
+.drop:hover{border-color:var(--gold)}
+.thumbs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.thumbs img{width:64px;height:64px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
+.slots .chip{text-align:center;padding:9px 6px}
+.chip[disabled]{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+
+/* faq */
+.faq{max-width:820px;margin-top:30px}
+details{border-bottom:1px solid var(--line);padding:18px 0}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;font-weight:600;font-size:17px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--gold);font-size:22px;line-height:1}
+details[open] summary:after{content:"–"}
+details p{color:var(--muted);margin-top:10px;white-space:pre-line}
+
+/* visit */
+.visit{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:stretch;margin-top:36px}
+.map{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);min-height:320px}
+.map iframe{width:100%;height:100%;min-height:320px;border:0;filter:grayscale(.6) invert(.9) hue-rotate(180deg) brightness(.9)}
+.kv{display:grid;gap:14px;margin:18px 0 24px}
+.kv div{display:flex;gap:12px}
+.kv b{min-width:26px}
+@media(max-width:900px){.visit{grid-template-columns:1fr}}
+
+footer{padding:40px 0 110px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+
+/* Beli chat */
+.fab{position:fixed;right:20px;bottom:20px;z-index:60;display:flex;align-items:center;gap:10px;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#1a1405;border:0;border-radius:999px;padding:12px 18px 12px 12px;font-weight:700;cursor:pointer;box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.fab .av{width:34px;height:34px;border-radius:50%;background:#1a1405;color:var(--gold2);display:grid;place-items:center;font-size:17px}
+.chat{position:fixed;right:20px;bottom:86px;z-index:60;width:min(380px,calc(100vw - 32px));max-height:min(560px,calc(100vh - 120px));display:none;flex-direction:column;background:#11100c;border:1px solid #3a321f;border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+.chat.open{display:flex}
+.chat-h{display:flex;align-items:center;gap:10px;padding:14px 16px;background:linear-gradient(90deg,#241d10,#15120b);border-bottom:1px solid var(--line)}
+.chat-h .av{width:36px;height:36px;border-radius:50%;background:var(--gold);color:#1a1405;display:grid;place-items:center;font-weight:700}
+.chat-h small{display:block;color:var(--ok);font-size:12px}
+.chat-h button{margin-left:auto;background:none;border:0;color:var(--muted);font-size:22px;cursor:pointer}
+.msgs{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.m{max-width:86%;padding:10px 13px;border-radius:14px;font-size:14px;white-space:pre-line}
+.m.bot{background:#1f1b12;border:1px solid #2f2818;border-top-left-radius:4px}
+.m.me{background:var(--gold);color:#1a1405;margin-left:auto;border-top-right-radius:4px}
+.qr{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 12px}
+.qr button{background:#171409;border:1px solid #4a3f25;color:var(--gold2);border-radius:999px;padding:7px 12px;font-size:13px;cursor:pointer}
+.inrow{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
+.inrow input{flex:1;background:#171409;border:1px solid var(--line);border-radius:999px;padding:10px 14px;outline:none;font-size:14px}
+.inrow button{background:var(--gold);border:0;border-radius:50%;width:40px;height:40px;cursor:pointer;color:#1a1405;font-weight:700}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="demo" data-i="demo"></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top"><i></i>CASA BELICE</a>
+    <nav class="links">
+      <a href="#cotizar" data-i="nav_calc"></a>
+      <a href="#fotos" data-i="nav_photos"></a>
+      <a href="#turno" data-i="nav_book"></a>
+      <a href="#faq" data-i="nav_faq"></a>
+      <a href="#visita" data-i="nav_visit"></a>
+    </nav>
+    <div class="lang" id="lang"></div>
+    <a class="btn btn-wa btn-sm" href="#" data-wa="hello">💬 <span>WhatsApp</span></a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal">
+      <div class="eyebrow" data-i="hero_eyebrow"></div>
+      <h1><span data-i="hero_t1"></span><br><span class="gold" data-i="hero_t2"></span></h1>
+      <p data-i="hero_p"></p>
+      <div class="cta">
+        <a class="btn btn-gold" href="#cotizar" data-i="hero_cta1"></a>
+        <a class="btn btn-ghost" href="#turno" data-i="hero_cta2"></a>
+      </div>
+      <div class="trust">
+        <div><span class="stars">★★★★★</span> <b>4,9</b> <span data-i="trust_google"></span></div>
+        <div>⚡ <span data-i="trust_pay"></span></div>
+        <div>🔒 <span data-i="trust_discreet"></span></div>
+      </div>
+    </div>
+    <div class="ticker reveal">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span class="live" data-i="live"></span><span class="small" id="src"></span>
+      </div>
+      <div class="k" data-i="gold_oz"></div>
+      <div class="big" id="spot">—</div>
+      <div class="row"><span class="k" data-i="pay18"></span><span class="v" id="p18">—</span></div>
+      <div class="row"><span class="k" data-i="pay14"></span><span class="v" id="p14">—</span></div>
+      <div class="row"><span class="k" data-i="pay_ag"></span><span class="v" id="pag">—</span></div>
+      <p class="small" style="margin-top:12px" data-i="ticker_note"></p>
+    </div>
+  </div>
+</section>
+
+<section id="cotizar" class="alt">
+  <div class="wrap">
+    <div class="eyebrow" data-i="calc_eyebrow"></div>
+    <h2 data-i="calc_t"></h2>
+    <p class="lead" data-i="calc_p"></p>
+    <div class="calc">
+      <div class="panel reveal">
+        <label data-i="calc_metal"></label>
+        <div class="chips" id="metals"></div>
+        <label for="w" data-i="calc_weight"></label>
+        <div class="weight"><input class="field" id="w" type="number" min="0.5" max="2000" step="0.5" value="15" inputmode="decimal"><span>g</span></div>
+        <input type="range" id="wr" min="1" max="200" step="1" value="15" aria-label="peso">
+      </div>
+      <div class="panel result reveal">
+        <div class="eyebrow" data-i="calc_res"></div>
+        <div class="amt gold" id="amt">—</div>
+        <p class="note" data-i="calc_note"></p>
+        <div class="cta" style="justify-content:center">
+          <a class="btn btn-gold" href="#" data-wa="calc" data-i="calc_btn"></a>
+          <a class="btn btn-ghost" href="#turno" data-i="hero_cta2"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow" data-i="buy_eyebrow"></div>
+    <h2 data-i="buy_t"></h2>
+    <div class="grid3" id="buy"></div>
+  </div>
+</section>
+
+<section id="fotos" class="alt">
+  <div class="wrap">
+    <div class="eyebrow" data-i="ph_eyebrow"></div>
+    <h2 data-i="ph_t"></h2>
+    <p class="lead" data-i="ph_p"></p>
+    <div class="two">
+      <div class="panel reveal" id="turno-anchor">
+        <h3 style="font-size:26px" data-i="ph_box"></h3>
+        <label class="drop" for="files"><span data-i="ph_drop"></span><input id="files" type="file" accept="image/*" multiple hidden></label>
+        <div class="thumbs" id="thumbs"></div>
+        <a class="btn btn-wa" href="#" data-wa="photos" data-i="ph_btn"></a>
+        <p class="small" style="margin-top:10px" data-i="ph_hint"></p>
+      </div>
+      <div class="panel reveal" id="turno">
+        <h3 style="font-size:26px" data-i="bk_t"></h3>
+        <p class="small" style="margin-bottom:16px" data-i="bk_p"></p>
+        <label data-i="bk_day"></label>
+        <div class="chips" id="days"></div>
+        <label data-i="bk_time"></label>
+        <div class="slots" id="times"></div>
+        <a class="btn btn-gold" href="#" data-wa="book" id="bkbtn" data-i="bk_btn"></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow" data-i="how_eyebrow"></div>
+    <h2 data-i="how_t"></h2>
+    <div class="grid4" id="how"></div>
+  </div>
+</section>
+
+<section id="faq" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">FAQ</div>
+    <h2 data-i="faq_t"></h2>
+    <div class="faq" id="faqs"></div>
+  </div>
+</section>
+
+<section id="visita">
+  <div class="wrap">
+    <div class="eyebrow" data-i="vis_eyebrow"></div>
+    <h2 data-i="vis_t"></h2>
+    <div class="visit">
+      <div class="panel reveal">
+        <div class="kv">
+          <div><b>📍</b><span>Franklin D. Roosevelt 2423, Belgrano, CABA</span></div>
+          <div><b>🕐</b><span data-i="hours"></span></div>
+          <div><b>📞</b><span>011 5492-6066</span></div>
+          <div><b>🌐</b><span data-i="langs_spoken"></span></div>
+        </div>
+        <div class="cta">
+          <a class="btn btn-gold" target="_blank" rel="noopener" href="https://maps.google.com/?q=Franklin+D.+Roosevelt+2423,+Belgrano,+CABA" data-i="vis_map"></a>
+          <a class="btn btn-wa" href="#" data-wa="hello">💬 WhatsApp</a>
+        </div>
+      </div>
+      <div class="map reveal"><iframe loading="lazy" title="Mapa" src="https://maps.google.com/maps?q=Franklin%20D.%20Roosevelt%202423%2C%20Belgrano%2C%20CABA&z=15&output=embed"></iframe></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap" data-i="footer"></div>
+</footer>
+
+<button class="fab" id="fab"><span class="av">B</span><span data-i="fab"></span></button>
+<div class="chat" id="chat" role="dialog" aria-label="Beli">
+  <div class="chat-h"><div class="av">B</div><div><b>Beli</b><small data-i="online"></small></div><button id="close" aria-label="Cerrar">×</button></div>
+  <div class="msgs" id="msgs"></div>
+  <div class="qr" id="qr"></div>
+  <form class="inrow" id="form"><input id="q" autocomplete="off"><button aria-label="Enviar">➤</button></form>
+</div>
+
+<script>
+const WA = "5491154926066";
+const PAY = {gold:[0.65,0.77], silver:[0.55,0.70]};
+const METALS = [
+  {id:"g18", p:0.750, m:"gold", t:"18K (750)"},
+  {id:"g14", p:0.585, m:"gold", t:"14K (585)"},
+  {id:"g24", p:0.999, m:"gold", t:"24K (999)"},
+  {id:"g10", p:0.417, m:"gold", t:"10K (417)"},
+  {id:"s925", p:0.925, m:"silver", t:"925"}
+];
+const T = {
+es:{demo:"✨ Concepto de mejora para Casa Belice — versión de demostración",nav_calc:"Cotizar",nav_photos:"Tasación online",nav_book:"Turnos",nav_faq:"Preguntas",nav_visit:"Visitanos",
+hero_eyebrow:"Compra y venta de oro · Belgrano",hero_t1:"Sabé cuánto vale tu oro",hero_t2:"antes de salir de casa",hero_p:"Cotización en vivo según el precio internacional, tasación por fotos y turno sin espera. Pago inmediato y trato discreto.",
+hero_cta1:"Cotizar ahora",hero_cta2:"Reservar turno",trust_google:"en Google · 130+ reseñas",trust_pay:"Pago en el momento",trust_discreet:"Atención privada",
+live:"En vivo",gold_oz:"Oro internacional (USD / onza)",pay18:"Oro 18K · por gramo",pay14:"Oro 14K · por gramo",pay_ag:"Plata 925 · por gramo",ticker_note:"Rango orientativo que paga Casa Belice. La oferta final se da al ver la pieza.",
+calc_eyebrow:"Cotizador",calc_t:"¿Cuánto vale tu pieza?",calc_p:"Elegí la ley y el peso. El cálculo usa el precio del oro de hoy.",calc_metal:"Metal y ley",calc_weight:"Peso total",calc_res:"Estimación",calc_note:"Estimación orientativa. La oferta final se confirma en el local con balanza y prueba de pureza, gratis y sin compromiso.",calc_btn:"Enviar por WhatsApp",
+buy_eyebrow:"Qué compramos",buy_t:"Tasamos todo tipo de piezas",
+buy:[["💍","Joyas de oro","Anillos, cadenas, pulseras, aros, piezas rotas o sin sello."],["🪙","Monedas y lingotes","Oro de inversión, monedas de colección y lingotes."],["🥈","Plata","Plata 925, vajilla, cubiertos y monedas."],["💎","Brillantes y piedras","Evaluación profesional de diamantes y piedras preciosas."],["⌚","Relojes","Relojes de oro y relojes suizos de alta gama."],["📋","Tasaciones","Sin compromiso, delante tuyo, en el momento."]],
+ph_eyebrow:"Tasación online",ph_t:"Mandanos fotos, te respondemos",ph_p:"Sin moverte de tu casa: sacá fotos de la pieza (y del sello si tiene) y un tasador te responde por WhatsApp.",ph_box:"📸 Tasación por fotos",ph_drop:"Tocá para elegir fotos",ph_btn:"💬 Enviar por WhatsApp",ph_hint:"En la versión final las fotos llegan directo al tasador. En esta demo se adjuntan en WhatsApp.",
+bk_t:"📅 Reservá tu turno",bk_p:"Elegí día y horario, te atendemos sin esperar.",bk_day:"Día",bk_time:"Horario",bk_btn:"Confirmar por WhatsApp",
+how_eyebrow:"Cómo funciona",how_t:"Simple, rápido y transparente",how:[["Traés tu pieza","Con o sin turno."],["La tasamos delante tuyo","Balanza y prueba de pureza."],["Oferta clara","Sin letra chica. Mejoramos ofertas."],["Pago inmediato","El mismo día."]],
+faq_t:"Preguntas frecuentes",faqs:[["¿Qué compran?","Oro (joyas, monedas, lingotes, piezas rotas), plata, brillantes, piedras preciosas y relojes."],["¿Y si la pieza no tiene sello?","Igual la tasamos: la pureza se comprueba en el momento."],["¿Necesito turno?","Podés venir con o sin turno. Con turno no esperás."],["¿Cómo pagan?","Pago inmediato, el mismo día, una vez aceptada la oferta."],["¿Mejoran otras ofertas?","Sí: si tenés una oferta de otro comprador, la igualamos o la mejoramos."],["¿Atienden en otros idiomas?","Sí. Nuestro asistente Beli responde en español, inglés, portugués y ruso."]],
+vis_eyebrow:"Visitanos",vis_t:"En el corazón de Belgrano",hours:"Lun–vie 10:00–18:00 · Sáb 10:00–13:00",langs_spoken:"Español · English · Português · Русский",vis_map:"Cómo llegar",
+footer:"Concepto de demostración preparado como propuesta de mejora para Casa Belice. Precios orientativos.",fab:"Preguntale a Beli",online:"Asistente virtual · en línea",
+chat:{hi:"¡Hola! Soy Beli 🤖, el asistente de Casa Belice. ¿En qué te ayudo?",qr:["💰 ¿Cuánto vale mi oro?","📅 Reservar turno","📍 ¿Dónde están?","🌐 Idiomas"],
+a:["Decime la ley y el peso, por ejemplo: 15 g 14K. Con el oro de hoy, 14K se paga aprox. {p14} por gramo y 18K {p18} por gramo.","Elegí día y horario en la sección de turnos 👇 y lo confirmás por WhatsApp.","Estamos en Franklin D. Roosevelt 2423, Belgrano. Lun–vie 10–18 h, sáb 10–13 h.","Hablo español, English, Português y Русский. Escribime en tu idioma 🙂"],
+est:"Para {w} g de {m}: aprox. {r}. La oferta final se da al ver la pieza, gratis y sin compromiso.",fallback:"Buena pregunta 🙂 En la versión final respondo con IA. Mientras tanto, ¿querés hablar con un tasador por WhatsApp?",ph:"Escribí tu pregunta…"},
+wa:{hello:"Hola Casa Belice, quiero hacer una consulta.",calc:"Hola, quiero vender {m}, {w} g. En la web me estimó {r}. ¿Me confirman?",photos:"Hola, quiero una tasación por fotos. Les envío las fotos de la pieza:",book:"Hola, quiero reservar un turno el {d} a las {t}."},days:["dom","lun","mar","mié","jue","vie","sáb"],silver:"Plata",gold:"Oro"},
+en:{demo:"✨ Improvement concept for Casa Belice — demo version",nav_calc:"Price check",nav_photos:"Online appraisal",nav_book:"Book",nav_faq:"FAQ",nav_visit:"Visit us",
+hero_eyebrow:"Gold buying & selling · Belgrano",hero_t1:"Know what your gold is worth",hero_t2:"before you leave home",hero_p:"Live quotes based on the international gold price, photo appraisals and no-wait bookings. Immediate payment, discreet service.",
+hero_cta1:"Get a quote",hero_cta2:"Book a visit",trust_google:"on Google · 130+ reviews",trust_pay:"Paid on the spot",trust_discreet:"Private service",
+live:"Live",gold_oz:"International gold (USD / oz)",pay18:"Gold 18K · per gram",pay14:"Gold 14K · per gram",pay_ag:"Silver 925 · per gram",ticker_note:"Indicative range paid by Casa Belice. Final offer after seeing the piece.",
+calc_eyebrow:"Calculator",calc_t:"What is your piece worth?",calc_p:"Choose karat and weight. Uses today's gold price.",calc_metal:"Metal & karat",calc_weight:"Total weight",calc_res:"Estimate",calc_note:"Indicative estimate. The final offer is confirmed in store with scale and purity test, free and without obligation.",calc_btn:"Send via WhatsApp",
+buy_eyebrow:"What we buy",buy_t:"We appraise all kinds of pieces",
+buy:[["💍","Gold jewelry","Rings, chains, bracelets, earrings, broken or unmarked pieces."],["🪙","Coins & bars","Investment gold, collectible coins and bars."],["🥈","Silver","925 silver, tableware, cutlery and coins."],["💎","Diamonds & stones","Professional evaluation of diamonds and precious stones."],["⌚","Watches","Gold and high-end Swiss watches."],["📋","Appraisals","No obligation, in front of you, on the spot."]],
+ph_eyebrow:"Online appraisal",ph_t:"Send photos, we reply",ph_p:"From home: take photos of the piece (and hallmark if any) and an appraiser replies on WhatsApp.",ph_box:"📸 Photo appraisal",ph_drop:"Tap to choose photos",ph_btn:"💬 Send via WhatsApp",ph_hint:"In the final version photos go straight to the appraiser. In this demo you attach them in WhatsApp.",
+bk_t:"📅 Book your visit",bk_p:"Pick a day and time — no waiting.",bk_day:"Day",bk_time:"Time",bk_btn:"Confirm via WhatsApp",
+how_eyebrow:"How it works",how_t:"Simple, fast and transparent",how:[["Bring your piece","With or without booking."],["We check it in front of you","Scale and purity test."],["Clear offer","No fine print. We beat offers."],["Immediate payment","Same day."]],
+faq_t:"Frequently asked questions",faqs:[["What do you buy?","Gold (jewelry, coins, bars, broken pieces), silver, diamonds, precious stones and watches."],["What if there's no hallmark?","We still appraise it: purity is tested on the spot."],["Do I need a booking?","Walk-ins welcome. With a booking there's no wait."],["How do you pay?","Immediately, same day, once you accept the offer."],["Do you beat other offers?","Yes — bring another buyer's offer and we match or beat it."],["Do you speak other languages?","Yes. Our assistant Beli replies in Spanish, English, Portuguese and Russian."]],
+vis_eyebrow:"Visit us",vis_t:"In the heart of Belgrano",hours:"Mon–Fri 10:00–18:00 · Sat 10:00–13:00",langs_spoken:"Español · English · Português · Русский",vis_map:"Directions",
+footer:"Demo concept prepared as an improvement proposal for Casa Belice. Indicative prices.",fab:"Ask Beli",online:"Virtual assistant · online",
+chat:{hi:"Hi! I'm Beli 🤖, Casa Belice's assistant. How can I help?",qr:["💰 What's my gold worth?","📅 Book a visit","📍 Where are you?","🌐 Languages"],
+a:["Tell me karat and weight, e.g. 15 g 14K. With today's gold, 14K pays approx. {p14} per gram and 18K {p18} per gram.","Pick a day and time in the booking section 👇 and confirm via WhatsApp.","We're at Franklin D. Roosevelt 2423, Belgrano. Mon–Fri 10–18, Sat 10–13.","I speak Español, English, Português and Русский. Write in your language 🙂"],
+est:"For {w} g of {m}: approx. {r}. Final offer after seeing the piece, free and without obligation.",fallback:"Good question 🙂 In the final version I answer with AI. Meanwhile, want to talk to an appraiser on WhatsApp?",ph:"Type your question…"},
+wa:{hello:"Hi Casa Belice, I have a question.",calc:"Hi, I'd like to sell {m}, {w} g. The website estimated {r}. Can you confirm?",photos:"Hi, I'd like a photo appraisal. Sending photos of the piece:",book:"Hi, I'd like to book a visit on {d} at {t}."},days:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],silver:"Silver",gold:"Gold"},
+pt:{demo:"✨ Conceito de melhoria para a Casa Belice — versão demo",nav_calc:"Cotar",nav_photos:"Avaliação online",nav_book:"Agendar",nav_faq:"Perguntas",nav_visit:"Visite-nos",
+hero_eyebrow:"Compra e venda de ouro · Belgrano",hero_t1:"Saiba quanto vale seu ouro",hero_t2:"antes de sair de casa",hero_p:"Cotação ao vivo pelo preço internacional, avaliação por fotos e horário sem espera. Pagamento imediato e atendimento discreto.",
+hero_cta1:"Cotar agora",hero_cta2:"Agendar visita",trust_google:"no Google · 130+ avaliações",trust_pay:"Pagamento na hora",trust_discreet:"Atendimento privado",
+live:"Ao vivo",gold_oz:"Ouro internacional (USD / onça)",pay18:"Ouro 18K · por grama",pay14:"Ouro 14K · por grama",pay_ag:"Prata 925 · por grama",ticker_note:"Faixa indicativa paga pela Casa Belice. Oferta final ao ver a peça.",
+calc_eyebrow:"Calculadora",calc_t:"Quanto vale sua peça?",calc_p:"Escolha o teor e o peso. Usa o preço do ouro de hoje.",calc_metal:"Metal e teor",calc_weight:"Peso total",calc_res:"Estimativa",calc_note:"Estimativa indicativa. A oferta final é confirmada na loja com balança e teste de pureza, grátis e sem compromisso.",calc_btn:"Enviar pelo WhatsApp",
+buy_eyebrow:"O que compramos",buy_t:"Avaliamos todo tipo de peça",
+buy:[["💍","Joias de ouro","Anéis, correntes, pulseiras, brincos, peças quebradas ou sem selo."],["🪙","Moedas e barras","Ouro de investimento, moedas de coleção e barras."],["🥈","Prata","Prata 925, baixela, talheres e moedas."],["💎","Brilhantes e pedras","Avaliação profissional de diamantes e pedras preciosas."],["⌚","Relógios","Relógios de ouro e suíços de alta gama."],["📋","Avaliações","Sem compromisso, na sua frente, na hora."]],
+ph_eyebrow:"Avaliação online",ph_t:"Envie fotos, respondemos",ph_p:"De casa: fotografe a peça (e o selo, se tiver) e um avaliador responde pelo WhatsApp.",ph_box:"📸 Avaliação por fotos",ph_drop:"Toque para escolher fotos",ph_btn:"💬 Enviar pelo WhatsApp",ph_hint:"Na versão final as fotos chegam direto ao avaliador. Nesta demo você as anexa no WhatsApp.",
+bk_t:"📅 Agende sua visita",bk_p:"Escolha dia e horário — sem espera.",bk_day:"Dia",bk_time:"Horário",bk_btn:"Confirmar pelo WhatsApp",
+how_eyebrow:"Como funciona",how_t:"Simples, rápido e transparente",how:[["Traga sua peça","Com ou sem horário."],["Avaliamos na sua frente","Balança e teste de pureza."],["Oferta clara","Sem letras miúdas. Cobrimos ofertas."],["Pagamento imediato","No mesmo dia."]],
+faq_t:"Perguntas frequentes",faqs:[["O que compram?","Ouro (joias, moedas, barras, peças quebradas), prata, brilhantes, pedras preciosas e relógios."],["E se a peça não tem selo?","Avaliamos igual: a pureza é testada na hora."],["Preciso agendar?","Pode vir com ou sem horário. Com horário não espera."],["Como pagam?","Pagamento imediato, no mesmo dia, após aceitar a oferta."],["Cobrem outras ofertas?","Sim: traga a oferta de outro comprador e igualamos ou melhoramos."],["Atendem em outros idiomas?","Sim. Nossa assistente Beli responde em espanhol, inglês, português e russo."]],
+vis_eyebrow:"Visite-nos",vis_t:"No coração de Belgrano",hours:"Seg–sex 10:00–18:00 · Sáb 10:00–13:00",langs_spoken:"Español · English · Português · Русский",vis_map:"Como chegar",
+footer:"Conceito de demonstração preparado como proposta de melhoria para a Casa Belice. Preços indicativos.",fab:"Pergunte à Beli",online:"Assistente virtual · online",
+chat:{hi:"Olá! Sou a Beli 🤖, assistente da Casa Belice. Como posso ajudar?",qr:["💰 Quanto vale meu ouro?","📅 Agendar visita","📍 Onde ficam?","🌐 Idiomas"],
+a:["Diga o teor e o peso, ex.: 15 g 14K. Com o ouro de hoje, 14K paga aprox. {p14} por grama e 18K {p18} por grama.","Escolha dia e horário na seção de agendamento 👇 e confirme pelo WhatsApp.","Estamos na Franklin D. Roosevelt 2423, Belgrano. Seg–sex 10–18h, sáb 10–13h.","Falo Español, English, Português e Русский. Escreva no seu idioma 🙂"],
+est:"Para {w} g de {m}: aprox. {r}. Oferta final ao ver a peça, grátis e sem compromisso.",fallback:"Boa pergunta 🙂 Na versão final respondo com IA. Enquanto isso, quer falar com um avaliador no WhatsApp?",ph:"Escreva sua pergunta…"},
+wa:{hello:"Olá Casa Belice, tenho uma dúvida.",calc:"Olá, quero vender {m}, {w} g. O site estimou {r}. Podem confirmar?",photos:"Olá, quero uma avaliação por fotos. Envio as fotos da peça:",book:"Olá, quero agendar uma visita em {d} às {t}."},days:["dom","seg","ter","qua","qui","sex","sáb"],silver:"Prata",gold:"Ouro"},
+ru:{demo:"✨ Концепция улучшений для Casa Belice — демо-версия",nav_calc:"Оценить",nav_photos:"Оценка онлайн",nav_book:"Запись",nav_faq:"Вопросы",nav_visit:"Контакты",
+hero_eyebrow:"Покупка и продажа золота · Бельграно",hero_t1:"Узнайте, сколько стоит золото,",hero_t2:"не выходя из дома",hero_p:"Цена онлайн по мировому курсу, оценка по фото и запись без ожидания. Оплата сразу, конфиденциально.",
+hero_cta1:"Оценить сейчас",hero_cta2:"Записаться",trust_google:"в Google · 130+ отзывов",trust_pay:"Оплата на месте",trust_discreet:"Отдельный кабинет",
+live:"Онлайн",gold_oz:"Мировая цена золота (USD / унция)",pay18:"Золото 18K (750) · за грамм",pay14:"Золото 14K (585) · за грамм",pay_ag:"Серебро 925 · за грамм",ticker_note:"Ориентировочный диапазон Casa Belice. Окончательная цена — после осмотра.",
+calc_eyebrow:"Калькулятор",calc_t:"Сколько стоит ваше изделие?",calc_p:"Выберите пробу и вес. Расчёт по сегодняшней цене золота.",calc_metal:"Металл и проба",calc_weight:"Общий вес",calc_res:"Оценка",calc_note:"Ориентировочная оценка. Окончательную цену назовут в салоне после взвешивания и проверки пробы — бесплатно и без обязательств.",calc_btn:"Отправить в WhatsApp",
+buy_eyebrow:"Что покупаем",buy_t:"Оцениваем любые изделия",
+buy:[["💍","Золотые украшения","Кольца, цепочки, браслеты, серьги, сломанные и без клейма."],["🪙","Монеты и слитки","Инвестиционное золото, коллекционные монеты и слитки."],["🥈","Серебро","Серебро 925, посуда, приборы и монеты."],["💎","Бриллианты и камни","Профессиональная оценка бриллиантов и драгоценных камней."],["⌚","Часы","Золотые и швейцарские часы премиум-класса."],["📋","Оценка","Без обязательств, при вас, на месте."]],
+ph_eyebrow:"Оценка онлайн",ph_t:"Пришлите фото — ответим",ph_p:"Не выходя из дома: сфотографируйте изделие (и клеймо, если есть), оценщик ответит в WhatsApp.",ph_box:"📸 Оценка по фото",ph_drop:"Нажмите, чтобы выбрать фото",ph_btn:"💬 Отправить в WhatsApp",ph_hint:"В финальной версии фото сразу уходят оценщику. В демо их нужно прикрепить в WhatsApp.",
+bk_t:"📅 Запишитесь на визит",bk_p:"Выберите день и время — без ожидания.",bk_day:"День",bk_time:"Время",bk_btn:"Подтвердить в WhatsApp",
+how_eyebrow:"Как это работает",how_t:"Просто, быстро и прозрачно",how:[["Приносите изделие","С записью или без."],["Оцениваем при вас","Весы и проверка пробы."],["Понятное предложение","Без мелкого шрифта. Перебиваем цену."],["Оплата сразу","В тот же день."]],
+faq_t:"Частые вопросы",faqs:[["Что вы покупаете?","Золото (украшения, монеты, слитки, лом), серебро, бриллианты, драгоценные камни и часы."],["Если нет клейма?","Всё равно оценим: пробу проверяем на месте."],["Нужна ли запись?","Можно с записью или без. По записи — без ожидания."],["Как платите?","Сразу, в тот же день, после согласия с предложением."],["Перебиваете цену?","Да: покажите предложение другого покупателя — дадим столько же или больше."],["Говорите на других языках?","Да. Наш помощник Beli отвечает на испанском, английском, португальском и русском."]],
+vis_eyebrow:"Контакты",vis_t:"В самом центре Бельграно",hours:"Пн–пт 10:00–18:00 · Сб 10:00–13:00",langs_spoken:"Español · English · Português · Русский",vis_map:"Как добраться",
+footer:"Демо-концепция, подготовленная как предложение по улучшению для Casa Belice. Цены ориентировочные.",fab:"Спросить Beli",online:"Виртуальный помощник · онлайн",
+chat:{hi:"Здравствуйте! Я Beli 🤖, помощник Casa Belice. Чем помочь?",qr:["💰 Сколько стоит золото?","📅 Записаться","📍 Где вы находитесь?","🌐 Языки"],
+a:["Напишите пробу и вес, например: 15 г 585. По сегодняшнему курсу 585 (14K) — примерно {p14} за грамм, 750 (18K) — {p18} за грамм.","Выберите день и время в разделе записи 👇 и подтвердите в WhatsApp.","Мы на Franklin D. Roosevelt 2423, Бельграно. Пн–пт 10–18, сб 10–13.","Говорю на Español, English, Português и Русский. Пишите на своём языке 🙂"],
+est:"Для {w} г, {m}: примерно {r}. Окончательная цена — после осмотра, бесплатно и без обязательств.",fallback:"Хороший вопрос 🙂 В финальной версии отвечаю с помощью ИИ. А пока — написать оценщику в WhatsApp?",ph:"Напишите вопрос…"},
+wa:{hello:"Здравствуйте, Casa Belice! У меня вопрос.",calc:"Здравствуйте, хочу продать {m}, {w} г. На сайте оценка {r}. Подтвердите?",photos:"Здравствуйте, хочу оценку по фото. Отправляю фото изделия:",book:"Здравствуйте, хочу записаться на {d} в {t}."},days:["вс","пн","вт","ср","чт","пт","сб"],silver:"Серебро",gold:"Золото"}
+};
+let L = "es", spot = {gold:4374, silver:50, src:"ref."}, metal = "g18", weight = 15, day = null, time = null;
+const $ = s => document.querySelector(s);
+const t = k => T[L][k] ?? T.es[k];
+const fmt = (s,o) => s.replace(/\{(\w+)\}/g,(_,k)=>o[k]??"");
+const money = x => "USD " + Math.round(x).toLocaleString(L==="en"?"en-US":L==="ru"?"ru-RU":"es-AR");
+const rnd = x => { const s = x>=300?10:5; return Math.max(s, Math.round(x/s)*s); };
+function perGram(id){ const m = METALS.find(x=>x.id===id); const oz = m.m==="silver"?spot.silver:spot.gold; const g = oz/31.1035*m.p; const k = PAY[m.m]; return [g*k[0], g*k[1]]; }
+function range(id,w){ const [a,b] = perGram(id); return money(rnd(a*w)) + " – " + money(rnd(b*w)).replace("USD ",""); }
+function gRange(id){ const [a,b] = perGram(id); return "USD " + a.toFixed(1) + "–" + b.toFixed(1); }
+function mName(id){ const m = METALS.find(x=>x.id===id); return (m.m==="silver"?t("silver"):t("gold")) + " " + m.t; }
+function wa(key){ const o = {m:mName(metal), w:weight, r:range(metal,weight), d:day?dayLabel(day):"", t:time||""}; return "https://wa.me/" + WA + "?text=" + encodeURIComponent(fmt(t("wa")[key], o)); }
+function dayLabel(d){ return t("days")[d.getDay()] + " " + String(d.getDate()).padStart(2,"0") + "/" + String(d.getMonth()+1).padStart(2,"0"); }
+
+function renderPrices(){
+  $("#spot").textContent = "$" + Math.round(spot.gold).toLocaleString("en-US");
+  $("#p18").textContent = gRange("g18"); $("#p14").textContent = gRange("g14"); $("#pag").textContent = gRange("s925");
+  $("#src").textContent = spot.src; $("#amt").textContent = range(metal, weight);
+}
+function renderStatic(){
+  document.documentElement.lang = L;
+  document.querySelectorAll("[data-i]").forEach(el => { const v = t(el.dataset.i); if (typeof v === "string") el.textContent = v; });
+  $("#lang").innerHTML = ["es","en","pt","ru"].map(k=>`<button class="${k===L?"on":""}" data-l="${k}">${k.toUpperCase()}</button>`).join("");
+  $("#metals").innerHTML = METALS.map(m=>`<button class="chip ${m.id===metal?"on":""}" data-m="${m.id}">${mName(m.id)}</button>`).join("");
+  $("#buy").innerHTML = t("buy").map(([i,h,p])=>`<div class="card reveal"><div class="ico">${i}</div><h3>${h}</h3><p>${p}</p></div>`).join("");
+  $("#how").innerHTML = t("how").map(([h,p],n)=>`<div class="card reveal"><div class="num">0${n+1}</div><h3>${h}</h3><p>${p}</p></div>`).join("");
+  $("#faqs").innerHTML = t("faqs").map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join("");
+  $("#q").placeholder = t("chat").ph;
+  renderBooking(); renderPrices(); observe(); resetChat();
+}
+function openDays(){ const out = []; const d = new Date(); d.setHours(0,0,0,0); while (out.length < 6){ if (d.getDay() !== 0) out.push(new Date(d)); d.setDate(d.getDate()+1); } return out; }
+function renderBooking(){
+  const days = openDays(); if (!day) day = days[0];
+  $("#days").innerHTML = days.map((d,i)=>`<button class="chip ${d.getTime()===day.getTime()?"on":""}" data-d="${i}">${dayLabel(d)}</button>`).join("");
+  const end = day.getDay()===6 ? 13 : 18, now = new Date(); let html = "";
+  for (let h = 10; h < end; h++){ const s = String(h).padStart(2,"0")+":00"; const past = day.toDateString()===now.toDateString() && h <= now.getHours(); const busy = (h*7 + day.getDate()) % 5 === 0;
+    html += `<button class="chip ${s===time?"on":""}" data-t="${s}" ${past||busy?"disabled":""}>${s}</button>`; }
+  $("#times").innerHTML = html;
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest("button,[data-wa]"); if (!b) return;
+  if (b.dataset.l){ L = b.dataset.l; try{localStorage.setItem("belice_lang",L)}catch(_){} renderStatic(); }
+  else if (b.dataset.m){ metal = b.dataset.m; document.querySelectorAll("#metals .chip").forEach(c=>c.classList.toggle("on", c.dataset.m===metal)); renderPrices(); }
+  else if (b.dataset.d){ day = openDays()[+b.dataset.d]; time = null; renderBooking(); }
+  else if (b.dataset.t){ time = b.dataset.t; renderBooking(); }
+  else if (b.dataset.wa){ e.preventDefault(); if (b.dataset.wa==="book" && !time){ $("#times").animate([{transform:"translateX(0)"},{transform:"translateX(-6px)"},{transform:"translateX(6px)"},{transform:"translateX(0)"}],{duration:300}); return; } window.open(wa(b.dataset.wa), "_blank", "noopener"); }
+});
+const setW = v => { weight = Math.max(0.5, Math.min(2000, +v || 0.5)); renderPrices(); };
+$("#w").addEventListener("input", e => { setW(e.target.value); $("#wr").value = Math.min(200, weight); });
+$("#wr").addEventListener("input", e => { $("#w").value = e.target.value; setW(e.target.value); });
+$("#files").addEventListener("change", e => { $("#thumbs").innerHTML = ""; [...e.target.files].slice(0,5).forEach(f => { const i = new Image(); i.src = URL.createObjectURL(f); $("#thumbs").appendChild(i); }); });
+
+/* Beli demo chat */
+function add(text, who){ const d = document.createElement("div"); d.className = "m " + who; d.textContent = text; $("#msgs").appendChild(d); $("#msgs").scrollTop = 1e6; }
+function resetChat(){ $("#msgs").innerHTML = ""; add(t("chat").hi, "bot"); $("#qr").innerHTML = t("chat").qr.map((q,i)=>`<button data-q="${i}">${q}</button>`).join(""); }
+function reply(text){
+  const c = t("chat"), low = text.toLowerCase();
+  const w = low.match(/(\d+(?:[.,]\d+)?)\s*(g|gr|г|gram)/); const k = low.match(/(24|18|14|10)\s*k|999|750|585|417|925/);
+  if (w || k){ const grams = w ? parseFloat(w[1].replace(",", ".")) : 10;
+    let id = "g18"; const s = k ? k[0] : ""; if (/14|585/.test(s)) id = "g14"; else if (/24|999/.test(s)) id = "g24"; else if (/10|417/.test(s)) id = "g10"; else if (/925/.test(s)) id = "s925";
+    return fmt(c.est, {w:grams, m:mName(id), r:range(id, grams)}); }
+  if (/turno|book|agend|запис|reserv/.test(low)) return c.a[1];
+  if (/dónde|donde|where|onde|где|direc|адрес/.test(low)) return c.a[2];
+  if (/precio|vale|price|worth|quanto|сколько|стоит|цена|oro|gold|ouro|золот/.test(low)) return fmt(c.a[0], {p14:gRange("g14"), p18:gRange("g18")});
+  return c.fallback;
+}
+$("#qr").addEventListener("click", e => { const b = e.target.closest("[data-q]"); if (!b) return; const i = +b.dataset.q; add(b.textContent, "me");
+  setTimeout(()=> add(fmt(t("chat").a[i], {p14:gRange("g14"), p18:gRange("g18")}), "bot"), 450); });
+$("#form").addEventListener("submit", e => { e.preventDefault(); const v = $("#q").value.trim(); if (!v) return; add(v, "me"); $("#q").value = ""; setTimeout(()=> add(reply(v), "bot"), 500); });
+$("#fab").onclick = () => $("#chat").classList.toggle("open");
+$("#close").onclick = () => $("#chat").classList.remove("open");
+
+/* reveal on scroll */
+let io; function observe(){ if (!("IntersectionObserver" in window)){ document.querySelectorAll(".reveal").forEach(x=>x.classList.add("in")); return; }
+  io = io || new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting){ x.target.classList.add("in"); io.unobserve(x.target); } }), {threshold:.12});
+  document.querySelectorAll(".reveal:not(.in)").forEach(x => io.observe(x)); }
+
+/* live price */
+async function loadSpot(){
+  try{
+    const [g, s] = await Promise.all(["XAU","XAG"].map(x => fetch("https://api.gold-api.com/price/"+x).then(r=>r.json())));
+    if (g && g.price){ spot = {gold:+g.price, silver:+(s&&s.price||spot.silver), src:"gold-api.com"}; renderPrices(); }
+  }catch(_){ /* keep reference price */ }
+}
+let saved = null; try{ saved = localStorage.getItem("belice_lang"); }catch(_){}
+const nav = (navigator.language||"es").slice(0,2);
+if (saved && T[saved]) L = saved; else if (T[nav]) L = nav;
+renderStatic(); loadSpot(); setInterval(loadSpot, 5*60*1000);
+</script>
+</body>
+</html>
