@@ -483,7 +483,7 @@ const PAY = {gold:[0.65,0.77], silver:[0.55,0.70]};
 const METALS = [
   {id:"g18",p:0.750,m:"gold",t:"18K (750)"},{id:"g14",p:0.585,m:"gold",t:"14K (585)"},{id:"g24",p:0.999,m:"gold",t:"24K (999)"},
   {id:"g10",p:0.417,m:"gold",t:"10K (417)"},{id:"s925",p:0.925,m:"silver",t:"925"}];
-const LANGS = {es:"🇦🇷 ES",en:"🇺🇸 EN",pt:"🇧🇷 PT",ru:"🇷🇺 RU"};
+const LANGS = {es:"ES",en:"EN",pt:"PT",ru:"RU"};
 const ICONS = ["i-shield","i-bolt","i-gem","i-pin"];
 const T = {
 es:{brand_s:"COMPRA · ORO · JOYAS",nav_home:"Inicio",nav_how:"Cómo funciona",nav_svc:"Servicios",nav_calc:"Cotizar",nav_faq:"Preguntas",nav_contact:"Contacto",wa_pill:"Escribinos por WhatsApp",badge:"CONFIANZA<br>EXPERIENCIA<br>VALOR REAL",
@@ -616,7 +616,7 @@ function renderPrices(){
 function renderStatic(){
   document.documentElement.lang=L;
   document.querySelectorAll("[data-i]").forEach(el=>{const v=t(el.dataset.i);if(typeof v==="string")el.innerHTML=v});
-  $("#langbtn").innerHTML=LANGS[L]+" ▾";
+  $("#langbtn").innerHTML='<svg class="ic" style="width:18px;height:18px"><use href="#i-globe"/></svg>'+LANGS[L]+" ▾";
   $("#langlist").innerHTML=Object.entries(LANGS).map(([k,v])=>`<li><button data-l="${k}">${v} · ${({es:"Español",en:"English",pt:"Português",ru:"Русский"})[k]}</button></li>`).join("");
   $("#feats").innerHTML=t("feats").map(([a,b],i)=>`<div class="feat"><span class="ring"><svg class="ic"><use href="#${ICONS[i]}"/></svg></span><span>${a}<small>${b}</small></span></div>`).join("");
   $("#strip").innerHTML=t("strip").map(([a,b],i)=>`<div><svg class="ic"><use href="#${["i-gem","i-shield","i-bolt","i-pin"][i]}"/></svg><span><b>${a}</b><small>${b}</small></span></div>`).join("");
